@@ -1,13 +1,16 @@
+import time
 import random
+import asyncio
 
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
 
 from playwright_stealth import Stealth
-from playwright.sync_api import sync_playwright, Page
+from playwright.async_api import async_playwright, Page, BrowserContext
 
 from ..file import FileManager
+
 
 class OpenLibrary:
     """ Scraping book's on official ocean of pdf website """
@@ -22,46 +25,70 @@ class OpenLibrary:
 
         self.closed_category: Dict = None
         self.open_category: Dict = None
-        self.open_cateory_book: Dict = None
+        self.open_category_book: Dict = None
         
-        self.subject_limit: int = 150
+        self.subject_limit: int = 200
         self.book_limit: int = 30
 
+        self.tabs = 3
 
 
-    def scrape_links(self,block_list: Dict, open_list: Dict, open_book_list, agent: Dict[str, str | Dict[str, str]], headless: bool, book_limit: int = 0) -> None:
-        """ Scrape ocean of pdf's genre """
+    def setup(self, block_list: Dict, open_list: Dict, open_book_list, book_limit: int = 50, subject_limit: int = 50) -> List:
+        """ Setup class attrbiutes """
         self.closed_category = block_list
         self.open_category = open_list
-        self.open_cateory_book = open_book_list
+        self.open_category_book = open_book_list
 
-        with Stealth().use_sync(sync_playwright()) as p:
-            browser = p.chromium.launch(headless = headless)
+        self.subject_limit = subject_limit
+        self.book_limit = book_limit
+
+
+    async def scrape(self, agent: Dict[str, str | Dict[str, str]], headless: bool) -> Dict:
+        """ Scrape books online on Open Library Website """
+        async with Stealth().use_async(async_playwright()) as p:
+            browser = await p.chromium.launch(headless=headless)
 
             # Apply Snippy's custom user agent
-            context = browser.new_context(
-                user_agent = agent["user_agent"],
-                extra_http_headers = agent["headers"]
+            context = await browser.new_context(
+                user_agent=agent["user_agent"],
+                extra_http_headers=agent["headers"]
             )
 
-            page = context.new_page()
+            # * GRABS SUBJECT, BOOK LINKS
+            book_links: List = await self.scrape_links(browser_context = context)
 
-            # * ------------------ SCRAPING PROCESS ------------------
+            book_datas: List = await self.scrape_book_data(book_links, browser_context = BrowserContext)
 
-            # * Scrape only subject page of openlibrary
-            if len(self.open_category["subjects"]) == 0:
-                subject_link_list: Dict = self.helper.grab_subject_links(page = page, goto_link = f"{self.parent.target_link}/subjects/")
-            else:
-                print("[ Snippy ] Avoided subject page of openlibrary. ")
-            
-            book_links: Dict = self.helper.grab_book_links(page, book_limit)
+            await context.close()
+            await browser.close()
 
-            # * ------------------ ----------------- ------------------
+            return book_datas
 
-            context.close()
-            browser.close()
 
-            return book_links
+    async def scrape_links(self, browser_context: BrowserContext) -> List:
+        """ Scrape ocean of pdf's genre """
+        # * Scrape only subject page of openlibrary
+        if len(self.open_category["subjects"]) == 0:
+
+            # * GRABS SUBJECT LINKS AS A STARTER
+            page = await browser_context.new_page()
+            await self.helper.grab_subject_links(page, goto_link = f"{self.parent.target_link}/subjects/")
+            page.close()
+
+        # * GRABS SUBJECT'S BOOK LINKS
+        subject_links = [s["subject_link"] for s in self.open_category["subjects"][:self.tabs]]
+
+        tasks = [self.helper.grab_book_links(await browser_context.new_page(), goto_link=link) for link in subject_links]
+
+        await asyncio.gather(*tasks)
+
+        return self.open_category_book["books"]
+        
+
+    async def scrape_book_data(self, book_links: List, browser_context: BrowserContext) -> None:
+        """ Gets Book Data """
+        return book_links
+
 
 
 class OpenLibraryHelper:
@@ -72,10 +99,8 @@ class OpenLibraryHelper:
 
         self.test_path = Path("snippy/scrapers/test.txt").read_text(encoding = 'utf-8')
 
-        self.tabs: int = 5
 
-
-    def normalize_subject_link(self,text: str, href: str) -> str:
+    async def normalize_subject_link(self,text: str, href: str) -> str:
         """ Best for avoiding /search links or href's """
         if href.startswith("/subjects/"):
             return f"https://openlibrary.org{href}"
@@ -87,16 +112,16 @@ class OpenLibraryHelper:
         return None
 
 
-    def grab_subject_links(self, page: Page, goto_link: str = None) -> None:
+    async def grab_subject_links(self, page: Page, goto_link: str = None) -> None:
         """ Grabs subject header links or also known genre's too. """
         # page.set_content(self.parent.test_path)
 
-        if len(self.parent.open_category["subjects"]) == self.parent.subject_limit:
+        if len(self.parent.open_category["subjects"]) >= self.parent.subject_limit:
             print("[ Snippy ] Subject limit reached.")
             return
 
         if goto_link:
-            page.goto(goto_link)
+            await page.goto(goto_link)
 
         block_list: Dict = self.parent.closed_category
         open_list: Dict = self.parent.open_category
@@ -104,14 +129,14 @@ class OpenLibraryHelper:
         new_data: int = 0
 
         links = page.locator('a[href*="/subjects/"], a[href*="/search"][href*="subject%3A"]')
-        count: int = links.count()
+        count: int = await links.count()
 
         for i in range(count):
             link = links.nth(i)
-            text: str = link.inner_text().strip()
-            href: str = link.get_attribute("href")
+            text: str = (await link.inner_text()).strip()
+            href: str = await link.get_attribute("href")
 
-            normalized_href: str = self.normalize_subject_link(text = text, href = href)
+            normalized_href: str = await self.normalize_subject_link(text = text, href = href)
 
             if normalized_href:
                 subject_data: Dict = {
@@ -119,7 +144,7 @@ class OpenLibraryHelper:
                     "subject_link": normalized_href
                 }
 
-                if subject_data not in open_list["subjects"] and subject_data not in block_list["subjects"]:
+                if subject_data not in open_list["subjects"] and subject_data not in block_list["subjects"] and len(open_list["subjects"]) != self.parent.subject_limit:
                     open_list["subjects"].append(subject_data)
                     new_data += 1
 
@@ -133,48 +158,63 @@ class OpenLibraryHelper:
         print(f"[ Snippy ] New data added: {new_data}")
 
 
-    def grab_book_links(self, page: Page, book_limit: int, max_clicks: int = 10) -> None:
+    async def grab_book_links(self, page: Page, goto_link: str, max_clicks: int = 10) -> None:
         """ Scrape book links for caching """
-        if self.parent.book_limit == self.parent.open_cateory_book["total_book_scraped"]:
+        if self.parent.open_category_book["total_book_scraped"] >= self.parent.book_limit:
             print("[ Snippy ] Book Link Limit Reached. ")
             return
-        
-        # page.set_content(self.parent.test_path)
-        page.goto("https://openlibrary.org/subjects/architecture")
 
-        self.grab_subject_links(page)
+        time.sleep(10)
 
-        subject_link_list: List = self.parent.open_category["subjects"]
+        await page.goto(goto_link)
 
-        book_links = []
+        await self.grab_subject_links(page)
 
         book_cards = page.locator('a[href^="/books/"]')
         next_btn = page.locator('button.slick-next')
 
         clicks = 0
 
+        new_data = 0
+
         while True:
-            for href in book_cards.evaluate_all("els => els.map(e => e.getAttribute('href'))"):
+            hrefs = await book_cards.evaluate_all("els => els.map(e => e.getAttribute('href'))")
+            for href in hrefs:
                 data: Dict = {
-                    "book_link": href,
+                    "book_link": f"https://openlibrary.org{href}",
                     "is_scraped": False
                 }
 
-                if data not in book_links and len(book_links) != self.parent.book_limit:
-                    book_links.append(data)
+                if data not in self.parent.open_category_book["books"] and len(self.parent.open_category_book["books"]) != self.parent.book_limit:
+                    self.parent.open_category_book["books"].append(data)
+                    new_data += 1
 
-            disabled = (next_btn.get_attribute("aria-disabled") or "").lower()
-            if disabled == "true" or clicks >= max_clicks or len(book_links) >= self.parent.book_limit:
+            disabled = await next_btn.get_attribute("aria-disabled")
+            disabled = (disabled or "").lower()
+
+            if disabled == "true" or clicks >= max_clicks or len(self.parent.open_category_book["books"]) >= self.parent.book_limit:
                 print("[ Snippy ] Scraping book link stopped")
                 break
 
-            next_btn.click()
-            page.wait_for_timeout(random.choice([1000, 500, 1500]))
-            clicks += 1
-            print(clicks)
+            await next_btn.click()
+            await page.wait_for_timeout(random.choice([1000, 500, 1500]))
 
-        print(len(book_links))
-        return book_links
+            clicks += 1
+            # print(clicks)
+
+        if new_data:
+            print("[ Snippy ] New Book Link Data Added: ", new_data)
+        else:
+            print("[ Snippy ] No Book Added")
+
+        self.parent.open_category_book["date_updated"] = datetime.today().strftime('%Y-%m-%d')
+        self.parent.open_category_book["total_book_scraped"] = sum(1 for book in self.parent.open_category_book["books"] if book.get("is_scraped") is False)
+        self.parent.open_category_book["total_book_links"] = len(self.parent.open_category_book["books"])
+
+        self.file_manager.save_json("snippy/cache/open_category_links/openlibrary_books.json", self.parent.open_category_book)
+
+        await page.close()
+        return self.parent.open_category_book["books"]
 
 
 if __name__ == "__main__":
@@ -249,10 +289,3 @@ if __name__ == "__main__":
     User-agent: *bot
     Crawl-delay: 10
     """
-
-    # result = {
-    #     "name": "Open Library",
-    #     "main_url": self.parent.target_link,
-    #     "total_subjects": 0,
-    #     "genres": []
-    # }
