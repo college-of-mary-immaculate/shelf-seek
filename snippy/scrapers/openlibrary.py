@@ -1,3 +1,5 @@
+import random
+
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
@@ -18,14 +20,20 @@ class OpenLibrary:
 
         self.test_path = Path("snippy/scrapers/test.txt").read_text(encoding = 'utf-8')
 
-        self.closed_category = None
-        self.open_category = None
+        self.closed_category: Dict = None
+        self.open_category: Dict = None
+        self.open_cateory_book: Dict = None
+        
+        self.subject_limit: int = 150
+        self.book_limit: int = 30
 
 
-    def scrape_links(self,block_list: Dict, open_list: Dict, agent: Dict[str, str | Dict[str, str]], headless: bool, book_limit: int = 0) -> None:
+
+    def scrape_links(self,block_list: Dict, open_list: Dict, open_book_list, agent: Dict[str, str | Dict[str, str]], headless: bool, book_limit: int = 0) -> None:
         """ Scrape ocean of pdf's genre """
         self.closed_category = block_list
         self.open_category = open_list
+        self.open_cateory_book = open_book_list
 
         with Stealth().use_sync(sync_playwright()) as p:
             browser = p.chromium.launch(headless = headless)
@@ -62,6 +70,8 @@ class OpenLibraryHelper:
         self.parent = parent
         self.file_manager = file_manager
 
+        self.test_path = Path("snippy/scrapers/test.txt").read_text(encoding = 'utf-8')
+
         self.tabs: int = 5
 
 
@@ -80,6 +90,10 @@ class OpenLibraryHelper:
     def grab_subject_links(self, page: Page, goto_link: str = None) -> None:
         """ Grabs subject header links or also known genre's too. """
         # page.set_content(self.parent.test_path)
+
+        if len(self.parent.open_category["subjects"]) == self.parent.subject_limit:
+            print("[ Snippy ] Subject limit reached.")
+            return
 
         if goto_link:
             page.goto(goto_link)
@@ -119,21 +133,50 @@ class OpenLibraryHelper:
         print(f"[ Snippy ] New data added: {new_data}")
 
 
-    def grab_book_links(self, page: Page, book_limit: int) -> None:
+    def grab_book_links(self, page: Page, book_limit: int, max_clicks: int = 10) -> None:
         """ Scrape book links for caching """
+        if self.parent.book_limit == self.parent.open_cateory_book["total_book_scraped"]:
+            print("[ Snippy ] Book Link Limit Reached. ")
+            return
+        
+        # page.set_content(self.parent.test_path)
+        page.goto("https://openlibrary.org/subjects/architecture")
+
+        self.grab_subject_links(page)
+
         subject_link_list: List = self.parent.open_category["subjects"]
 
-        closed_list: Dict = self.parent.open_category
-        open_list: Dict = self.parent.closed_category
+        book_links = []
 
-        
+        book_cards = page.locator('a[href^="/books/"]')
+        next_btn = page.locator('button.slick-next')
+
+        clicks = 0
+
+        while True:
+            for href in book_cards.evaluate_all("els => els.map(e => e.getAttribute('href'))"):
+                data: Dict = {
+                    "book_link": href,
+                    "is_scraped": False
+                }
+
+                if data not in book_links and len(book_links) != self.parent.book_limit:
+                    book_links.append(data)
+
+            disabled = (next_btn.get_attribute("aria-disabled") or "").lower()
+            if disabled == "true" or clicks >= max_clicks or len(book_links) >= self.parent.book_limit:
+                print("[ Snippy ] Scraping book link stopped")
+                break
+
+            next_btn.click()
+            page.wait_for_timeout(random.choice([1000, 500, 1500]))
+            clicks += 1
+            print(clicks)
+
+        print(len(book_links))
+        return book_links
 
 
-
-
-
-        
-        
 if __name__ == "__main__":
     ocean = OpenLibrary(None)
     

@@ -47,12 +47,11 @@ class FileManager:
         with open(fr"{file_name}", "r", encoding="utf-8") as file:
             return json.load(file)
 
-
-    def save_json(self, file_name: str, data: Any, ) -> None:
+    def save_json(self, file_name: str, data: Any) -> None:
         """ Saves data on the specified json file name. """
         self.create_file(file_name)
 
-        with open(fr"{file_name}", 'w') as file:
+        with open(fr"{file_name}", 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
     # * -------------------------------------------- ---------  --------------------------------------------
 

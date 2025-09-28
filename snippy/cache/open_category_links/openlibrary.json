@@ -3,7 +3,7 @@
     "description": "Contains active cached library links that contains alot of results when open",
     "date_updated": "2025-09-28",
     "main_source": "https://openlibrary.org/",
-    "total_subjects": 84,
+    "total_subjects": 142,
     "subjects": [
         {
             "subject_name": "Architecture",
@@ -340,6 +340,238 @@
         {
             "subject_name": "Computer Science",
             "subject_link": "https://openlibrary.org/subjects/computer_science"
+        },
+        {
+            "subject_name": "Buildings, structures",
+            "subject_link": "https://openlibrary.org/subjects/buildings_structures"
+        },
+        {
+            "subject_name": "Modern Architecture",
+            "subject_link": "https://openlibrary.org/subjects/modern_architecture"
+        },
+        {
+            "subject_name": "City planning",
+            "subject_link": "https://openlibrary.org/subjects/city_planning"
+        },
+        {
+            "subject_name": "Architects",
+            "subject_link": "https://openlibrary.org/subjects/architects"
+        },
+        {
+            "subject_name": "Conservation and restoration",
+            "subject_link": "https://openlibrary.org/subjects/conservation_and_restoration"
+        },
+        {
+            "subject_name": "Buildings",
+            "subject_link": "https://openlibrary.org/subjects/buildings"
+        },
+        {
+            "subject_name": "Designs and plans",
+            "subject_link": "https://openlibrary.org/subjects/designs_and_plans"
+        },
+        {
+            "subject_name": "Exhibitions",
+            "subject_link": "https://openlibrary.org/subjects/exhibitions"
+        },
+        {
+            "subject_name": "Domestic Architecture",
+            "subject_link": "https://openlibrary.org/subjects/domestic_architecture"
+        },
+        {
+            "subject_name": "Pictorial works",
+            "subject_link": "https://openlibrary.org/subjects/pictorial_works"
+        },
+        {
+            "subject_name": "Historic buildings",
+            "subject_link": "https://openlibrary.org/subjects/historic_buildings"
+        },
+        {
+            "subject_name": "Art",
+            "subject_link": "https://openlibrary.org/subjects/art"
+        },
+        {
+            "subject_name": "Guidebooks",
+            "subject_link": "https://openlibrary.org/subjects/guidebooks"
+        },
+        {
+            "subject_name": "Criticism and interpretation",
+            "subject_link": "https://openlibrary.org/subjects/criticism_and_interpretation"
+        },
+        {
+            "subject_name": "Catalogs",
+            "subject_link": "https://openlibrary.org/subjects/catalogs"
+        },
+        {
+            "subject_name": "Congresses",
+            "subject_link": "https://openlibrary.org/subjects/congresses"
+        },
+        {
+            "subject_name": "Philosophy",
+            "subject_link": "https://openlibrary.org/subjects/philosophy"
+        },
+        {
+            "subject_name": "Description and travel",
+            "subject_link": "https://openlibrary.org/subjects/description_and_travel"
+        },
+        {
+            "subject_name": "Italy",
+            "subject_link": "https://openlibrary.org/subjects/place:italy"
+        },
+        {
+            "subject_name": "Germany",
+            "subject_link": "https://openlibrary.org/subjects/place:germany"
+        },
+        {
+            "subject_name": "France",
+            "subject_link": "https://openlibrary.org/subjects/place:france"
+        },
+        {
+            "subject_name": "Spain",
+            "subject_link": "https://openlibrary.org/subjects/place:spain"
+        },
+        {
+            "subject_name": "United States",
+            "subject_link": "https://openlibrary.org/subjects/place:united_states"
+        },
+        {
+            "subject_name": "Japan",
+            "subject_link": "https://openlibrary.org/subjects/place:japan"
+        },
+        {
+            "subject_name": "New York (State)",
+            "subject_link": "https://openlibrary.org/subjects/place:new_york_(state)"
+        },
+        {
+            "subject_name": "New York",
+            "subject_link": "https://openlibrary.org/subjects/place:new_york"
+        },
+        {
+            "subject_name": "China",
+            "subject_link": "https://openlibrary.org/subjects/place:china"
+        },
+        {
+            "subject_name": "England",
+            "subject_link": "https://openlibrary.org/subjects/place:england"
+        },
+        {
+            "subject_name": "New York (N.Y.)",
+            "subject_link": "https://openlibrary.org/subjects/place:new_york_(n.y.)"
+        },
+        {
+            "subject_name": "Netherlands",
+            "subject_link": "https://openlibrary.org/subjects/place:netherlands"
+        },
+        {
+            "subject_name": "Russia (Federation)",
+            "subject_link": "https://openlibrary.org/subjects/place:russia_(federation)"
+        },
+        {
+            "subject_name": "Europe",
+            "subject_link": "https://openlibrary.org/subjects/place:europe"
+        },
+        {
+            "subject_name": "Switzerland",
+            "subject_link": "https://openlibrary.org/subjects/place:switzerland"
+        },
+        {
+            "subject_name": "Rome",
+            "subject_link": "https://openlibrary.org/subjects/place:rome"
+        },
+        {
+            "subject_name": "Austria",
+            "subject_link": "https://openlibrary.org/subjects/place:austria"
+        },
+        {
+            "subject_name": "Turkey",
+            "subject_link": "https://openlibrary.org/subjects/place:turkey"
+        },
+        {
+            "subject_name": "Mexico",
+            "subject_link": "https://openlibrary.org/subjects/place:mexico"
+        },
+        {
+            "subject_name": "Great Britain",
+            "subject_link": "https://openlibrary.org/subjects/place:great_britain"
+        },
+        {
+            "subject_name": "Le Corbusier (1887-1965)",
+            "subject_link": "https://openlibrary.org/subjects/person:le_corbusier_(1887-1965)"
+        },
+        {
+            "subject_name": "Frank Lloyd Wright (1867-1959)",
+            "subject_link": "https://openlibrary.org/subjects/person:frank_lloyd_wright_(1867-1959)"
+        },
+        {
+            "subject_name": "Andrea Palladio (1508-1580)",
+            "subject_link": "https://openlibrary.org/subjects/person:andrea_palladio_(1508-1580)"
+        },
+        {
+            "subject_name": "Alvar Aalto (1898-1976)",
+            "subject_link": "https://openlibrary.org/subjects/person:alvar_aalto_(1898-1976)"
+        },
+        {
+            "subject_name": "Antoni Gaudí (1852-1926)",
+            "subject_link": "https://openlibrary.org/subjects/person:antoni_gaudí_(1852-1926)"
+        },
+        {
+            "subject_name": "Vitruvius Pollio",
+            "subject_link": "https://openlibrary.org/subjects/person:vitruvius_pollio"
+        },
+        {
+            "subject_name": "Karl Friedrich Schinkel (1781-1841)",
+            "subject_link": "https://openlibrary.org/subjects/person:karl_friedrich_schinkel_(1781-1841)"
+        },
+        {
+            "subject_name": "Louis I. Kahn (1901-1974)",
+            "subject_link": "https://openlibrary.org/subjects/person:louis_i._kahn_(1901-1974)"
+        },
+        {
+            "subject_name": "Tadao Andō (1941-)",
+            "subject_link": "https://openlibrary.org/subjects/person:tadao_andō_(1941-)"
+        },
+        {
+            "subject_name": "Ludwig Mies van der Rohe (1886-1969)",
+            "subject_link": "https://openlibrary.org/subjects/person:ludwig_mies_van_der_rohe_(1886-1969)"
+        },
+        {
+            "subject_name": "20th century",
+            "subject_link": "https://openlibrary.org/subjects/time:20th_century"
+        },
+        {
+            "subject_name": "21st century",
+            "subject_link": "https://openlibrary.org/subjects/time:21st_century"
+        },
+        {
+            "subject_name": "19th century",
+            "subject_link": "https://openlibrary.org/subjects/time:19th_century"
+        },
+        {
+            "subject_name": "18th century",
+            "subject_link": "https://openlibrary.org/subjects/time:18th_century"
+        },
+        {
+            "subject_name": "17th century",
+            "subject_link": "https://openlibrary.org/subjects/time:17th_century"
+        },
+        {
+            "subject_name": "16th century",
+            "subject_link": "https://openlibrary.org/subjects/time:16th_century"
+        },
+        {
+            "subject_name": "20e siècle",
+            "subject_link": "https://openlibrary.org/subjects/time:20e_siècle"
+        },
+        {
+            "subject_name": "1868-",
+            "subject_link": "https://openlibrary.org/subjects/time:1868-"
+        },
+        {
+            "subject_name": "Ming-Qing dynasties, 1368-1912",
+            "subject_link": "https://openlibrary.org/subjects/time:ming-qing_dynasties_1368-1912"
+        },
+        {
+            "subject_name": "Edo period, 1600-1868",
+            "subject_link": "https://openlibrary.org/subjects/time:edo_period_1600-1868"
         }
     ]
 }
