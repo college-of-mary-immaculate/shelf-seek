@@ -1,4 +1,5 @@
 import time
+import asyncio
 
 from typing import Dict
 
@@ -14,34 +15,34 @@ class OpenLibraryController:
         self.target = OpenLibrary(self.file_manager)
 
 
-    def validate_openlibrary(self, agent: Dict[str, str | Dict[str, str]], headless: bool = True, total_books: int = 1_000) -> None:
+    def validate_openlibrary(self, agent: Dict[str, str | Dict[str, str]], headless: bool = True, total_books: int = 50, total_subject: int = 200) -> None:
         """ Scrapes ocean of pdf, it will take longer time """
-        # try:
+
         if not isinstance(headless, bool):
-            raise ValueError("[ 🍎 ] Headless must be a boolean")
+            raise ValueError("[ Snippy ] Headless must be a boolean")
 
         if not isinstance(agent, dict):
-            raise ValueError("[ 🍎 ] Agent must be a dictionary containing 'user_agent' and 'headers'.")
+            raise ValueError("[ Snippy ] Agent must be a dictionary containing 'user_agent' and 'headers'.")
 
         if "user_agent" not in agent or "headers" not in agent:
-            raise KeyError("[ 🍎 ] Agent dictionary must include both 'user_agent' and 'headers' keys.")
+            raise KeyError("[ Snippy ] Agent dictionary must include both 'user_agent' and 'headers' keys.")
         
         closed_category: str = "snippy/cache/closed_category_links/openlibrary.json"
 
         open_category: str = "snippy/cache/open_category_links/openlibrary.json"
         open_category_book: str = "snippy/cache/open_category_links/openlibrary_books.json"
 
-        if self.file_manager.is_file_exist(closed_category) and self.file_manager.is_file_exist(open_category):
+        if self.file_manager.is_file_exist(closed_category) and self.file_manager.is_file_exist(open_category) and self.file_manager.is_file_exist(open_category_book):
             block_list: Dict = self.file_manager.load_json(closed_category)
             open_list: Dict = self.file_manager.load_json(open_category)
             open_book_list: Dict = self.file_manager.load_json(open_category_book)
 
-        existing_genre_data: Dict = self.target.scrape_links(block_list, open_list, open_book_list, agent, headless, book_limit = total_books)
+        self.target.setup(block_list, open_list, open_book_list, book_limit = total_books, subject_limit = total_subject)
+
+        existing_genre_data: Dict = asyncio.run(self.target.scrape(agent, headless))
 
         return existing_genre_data
 
-        # except Exception as error:
-        #     print(f"[ 🍎 ] Checkup failed due to error: {error}")
 
 if __name__ == "__main__":
     controller = OpenLibraryController(None)
