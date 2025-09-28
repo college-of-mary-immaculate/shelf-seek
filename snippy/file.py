@@ -13,11 +13,16 @@ class FileManager:
         self.__size_limit = size_limit
     
 
+    def is_file_exist(self, path: str) -> bool:
+        """ Returns a boolean if a certain file is existed by the given path. """
+        return os.path.exists(path)
+
+
     def create_file(self, file_name: str) -> bool:
         """ Creates a specified file with its file name and designated directrory """
         os.makedirs(os.path.dirname(file_name), exist_ok=True)
 
-        if os.path.exists(file_name):
+        if self.is_file_exist(file_name):
             return False
 
         with open(file_name, "w", encoding="utf-8") as f:
@@ -35,20 +40,20 @@ class FileManager:
     # * -------------------------------------------- JSON FILES --------------------------------------------
     def load_json(self, file_name: str) -> List | Dict | Any:
         """ Loads data on the specified json file name. """
-        if not os.path.exists(file_name):
-            print("File not found")
+        if not self.is_file_exist(file_name):
+            print("File not found: ", file_name)
             return
         
         with open(fr"{file_name}", "r", encoding="utf-8") as file:
             return json.load(file)
 
 
-    def save_json(self, file_name: str, data: Any) -> Any:
+    def save_json(self, file_name: str, data: Any, ) -> None:
         """ Saves data on the specified json file name. """
         self.create_file(file_name)
 
         with open(fr"{file_name}", 'w') as file:
-            json.dump(data, file, indent=4)
+            json.dump(data, file, indent=4, ensure_ascii=False)
     # * -------------------------------------------- ---------  --------------------------------------------
 
 
@@ -85,7 +90,7 @@ class FileManager:
 
     def load_csv(self, file_name: str) -> List:
         """ Loads data on the specified csv file name. """
-        if not os.path.exists(file_name):
+        if not self.is_file_exist(file_name):
             print("File not found")
             return
 
