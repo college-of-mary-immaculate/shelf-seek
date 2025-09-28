@@ -42,14 +42,15 @@ def seek_checkup(headless: bool = True) -> None:
         return result
 
 
-def seek_openlibrary(headless: bool = True,  total_books: int = 1_000, online = True) -> None:
+def seek_openlibrary(headless: bool = True, online=True, total_books: int = 50, total_subject: int = 200) -> None:
     """ Scrapes ocean of pdf, it will take longer time """
 
     if online:
         result: Dict = ocean_of_pdf.validate_openlibrary(
             agent = generate_agent(),
             headless = headless,
-            total_books = total_books
+            total_books = total_books,
+            total_subject = total_subject
         )
 
     if result:
