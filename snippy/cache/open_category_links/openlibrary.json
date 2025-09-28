@@ -3,7 +3,7 @@
     "description": "Contains active cached library links that contains alot of results when open",
     "date_updated": "2025-09-28",
     "main_source": "https://openlibrary.org/",
-    "total_subjects": 142,
+    "total_subjects": 200,
     "subjects": [
         {
             "subject_name": "Architecture",
@@ -572,6 +572,238 @@
         {
             "subject_name": "Edo period, 1600-1868",
             "subject_link": "https://openlibrary.org/subjects/time:edo_period_1600-1868"
+        },
+        {
+            "subject_name": "Web sites",
+            "subject_link": "https://openlibrary.org/subjects/web_sites"
+        },
+        {
+            "subject_name": "Gardens",
+            "subject_link": "https://openlibrary.org/subjects/gardens"
+        },
+        {
+            "subject_name": "Web sites, design",
+            "subject_link": "https://openlibrary.org/subjects/web_sites_design"
+        },
+        {
+            "subject_name": "Web site development",
+            "subject_link": "https://openlibrary.org/subjects/web_site_development"
+        },
+        {
+            "subject_name": "Industrial design",
+            "subject_link": "https://openlibrary.org/subjects/industrial_design"
+        },
+        {
+            "subject_name": "Landscape gardening",
+            "subject_link": "https://openlibrary.org/subjects/landscape_gardening"
+        },
+        {
+            "subject_name": "Graphic arts",
+            "subject_link": "https://openlibrary.org/subjects/graphic_arts"
+        },
+        {
+            "subject_name": "Computer graphics",
+            "subject_link": "https://openlibrary.org/subjects/computer_graphics"
+        },
+        {
+            "subject_name": "Art & Art Instruction",
+            "subject_link": "https://openlibrary.org/subjects/art__art_instruction"
+        },
+        {
+            "subject_name": "History of art / art & design styles",
+            "subject_link": "https://openlibrary.org/subjects/history_of_art__art__design_styles"
+        },
+        {
+            "subject_name": "General",
+            "subject_link": "https://openlibrary.org/subjects/general"
+        },
+        {
+            "subject_name": "Individual Artist",
+            "subject_link": "https://openlibrary.org/subjects/individual_artist"
+        },
+        {
+            "subject_name": "Individual artists",
+            "subject_link": "https://openlibrary.org/subjects/individual_artists"
+        },
+        {
+            "subject_name": "History - General",
+            "subject_link": "https://openlibrary.org/subjects/history_-_general"
+        },
+        {
+            "subject_name": "Art / Individual Artist",
+            "subject_link": "https://openlibrary.org/subjects/art__individual_artist"
+        },
+        {
+            "subject_name": "Collections, Catalogs, Exhibitions - General",
+            "subject_link": "https://openlibrary.org/subjects/collections_catalogs_exhibitions_-_general"
+        },
+        {
+            "subject_name": "Painting & paintings",
+            "subject_link": "https://openlibrary.org/subjects/painting__paintings"
+        },
+        {
+            "subject_name": "20th century",
+            "subject_link": "https://openlibrary.org/subjects/20th_century"
+        },
+        {
+            "subject_name": "Modern Art",
+            "subject_link": "https://openlibrary.org/subjects/modern_art"
+        },
+        {
+            "subject_name": "Museum, historic sites, gallery & art guides",
+            "subject_link": "https://openlibrary.org/subjects/museum_historic_sites_gallery__art_guides"
+        },
+        {
+            "subject_name": "History of art & design styles: from c 1900 -",
+            "subject_link": "https://openlibrary.org/subjects/history_of_art__design_styles_from_c_1900_-"
+        },
+        {
+            "subject_name": "Art collections",
+            "subject_link": "https://openlibrary.org/subjects/art_collections"
+        },
+        {
+            "subject_name": "European",
+            "subject_link": "https://openlibrary.org/subjects/european"
+        },
+        {
+            "subject_name": "Exhibition catalogues and specific collections",
+            "subject_link": "https://openlibrary.org/subjects/exhibition_catalogues_and_specific_collections"
+        },
+        {
+            "subject_name": "Art / General",
+            "subject_link": "https://openlibrary.org/subjects/art__general"
+        },
+        {
+            "subject_name": "Sculpture",
+            "subject_link": "https://openlibrary.org/subjects/sculpture"
+        },
+        {
+            "subject_name": "Collections, Catalogs, Exhibitions - Museum",
+            "subject_link": "https://openlibrary.org/subjects/collections_catalogs_exhibitions_-_museum"
+        },
+        {
+            "subject_name": "California",
+            "subject_link": "https://openlibrary.org/subjects/place:california"
+        },
+        {
+            "subject_name": "Chicago",
+            "subject_link": "https://openlibrary.org/subjects/place:chicago"
+        },
+        {
+            "subject_name": "Illinois",
+            "subject_link": "https://openlibrary.org/subjects/place:illinois"
+        },
+        {
+            "subject_name": "India",
+            "subject_link": "https://openlibrary.org/subjects/place:india"
+        },
+        {
+            "subject_name": "Ireland",
+            "subject_link": "https://openlibrary.org/subjects/place:ireland"
+        },
+        {
+            "subject_name": "London",
+            "subject_link": "https://openlibrary.org/subjects/place:london"
+        },
+        {
+            "subject_name": "Scotland",
+            "subject_link": "https://openlibrary.org/subjects/place:scotland"
+        },
+        {
+            "subject_name": "Australia",
+            "subject_link": "https://openlibrary.org/subjects/place:australia"
+        },
+        {
+            "subject_name": "Diego Rivera (1886-1957)",
+            "subject_link": "https://openlibrary.org/subjects/person:diego_rivera_(1886-1957)"
+        },
+        {
+            "subject_name": "Frida Kahlo",
+            "subject_link": "https://openlibrary.org/subjects/person:frida_kahlo"
+        },
+        {
+            "subject_name": "Gabriel Orozco (1962-)",
+            "subject_link": "https://openlibrary.org/subjects/person:gabriel_orozco_(1962-)"
+        },
+        {
+            "subject_name": "Paris",
+            "subject_link": "https://openlibrary.org/subjects/place:paris"
+        },
+        {
+            "subject_name": "Joseph Cornell",
+            "subject_link": "https://openlibrary.org/subjects/person:joseph_cornell"
+        },
+        {
+            "subject_name": "Richard Tuttle (1941-)",
+            "subject_link": "https://openlibrary.org/subjects/person:richard_tuttle_(1941-)"
+        },
+        {
+            "subject_name": "Andy Warhol (1928-1987)",
+            "subject_link": "https://openlibrary.org/subjects/person:andy_warhol_(1928-1987)"
+        },
+        {
+            "subject_name": "Tony Oursler",
+            "subject_link": "https://openlibrary.org/subjects/person:tony_oursler"
+        },
+        {
+            "subject_name": "Pablo Picasso (1881-1973)",
+            "subject_link": "https://openlibrary.org/subjects/person:pablo_picasso_(1881-1973)"
+        },
+        {
+            "subject_name": "Alberto Campo Baeza (1946-)",
+            "subject_link": "https://openlibrary.org/subjects/person:alberto_campo_baeza_(1946-)"
+        },
+        {
+            "subject_name": "Joseph Beuys",
+            "subject_link": "https://openlibrary.org/subjects/person:joseph_beuys"
+        },
+        {
+            "subject_name": "Alexander Birchler (1962-)",
+            "subject_link": "https://openlibrary.org/subjects/person:alexander_birchler_(1962-)"
+        },
+        {
+            "subject_name": "Rembrandt Harmenszoon van Rijn (1606-1669)",
+            "subject_link": "https://openlibrary.org/subjects/person:rembrandt_harmenszoon_van_rijn_(1606-1669)"
+        },
+        {
+            "subject_name": "Alexandre Rodrigues Ferreira (1756-1815)",
+            "subject_link": "https://openlibrary.org/subjects/person:alexandre_rodrigues_ferreira_(1756-1815)"
+        },
+        {
+            "subject_name": "Salvador Dalí (1904-1989)",
+            "subject_link": "https://openlibrary.org/subjects/person:salvador_dalí_(1904-1989)"
+        },
+        {
+            "subject_name": "Alexis Rockman (1962-)",
+            "subject_link": "https://openlibrary.org/subjects/person:alexis_rockman_(1962-)"
+        },
+        {
+            "subject_name": "Edgar Degas (1834-1917)",
+            "subject_link": "https://openlibrary.org/subjects/person:edgar_degas_(1834-1917)"
+        },
+        {
+            "subject_name": "Mike Kelley (1954-)",
+            "subject_link": "https://openlibrary.org/subjects/person:mike_kelley_(1954-)"
+        },
+        {
+            "subject_name": "Alex Katz (1927-)",
+            "subject_link": "https://openlibrary.org/subjects/person:alex_katz_(1927-)"
+        },
+        {
+            "subject_name": "Antoni Tàpies (1923-)",
+            "subject_link": "https://openlibrary.org/subjects/person:antoni_tàpies_(1923-)"
+        },
+        {
+            "subject_name": "Auguste Rodin (1840-1917)",
+            "subject_link": "https://openlibrary.org/subjects/person:auguste_rodin_(1840-1917)"
+        },
+        {
+            "subject_name": "20e siecle",
+            "subject_link": "https://openlibrary.org/subjects/time:20e_siecle"
+        },
+        {
+            "subject_name": "Medieval, 500-1500",
+            "subject_link": "https://openlibrary.org/subjects/time:medieval_500-1500"
         }
     ]
 }
