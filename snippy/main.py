@@ -36,29 +36,38 @@ def seek_checkup(headless: bool = True) -> None:
 
     if result:
         print(r"[ Snippy ] Sucessfully take snippy to a checkup results are in snippy/data/daily_checkup folder. 🎉")
-        return result
     else:
         print("[ Snippy ] Snippy checkup did not complete successfully.")
-        return result
+
+    return result
 
 
-def seek_openlibrary(headless: bool = True, online=True, total_books: int = 50, total_subject: int = 200) -> None:
+def seek_openlibrary(online: bool = True, headless: bool = True, total_books: int = 50, total_subject: int = 200, total_tabs: int = 3) -> List:
     """ Scrapes ocean of pdf, it will take longer time """
-
     if online:
-        result: Dict = ocean_of_pdf.validate_openlibrary(
+        result: List = ocean_of_pdf.validate_openlibrary(
             agent = generate_agent(),
             headless = headless,
             total_books = total_books,
             total_subject = total_subject
         )
 
-    if result:
-        print("[ Snippy ] Sucessfully take snippy to scrape Ocean of PDF. 🎉")
-        return result
+        if result:
+            print("[ Snippy ] Sucessfully take snippy to scrape Open Library. 🥳🎉")
+        else:
+            print("[ Snippy ] Snippy scraping on Open Library did not complete successfully. 😐✌️")
+    
     else:
-        print("[ Snippy ] Snippy scraping on Ocean of PDF did not complete successfully.")
-        return result
+
+        result: List = file_manager.load_json(file_name = "snippy/data/shelf.json")
+
+        if result:
+            print("[ Snippy ] Sucessfully take snippy scraped Open Library data. 🥳🎉")
+        else:
+            print("[ Snippy ] Snippy scraped Open Library did not complete. 😐✌️")
+
+    return result
+
 
 
 if __name__ == "__main__":
