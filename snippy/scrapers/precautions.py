@@ -6,15 +6,16 @@ from playwright_stealth import Stealth
 
 
 class Precaution:
-    def __init__(self):
-        """ 
-        Provide a test record for the snippy bot
+    """
+    Provide a test record for the snippy bot
 
-        ### Methods:
-        take_screenshot() -> None
-            
-            takes snippy for a detection test
-        """
+    ### Methods:
+    take_screenshot() -> None
+
+        takes snippy for a detection test
+    """
+    
+    def __init__(self, file_manager):
         self.target_link = "https://bot.sannysoft.com/"
 
 
@@ -32,7 +33,7 @@ class Precaution:
             page = context.new_page()
 
             page.goto(self.target_link)
-            page.screenshot(path = f"snippy/data/daily_checkup/test-snippy-checkup-{datetime.today().strftime('%Y-%m-%d')}.png")
+            page.screenshot(path = f"snippy/cache/daily_checkup/test-snippy-checkup-{datetime.today().strftime('%Y-%m-%d')}.png")
 
             context.close()
             browser.close()

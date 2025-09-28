@@ -11,4 +11,6 @@ This folder contains the `traffic cops` 🚦 of Snippy.
 ----
 `🍏 This can stop you for number of scrapes per day.`
 """
+
 from .precautions import Precaution
+from .openlibrary import OpenLibrary
