@@ -1,7 +1,9 @@
 from pydantic import BaseModel
 
 class ShelfSeekModel(BaseModel):
-    pass
+    
+    class Config:
+        pass
 
 class SearchRequest(ShelfSeekModel):
     pass
