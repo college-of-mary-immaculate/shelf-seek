@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShelfSeek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#fdf6ec] text-gray-900">
+    <!-- Header -->
+    <!-- Header -->
+    <header class="border-b border-gray-300 bg-[#fdf6ec]">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <!-- Logo -->
+        <div class="flex items-center justify-start">
+            <div class="w-12 h-12 rounded-full border-2 border-[#0f4257] flex items-center justify-center bg-white p-2">
+            <img src="/img/Removal-744.png" alt="ShelfSeek Logo" class="w-full h-full object-contain" />
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="flex items-center w-full sm:w-2/3">
+            <input
+            type="text"
+            placeholder="Seek Books."
+            class="flex-grow px-4 py-2 border border-gray-400 rounded-l-full focus:outline-none text-sm"
+            />
+            <button class="bg-[#0f4257] text-white px-4 py-2 rounded-r-full">
+            <i class="fa fa-search"></i>
+            </button>
+        </div>
+        </div>
+
+        <!-- Nav Links -->
+        <nav class="flex flex-wrap justify-center sm:justify-start gap-2 mt-4">
+        <a href="#" class="px-4 py-2 border border-gray-400 rounded-full hover:bg-gray-200 bg-white text-xs sm:text-sm font-medium">All</a>
+        <a href="#" class="px-4 py-2 text-xs sm:text-sm font-medium hover:text-[#0f4257]">Genres</a>
+        <a href="#" class="px-4 py-2 text-xs sm:text-sm font-medium hover:text-[#0f4257]">Authors</a>
+        <a href="#" class="px-4 py-2 text-xs sm:text-sm font-medium hover:text-[#0f4257]">Ratings</a>
+        <a href="#" class="px-4 py-2 text-xs sm:text-sm font-medium hover:text-[#0f4257]">Shopping</a>
+        <a href="#" class="w-9 h-9 sm:w-10 sm:h-10 bg-[#0f4257] text-white rounded-full flex items-center justify-center hover:bg-[#0a3344]">
+            <i class="fa fa-star text-xs sm:text-sm"></i>
+        </a>
+        </nav>
+    </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 p-4 sm:p-6">
+      <!-- Left Column (Books) -->
+      <section class="lg:col-span-2 space-y-6">
+        <!-- Example Book Card -->
+        <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+          <img src="/img/Screenshot 2025-09-30 201722.png" alt="Harry Potter book cover" class="w-32 h-48 sm:w-24 sm:h-36 object-cover rounded mx-auto sm:mx-0" />
+          <div>
+            <h2 class="text-base sm:text-lg font-semibold">Harry Potter</h2>
+            <p class="font-bold text-sm sm:text-base">The Chamber of Secrets</p>
+            <p class="text-xs sm:text-sm text-gray-500">June 5, 1907</p>
+            <p class="text-xs sm:text-sm mt-2">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              <span class="px-3 py-1 text-xs bg-gray-200 rounded-full">J.K Rowling</span>
+              <span class="px-3 py-1 text-xs bg-gray-200 rounded-full">Fantasy</span>
+              <span class="px-3 py-1 text-xs bg-gray-200 rounded-full">Classic</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column (Author Bio) -->
+      <aside class="space-y-4">
+        <div class="border border-gray-300 rounded-lg p-4 sm:p-6 bg-[#fdf6ec]">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="bg-[#0f4257] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center">
+              <i class="fa fa-feather text-sm sm:text-lg"></i>
+            </span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold mb-1">J.K Rowling</h3>
+          <p class="text-xs sm:text-sm text-gray-600 mb-4">British author and philanthropist (born 1965)</p>
+          <hr class="border-gray-400 mb-4" />
+          <img src="/img/Screenshot 2025-09-30 201708.png" alt="Portrait of J.K Rowling" class="w-full h-48 sm:h-56 object-cover rounded mb-4" />
+          <hr class="border-gray-400 mb-4" />
+          <p class="text-xs sm:text-sm leading-relaxed text-gray-800">
+            J. K. Rowling, is a British author best known as the creator of the Harry Potter fantasy series, conceived whilst on a train trip in 1990. 
+            The Potter books have gained worldwide attention, won awards, sold more than 400 million copies, and inspired a popular film series.
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#fdf6ec] border-t border-gray-300 mt-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <!-- Logo + About -->
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold">Shelf<span class="text-red-500">Seek</span></h2>
+          <p class="text-xs sm:text-sm mt-1">Every Shelf has <span class="text-red-500">a story</span></p>
+          <h3 class="mt-4 font-semibold text-sm sm:text-base">About Us</h3>
+          <p class="text-xs sm:text-sm mt-2">We're constantly improving ShelfSeek to make book discovery easier, helping you explore new titles and authors every day.</p>
+        </div>
+
+        <!-- Tech Stacks -->
+        <div>
+          <h3 class="font-semibold text-sm sm:text-base">Tech Stacks</h3>
+          <ul class="mt-2 space-y-1 text-xs sm:text-sm">
+            <li>HTML</li>
+            <li>Tailwind</li>
+            <li>React</li>
+            <li>FASTAPI</li>
+            <li>MongoDB</li>
+            <li>Docker</li>
+          </ul>
+        </div>
+
+        <!-- Content -->
+        <div>
+          <h3 class="font-semibold text-sm sm:text-base">Content</h3>
+          <ul class="mt-2 space-y-1 text-xs sm:text-sm">
+            <li>All</li>
+            <li>Genres</li>
+            <li>Authors</li>
+            <li>Ratings</li>
+            <li>Shopping</li>
+          </ul>
+        </div>
+
+        <!-- Sources -->
+        <div>
+          <h3 class="font-semibold text-sm sm:text-base">Sources</h3>
+          <ul class="mt-2 space-y-1 text-xs sm:text-sm">
+            <li>Open Library</li>
+            <li>Goodreads</li>
+            <li>Project Gutenberg</li>
+            <li>Barnes & Noble</li>
+          </ul>
+        </div>
+
+        <!-- Follow Us -->
+        <div>
+          <h3 class="font-semibold text-sm sm:text-base">Follow Us</h3>
+          <div class="flex space-x-4 mt-3 text-base">
+            <a href="#" class="hover:text-gray-900"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="hover:text-gray-900"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="hover:text-gray-900"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="hover:text-gray-900"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-300 py-4 text-center text-xs sm:text-sm px-4">
+        <div class="flex flex-wrap justify-center gap-3 mb-2">
+          <a href="#" class="hover:text-red-500">Send Feedback</a>
+          <a href="#" class="hover:text-red-500">About Us</a>
+          <a href="#" class="hover:text-red-500">Contact</a>
+        </div>
+        <p>© 2025 ShelfSeek, For educational purposes only.</p>
+      </div>
+    </footer>
+  </body>
+</html>
