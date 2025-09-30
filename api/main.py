@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from routers import greeting_router
 from config import settings
-from ..model import SearchRequest, SearchResult, SearchResponse
+from models import SearchRequest, SearchResult, SearchResponse
 
 app = FastAPI(
     title=settings.APP_NAME, 
