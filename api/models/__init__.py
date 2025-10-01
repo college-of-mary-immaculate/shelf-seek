@@ -1,3 +1,3 @@
-from .searchEngineModel import *
+from .book import Book
 
-__all__ = ["ShelfSeekModel", "SearchRequest", "SearchResult", "SearchResponse"]
+__all__ = ["Book"]
