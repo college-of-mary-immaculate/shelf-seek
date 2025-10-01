@@ -1,3 +1,3 @@
-from .greeting import router as greeting_router
+from .greeting import router 
 
-__all__ = ["greeting_router"]
+__all__ = ["router"]
