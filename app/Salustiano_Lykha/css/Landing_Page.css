@@ -3,7 +3,7 @@ body {
   background-color: #fff8f1;
   font-family: "Georgia", serif;
   margin: 0;
-  padding: 0;
+  padding-top: 80px; 
 }
 
 .header {
@@ -14,21 +14,16 @@ body {
   left: 0;
   width: 100%;       
   z-index: 1000;     
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); 
 }
 
 .header-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 16px 32px; 
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-
-body {
-  margin: 0;
-  padding-top: 72px;
 }
 
 .logo-wrapper {
@@ -54,16 +49,20 @@ body {
   border: 1px solid #ccc;
   border-radius: 50px;
   overflow: hidden;
+  background: white;
 }
 
 .nav-link {
-  padding: 8px 20px;
+  padding: 10px 24px;
   font-size: 14px;
-  color: #555;
+  font-weight: 500;
+  color: #444;
   text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .nav-link:hover {
+  background-color: rgba(15, 66, 87, 0.08);
   color: #0f4257;
 }
 
@@ -73,6 +72,7 @@ body {
 }
 
 .search-btn {
+  margin-left: 16px;
   padding: 8px 20px;
   border-radius: 50px;
   background-color: #0f4257;
@@ -80,6 +80,11 @@ body {
   font-size: 14px;
   text-decoration: none;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.search-btn:hover {
+  background-color: #0c3344;
 }
 
 .hero {
@@ -153,6 +158,9 @@ body {
   grid-template-columns: repeat(6, 1fr); 
   gap: 40px; 
   padding: 0 32px;
+  max-width: 1200px;   
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .book-card {
@@ -185,25 +193,21 @@ body {
   margin-top: 6px;
 }
 
-
 .book-card.featured {
   grid-column: span 2; 
   grid-row: span 2;    
 }
 
 .book-card.featured .book-img {
-  height: auto;  
   aspect-ratio: 2 / 3;
   box-shadow: 12px 12px 22px rgba(0, 0, 0, 0.3); 
 }
-
 
 @media (max-width: 1024px) {
   .books {
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
   }
-  
   .hero-title {
     font-size: 2rem;
   }
@@ -213,41 +217,20 @@ body {
   body {
     padding-top: 130px;
   }
-  
   .header-container {
     flex-wrap: wrap;
     padding: 12px 16px;
   }
-  
   .nav {
     order: 3;
     width: 100%;
     margin-top: 12px;
     justify-content: center;
   }
-  
-  .nav-link {
-    padding: 8px 16px;
-    font-size: 13px;
-  }
-  
-  .search-btn {
-    padding: 8px 16px;
-    font-size: 13px;
-  }
-  
   .books {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     padding: 0 24px;
-  }
-  
-  .hero-title {
-    font-size: 1.75rem;
-  }
-  
-  .book-title {
-    font-size: 16px;
   }
 }
 
@@ -257,23 +240,9 @@ body {
     gap: 20px;
     padding: 0 16px;
   }
-  
   .book-card.featured {
     grid-column: span 1;
     grid-row: span 1;
-  }
-  
-  .hero-title {
-    font-size: 1.5rem;
-  }
-  
-  .filters {
-    gap: 8px;
-  }
-  
-  .filter-btn {
-    padding: 6px 12px;
-    font-size: 13px;
   }
 }
 
@@ -281,66 +250,17 @@ body {
   body {
     padding-top: 140px;
   }
-  
-  .header-container {
-    padding: 10px 12px;
-  }
-  
-  .logo-wrapper {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .nav {
-    flex-wrap: wrap;
-  }
-  
-  .nav-link {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  
-  .search-btn {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-  
-  .hero {
-    margin-top: 24px;
-  }
-  
-  .hero-title {
-    font-size: 1.25rem;
-  }
-  
-  .search-bar {
-    margin-top: 16px;
-  }
-  
-  .search-input {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-  
-  .search-icon-btn {
-    padding: 0 12px;
-    font-size: 14px;
-  }
-  
   .books {
     margin-top: 32px;
     gap: 16px;
     padding: 0 12px;
   }
-  
   .book-title {
     font-size: 14px;
   }
-  
   .book-author {
     font-size: 12px;
   }
-  
   .book-img {
     margin-bottom: 12px;
   }
