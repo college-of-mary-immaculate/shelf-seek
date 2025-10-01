@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from routers import greeting_router
+from routers import router
 from config import settings
-from models import SearchRequest, SearchResult, SearchResponse
+from schemas import SearchRequest, SearchResult, SearchResponse
 
 app = FastAPI(
     title=settings.APP_NAME, 
@@ -10,7 +10,7 @@ app = FastAPI(
 )
 
 # Include greeting router with API prefix
-app.include_router(greeting_router, prefix=settings.API_PREFIX)
+app.include_router(router, prefix=settings.API_PREFIX)
 
 @app.get("/")
 def root():
