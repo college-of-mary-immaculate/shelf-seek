@@ -3,7 +3,7 @@ class SPA {
 
     constructor(config = {}) {
       this.context = {
-        root: config?.root || document.getElementById('app'),
+        root: config?.root || document.getElementById('site'),
       };
   
       this.defaultRoute = {
