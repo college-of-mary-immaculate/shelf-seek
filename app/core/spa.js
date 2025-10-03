@@ -5,6 +5,8 @@ class SPA {
       this.context = {
         root: config?.root || document.getElementById('site'),
       };
+
+      
   
       this.defaultRoute = {
         key: '*',
@@ -17,6 +19,7 @@ class SPA {
     }
 
     add(path, cb, isProtected = false) {
+
       const callback = (params) => {
         if (isProtected && !this.userAuthenticated()) {
             this.pushRoute('/')
@@ -93,6 +96,8 @@ class SPA {
       window.addEventListener('popstate', () => {
         this.execute(window.location.pathname);
       });
+
+      console.log(this.context)
   
       const observer = new MutationObserver((mutationList) => {
         mutationList.forEach((mutation) => {

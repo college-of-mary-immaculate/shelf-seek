@@ -6,9 +6,11 @@ const app = new SPA({
     root: document.getElementById('site'),
 });
 
-window.site = site;
+window.app = app;
 
-site.add('/landing', Landing);
-site.add('/result', Result);
+app.add('/landing', Landing);
+app.add('/result', Result);
 
-site.handleRouteChanges();
+app.setDefault(Landing)
+
+app.handleRouteChanges();

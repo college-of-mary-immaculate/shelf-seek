@@ -1,4 +1,5 @@
 export default function LandingPageLayout(root) {
+
     root.innerHTML = `
         <footer id="footer"></footer>
         <header id="header"></header>
