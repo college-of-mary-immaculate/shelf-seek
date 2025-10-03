@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/app/Salustiano_Lykha/css/Landing_Page.css">
+  <script defer src="/app/Salustiano_Lykha/js/Landing_Page.js"></script>
   <title>ShelfSeek</title>
 </head>
 <body>
@@ -12,22 +13,21 @@
     <div class="header-container">
       
       <div class="logo-wrapper">
-        <img src="/img/Removal-744.png" alt="ShelfSeek Logo" class="logo-img" />
+        <img src="/img/Removal-744.png" alt="ShelfSeek Logo" class="logo-img" id="site-logo" />
       </div>
 
       <nav class="nav">
-        <a href="#" class="nav-link active">Explore</a>
-        <a href="#" class="nav-link">Genres</a>
-        <a href="#" class="nav-link">Authors</a>
-        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link active" data-page="Explore">Explore</a>
+        <a href="#" class="nav-link" data-page="Genres">Genres</a>
+        <a href="#" class="nav-link" data-page="Authors">Authors</a>
+        <a href="#" class="nav-link" data-page="About">About</a>
       </nav>
 
       <div>
-        <a href="#" class="search-btn">Searches</a>
+        <a href="#" class="search-btn nav-link" data-page="Searches">Searches</a>
       </div>
     </div>
   </header>
-
 
   <section class="hero">
     <h1 class="hero-title">
@@ -35,10 +35,8 @@
     </h1>
 
     <div class="search-bar">
-      <input type="text" placeholder="Seek Books." class="search-input" />
-      <button class="search-icon-btn">
-        ✦
-      </button>
+      <input type="text" placeholder="Seek Books..." class="search-input" />
+      <button class="search-icon-btn">✦</button>
     </div>
 
     <div class="filters">
@@ -49,60 +47,92 @@
   </section>
 
   <section class="books">
-  <div class="book-card">
-    <img src="/img/monk.png" alt="Mediocre Monk" class="book-img" />
-    <h3 class="book-title">Mediocre Monk</h3>
-    <p class="book-author">Grant Lindsley</p>
-  </div>
+    <div class="book-card">
+      <img src="/img/monk.png" alt="Mediocre Monk" class="book-img" />
+      <h3 class="book-title">Mediocre Monk</h3>
+      <p class="book-author">Grant Lindsley</p>
+    </div>
 
-  <div class="book-card">
-    <img src="/img/harry potter.jpg" alt="Harry Potter" class="book-img" />
-    <h3 class="book-title">Harry Potter</h3>
-    <p class="book-author">J.K. Rowling</p>
-  </div>
+    <div class="book-card">
+      <img src="/img/harry potter.jpg" alt="Harry Potter" class="book-img" />
+      <h3 class="book-title">Harry Potter</h3>
+      <p class="book-author">J.K. Rowling</p>
+    </div>
 
-  <div class="book-card featured">
-    <img src="/img/ashley.png" alt="The Seven Year Slip" class="book-img" />
-    <h3 class="book-title">The Seven Year Slip</h3>
-    <p class="book-author">Ashley Poston</p>
-  </div>
+    <div class="book-card featured">
+      <img src="/img/ashley.png" alt="The Seven Year Slip" class="book-img" />
+      <h3 class="book-title">The Seven Year Slip</h3>
+      <p class="book-author">Ashley Poston</p>
+    </div>
 
-  <div class="book-card">
-    <img src="/img/Screenshot 2025-10-01 011330.png" alt="Incursion" class="book-img" />
-    <h3 class="book-title">Incursion</h3>
-    <p class="book-author">Elizabeth McLaughlin</p>
-  </div>
+    <div class="book-card">
+      <img src="/img/Screenshot 2025-10-01 011330.png" alt="Incursion" class="book-img" />
+      <h3 class="book-title">Incursion</h3>
+      <p class="book-author">Elizabeth McLaughlin</p>
+    </div>
 
-  <div class="book-card">
-    <img src="/img/science.png" alt="Science Nature" class="book-img" />
-    <h3 class="book-title">Science Nature</h3>
-    <p class="book-author">Michio Kaku</p>
-  </div>
+    <div class="book-card">
+      <img src="/img/science.png" alt="Science Nature" class="book-img" />
+      <h3 class="book-title">Science Nature</h3>
+      <p class="book-author">Michio Kaku</p>
+    </div>
 
-  <div class="book-card">
-    <img src="/img/marrage.png" alt="Marriage and Murder" class="book-img" />
-    <h3 class="book-title">Marriage and Murder</h3>
-    <p class="book-author">Penny Reid</p>
-  </div>
+    <div class="book-card">
+      <img src="/img/marrage.png" alt="Marriage and Murder" class="book-img" />
+      <h3 class="book-title">Marriage and Murder</h3>
+      <p class="book-author">Penny Reid</p>
+    </div>
 
-  <div class="book-card">
-    <img src="/img/bound.jpg" alt="Bound in Inked Flame" class="book-img" />
-    <h3 class="book-title">Bound in Inked Flame</h3>
-    <p class="book-author">Ava Larksen</p>
-  </div>
+    <div class="book-card">
+      <img src="/img/bound.jpg" alt="Bound in Inked Flame" class="book-img" />
+      <h3 class="book-title">Bound in Inked Flame</h3>
+      <p class="book-author">Ava Larksen</p>
+    </div>
 
-  <div class="book-card">
-    <img src="/img/images (1).jpg" alt="The Elements of the Crown" class="book-img" />
-    <h3 class="book-title">The Elements of the Crown</h3>
-    <p class="book-author">Kay L. Moody</p>
-  </div>
+    <div class="book-card">
+      <img src="/img/images (1).jpg" alt="The Elements of the Crown" class="book-img" />
+      <h3 class="book-title">The Elements of the Crown</h3>
+      <p class="book-author">Kay L. Moody</p>
+    </div>
 
-  <div class="book-card">
-    <img src="/img/download (1).jpg" alt="Serpent & Wings" class="book-img" />
-    <h3 class="book-title">Serpent & Wings</h3>
-    <p class="book-author">Carissa Broadbent</p>
-  </div>
-</section>
+    <div class="book-card">
+      <img src="/img/download (1).jpg" alt="Serpent & Wings" class="book-img" />
+      <h3 class="book-title">Serpent & Wings</h3>
+      <p class="book-author">Carissa Broadbent</p>
+    </div>
+  </section>
 
+  <div class="bottom-nav">
+    <a href="#" class="active" data-page="Explore" 
+       data-icon-default="/img/EXPLORE-UNSELECTED.png" 
+       data-icon-active="/img/EXPLORE-SELECTED.png">
+      <img src="/img/EXPLORE-SELECTED.png" alt="Explore" class="nav-icon" />
+      <span>Explore</span>
+    </a>
+    <a href="#" data-page="Genres"
+       data-icon-default="/img/GENRE-UNSELECTED.png"
+       data-icon-active="/img/GENRE-SELECTED.png">
+      <img src="/img/GENRE-UNSELECTED.png" alt="Genre" class="nav-icon" />
+      <span>Genre</span>
+    </a>
+    <a href="#" data-page="Authors"
+       data-icon-default="/img/AUTHOR-UNSELECTED.png"
+       data-icon-active="/img/AUTHOR-SELECTED.png">
+      <img src="/img/AUTHOR-UNSELECTED.png" alt="Author" class="nav-icon" />
+      <span>Author</span>
+    </a>
+    <a href="#" data-page="About"
+       data-icon-default="/img/ABOUT-UNSELECTED.png"
+       data-icon-active="/img/ABOUT-SELECTED.png">
+      <img src="/img/ABOUT-UNSELECTED.png" alt="About" class="nav-icon" />
+      <span>About</span>
+    </a>
+    <a href="#" data-page="Searches"
+       data-icon-default="/img/SEARCHERS-UNSELECTED.png"
+       data-icon-active="/img/SEARCHERS-SELECTED.png">
+      <img src="/img/SEARCHES-UNSELECTED.png" alt="Searches" class="nav-icon" />
+      <span>Searches</span>
+    </a>
+  </div>
 </body>
 </html>
