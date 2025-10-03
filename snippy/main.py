@@ -11,6 +11,7 @@ file_manager = FileManager()
 
 precaution = PrecautionController(file_manager)
 ocean_of_pdf = OpenLibraryController(file_manager)
+barnes_and_nobles = BarnesNoblesController(file_manager)
 
 
 def generate_agent() -> Dict[str, str | Dict[str, str]]:
@@ -41,9 +42,10 @@ def seek_checkup(headless: bool = True) -> None:
 
     return result
 
+# * ------------------------------------------------------ OPEN LIBRARY ----------------------------------------------------- * #
 
 def seek_openlibrary(online: bool = True, headless: bool = True, total_books: int = 50, total_subject: int = 200, total_tabs: int = 3) -> List:
-    """ Scrapes ocean of pdf, it will take longer time """
+    """ Scrapes open library full range, it will take longer time """
     if online:
         result: List = ocean_of_pdf.validate_openlibrary(
             agent = generate_agent(),
@@ -63,11 +65,112 @@ def seek_openlibrary(online: bool = True, headless: bool = True, total_books: in
 
         if result:
             print("[ Snippy ] Sucessfully take snippy scraped Open Library data. 🥳🎉")
+
         else:
             print("[ Snippy ] Snippy scraped Open Library did not complete. 😐✌️")
 
     return result
 
+
+def seek_openlibrary_book_list(link: str | List[str], online: bool = True) -> List:
+    """ Scrape open library book list page range or area """
+    pass
+
+
+def seek_openlibrary_book(link: str | List[str], online: bool = True) -> Dict | List:
+    """ Scrape open library book page range or area """
+    pass
+
+# * ------------------------------------------------------ ------------ ----------------------------------------------------- * #
+
+
+
+# * ---------------------------------------------------- BARNES & NOBLES ---------------------------------------------------- * #
+
+def seek_barnesnobles(online: bool = True, headless: bool = True, total_books: int = 50, total_subject: int = 200, total_tabs: int = 3) -> List:
+    """ Scrape barnes and nobles full range, it will take longer time """
+    if online:
+        result: List = barnes_and_nobles.validate_barnesnobles(
+            agent = generate_agent(),
+            type = "--all",
+            headless=headless,
+            total_books=total_books,
+            total_subject=total_subject
+        )
+
+        if result:
+            print("[ Snippy ] Sucessfully take snippy to scrape Barnes and Nobles. 🥳🎉")
+        else:
+            print("[ Snippy ] Snippy scraping on Barnes and Nobles did not complete successfully. 😐✌️")
+
+    else:
+
+        result: List = file_manager.load_json(file_name="snippy/data/shelf.json")
+
+        if result:
+            print("[ Snippy ] Sucessfully take snippy scraped Barnes and Nobles data. 🥳🎉")
+
+        else:
+            print("[ Snippy ] Snippy scraped Barnes and Nobles did not complete. 😐✌️")
+
+    return result
+
+
+def seek_barnesnobles_book_list(link: str | List[str], online: bool = True, headless: bool = True, total_books: int = 50) -> List:
+    """ Scrape barnes and nobles book list page """
+    if online:
+        result: List = barnes_and_nobles.validate_barnesnobles(
+            agent=generate_agent(),
+            type = "--book_list_links",
+            headless=headless,
+            total_books=total_books,
+            specific_link = link
+        )
+
+        if result:
+            print("[ Snippy ] Sucessfully take snippy to scrape Barnes and Nobles. 🥳🎉")
+        else:
+            print(
+                "[ Snippy ] Snippy scraping on Barnes and Nobles did not complete successfully. 😐✌️")
+
+    else:
+
+        result: List = file_manager.load_json(file_name="snippy/data/shelf.json")
+
+        if result:
+            print(
+                "[ Snippy ] Sucessfully take snippy scraped Barnes and Nobles data. 🥳🎉")
+
+        else:
+            print("[ Snippy ] Snippy scraped Barnes and Nobles did not complete. 😐✌️")
+
+
+def seek_barnesnobles_book(link: str | List[str], online: bool = True, headless: bool = True) -> Dict | List:
+    """ Scrape barnes and nobles book details page """
+    if online:
+        result: List = barnes_and_nobles.validate_barnesnobles(
+            agent=generate_agent(),
+            type="--book_data",
+            headless=headless,
+            specific_link=link
+        )
+
+        if result:
+            print("[ Snippy ] Sucessfully take snippy to scrape Barnes and Nobles. 🥳🎉")
+        else:
+            print("[ Snippy ] Snippy scraping on Barnes and Nobles did not complete successfully. 😐✌️")
+
+    else:
+
+        result: List = file_manager.load_json(
+            file_name="snippy/data/shelf.json")
+
+        if result:
+            print("[ Snippy ] Sucessfully take snippy scraped Barnes and Nobles data. 🥳🎉")
+        else:
+            print("[ Snippy ] Snippy scraped Barnes and Nobles did not complete. 😐✌️")
+
+# * ---------------------------------------------------- --------------- ---------------------------------------------------- * #
 
 
 if __name__ == "__main__":
