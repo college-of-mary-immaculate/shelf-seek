@@ -8,9 +8,8 @@ const app = new SPA({
 
 window.app = app;
 
+app.add('/', Result);
 app.add('/landing', Landing);
 app.add('/result', Result);
-
-app.setDefault(Landing)
 
 app.handleRouteChanges();

@@ -1,9 +1,9 @@
 export default function ResultPageLayout(root) {
     root.innerHTML = `
-        <nav id="nav"></nav>
-        <footer id="footer"></footer>
+
         <header id="header"></header>
         <main id="main"></main>
+        <footer id="footer"></footer>
     `;
 
     return {

@@ -71,7 +71,7 @@
 }
 
 .nav-row {
-    display: none;
+    /* display: none; */
     position: absolute;
     justify-content: space-around;
     align-items: center;
