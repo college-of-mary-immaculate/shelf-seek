@@ -71,7 +71,7 @@
 }
 
 .nav-row {
-    /* display: none; */
+    display: none;
     position: absolute;
     justify-content: space-around;
     align-items: center;
@@ -261,8 +261,4 @@
     height: 183px;
     border-top: 3px solid black;
     border-bottom: 3px solid black;
-}
-
-h1 {
-    display: none;
 }
