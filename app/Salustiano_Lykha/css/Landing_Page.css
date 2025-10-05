@@ -1,13 +1,13 @@
 body {
   min-height: 100vh;
-  background-color: #fff8f1;
+  background-color: #FBF3E6;
   font-family: "Georgia", serif;
   margin: 0;
   padding-top: 80px; 
 }
 
 .header {
-  background-color: #fff8f1;
+  background-color: #FBF3E6;
   position: fixed;   
   top: 0;
   left: 0;
@@ -29,7 +29,7 @@ body {
   height: 40px;
   border: 2px solid #0f4257;
   border-radius: 50%;
-  background: white;
+  background: #FBF3E6;
   padding: 6px;
   display: flex;
   justify-content: center;
@@ -47,7 +47,7 @@ body {
   border: 1px solid #0f4257; 
   border-radius: 50px;
   overflow: hidden;
-  background: white;
+  background: #FBF3E6;
 }
 
 .nav-link {
