@@ -11,3 +11,13 @@ html, body {
     font-family: "Roboto Regular";
     src: url("../fonts/Roboto/static/Roboto-Regular.ttf");
 }
+
+@font-face {
+    font-family: "Roboto Semibold";
+    src: url("../fonts/Roboto/static/Roboto-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto Medium";
+    src: url("../fonts/Roboto/static/Roboto-Medium.ttf");
+}
