@@ -5,7 +5,7 @@ class SPA {
       this.context = {
         root: config?.root || document.getElementById('site'),
       };
-  
+
       this.defaultRoute = {
         key: '*',
         callback: (config?.defaultRoute || (() => { })).bind(this.context),
@@ -19,11 +19,12 @@ class SPA {
     add(path, cb, isProtected = false) {
       const callback = (params) => {
         if (isProtected && !this.userAuthenticated()) {
-            this.pushRoute('/')
+            this.pushRoute('/');
             return;
         }
         cb.call(this.context, params);
-    };
+      };
+      
       this.routes.push({
         key: path,
         callback: callback,
@@ -57,7 +58,7 @@ class SPA {
     setDefault(cb) {
       this.defaultRoute = {
         key: '*',
-        callback: cb,
+        callback: cb.bind(this.context), // ✅ Fixed: Added .bind(this.context)
       };
     }
 
@@ -79,7 +80,7 @@ class SPA {
           // simulate scroll into
           if (targetUrl.hash) {
             const focusElem = document.querySelector(targetUrl.hash);
-            focusElem && setTimeout(focusElem.scrollIntoView(
+            focusElem && setTimeout(() => focusElem.scrollIntoView(
               { behavior: 'smooth', block: 'end', inline: 'nearest' }
             ), 500);
           }
@@ -93,6 +94,8 @@ class SPA {
       window.addEventListener('popstate', () => {
         this.execute(window.location.pathname);
       });
+
+      console.log(this.context);
   
       const observer = new MutationObserver((mutationList) => {
         mutationList.forEach((mutation) => {
@@ -109,8 +112,8 @@ class SPA {
                 }
               }
             }
-          })
-        })
+          });
+        });
       });
   
       observer.observe(document, { attributes: true, childList: true, subtree: true });
