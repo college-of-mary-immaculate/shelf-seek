@@ -15,7 +15,7 @@ export default function Main(root) {
         </ul>
       </div>
       <div class=${styles["error-img"]}>
-        <img src="/app/img/man.png" alt="Confused Librarian"/>
+        <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1759734172/man_kx4otc.png" alt="Confused Librarian"/>
       </div>
     </section>
         
