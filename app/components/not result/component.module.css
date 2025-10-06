@@ -18,7 +18,7 @@ body {
 
 .header-container {
   max-width: 1200px;
-  margin: auto;
+  margin: 2rem auto;
   display: flex;
   gap: 5em;
   align-items: center;
@@ -274,7 +274,7 @@ body {
 .bottom-nav {
   display: none;
 }
-
+/* --------------------------------------------*/
 @media (max-width: 768px) {
   .header {
     padding: 1rem 0.6rem;
@@ -285,13 +285,14 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 5px;
     width: 100%;
+    margin: 0 auto; 
   }
 
   .logo-box {
-    width: 45px;
-    height: 45px;
+    width: 6rem; /* larger logo on tablet */
+    height: 6rem;
     border: none;
     background: transparent;
     display: flex;
@@ -306,8 +307,7 @@ body {
   }
 
   .search-bar {
-    width: 92%;
-    max-width: 420px;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -315,21 +315,24 @@ body {
     border-radius: 9999px;
     background: #fff;
     overflow: hidden;
+    height: 40px; 
+    margin: 0 auto; 
   }
 
   .search-bar input {
     flex: 1;
     border: none;
-    padding: 0.6rem 1rem;
+    padding: 0 1rem;
     font-size: clamp(0.85rem, 2.3vw, 0.95rem);
     outline: none;
     color: #333;
+    height: 100%;
   }
 
   .search-bar button {
     background: #0f4257;
     color: #fff;
-    padding: 0.6rem 1rem;
+    padding: 0 1rem; 
     border: none;
     border-radius: 0 9999px 9999px 0;
     cursor: pointer;
@@ -337,6 +340,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
   }
 
   .search-bar button i {
@@ -347,9 +351,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin: 1rem auto 0 auto; 
     white-space: nowrap;
     padding: 0 0.4rem;
+    overflow-x: auto; 
   }
 
   .nav::-webkit-scrollbar {
@@ -358,7 +363,7 @@ body {
 
   .nav a {
     font-size: clamp(0.75rem, 2vw, 0.85rem);
-    padding: 0.45rem 0.9rem;
+    padding: 0.45rem 2rem;
     border-radius: 9999px;
     text-decoration: none;
     color: #333;
@@ -397,15 +402,15 @@ body {
     justify-content: center;
     text-align: left;
     gap: 1.2rem;
-    margin: 2.5rem 1.5rem;
+    margin: 2rem 5rem;
   }
 
   .error-text h1 {
-    font-size: 1.05rem;
+    font-size: 1.9rem;
     font-weight: 500;
     line-height: 1.7;
     color: #0f4257;
-    max-width: 340px;
+    max-width: 550px;
     margin-bottom: 1rem;
   }
 
@@ -424,11 +429,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-width: 320px;
+    max-width: 550px;
   }
 
   .error-text ul li {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #333;
     line-height: 1.5;
   }
@@ -437,15 +442,19 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: #FF6868; 
+    align-items: center;
+    background-color: #FF6868;
+    padding: 1.25rem; 
+    border-radius: 18px; 
+    margin-top: 0.5rem;
   }
 
   .error-img img {
-    width: 55%;
-    max-width: 180px;
+    width: 60%;
+    max-width: 200px;
     height: auto;
     display: block;
-    border-radius: 12px; 
+    border-radius: 0; 
   }
 
   .footer {
@@ -454,58 +463,92 @@ body {
 
   .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #F4EEE2;
-    border-top: 1px solid #ccc;
-    display: flex;
-    justify-content: space-around;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 1.5rem);
+    background: rgb(244, 238, 226);
+    border: 1px solid #073243;
+    border-radius: 9999px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0; /* no inner padding so active can reach edge */
+    overflow: hidden; 
     z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-bottom: 10px ;
   }
 
   .bottom-nav a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
-    color: #333;
+    color: #073243;
     font-size: 0.75rem;
+    gap: 3px;
+    width: 100%; 
+    padding: 0.5rem 0; 
   }
 
   .bottom-nav a img {
     width: 24px;
     height: 24px;
-    margin-bottom: 3px;
   }
 
   .bottom-nav a.active {
-    color: #0f4257;
+    color: #fff;
+    background: #0f4257;
+    border-radius: 9999px;
+    padding: 0.5rem 0; 
     font-weight: 600;
   }
 
-  /* Hide large footer sections */
+  .bottom-nav a.active img {
+    filter: invert(1) brightness(2);
+  }
+
   .footer-container,
   .footer-bottom {
     display: none;
   }
 
-  /* Prevent nav overlap */
   body {
     padding-bottom: 4rem;
   }
 }
 
+/* ---------------------------------------------*/
 @media (max-width: 480px) {
+  /* bottom nav sizing */
+  .bottom-nav {
+    width: calc(100% - 1rem);
+    bottom: 8px;
+  }
+
+  .bottom-nav a {
+    font-size: 0.7rem;
+    padding: 0.45rem 0;
+  }
+
+  .bottom-nav a img {
+    width: 18px;
+    height: 18px;
+  }
+  .logo-box {
+    width: 5.8rem; 
+    height: 5.8rem;
+  }
   .search-bar {
-    width: 101%;
+    width: 85%;
+    height: 40px
   }
 
   .nav a {
     padding: 0.4rem 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .star-btn {
@@ -514,16 +557,16 @@ body {
   }
 
   .error-section {
-    margin: 2px 1rem;
+    margin: 2px 2.2rem;
   }
 
   .error-text h1 {
-    font-size: 1rem;
+    font-size: 1.4rem;
     line-height: 1.6;
   }
 
   .error-text ul li {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .error-img {
@@ -539,23 +582,42 @@ body {
     display: none;
   }
 }
-
+/* --------------------------------------------*/
 @media (max-width: 375px) {
+  /* bottom nav sizing */
+  .bottom-nav {
+    width: calc(100% - 0.8rem);
+    bottom: 6px;
+  }
+
+  .bottom-nav a {
+    font-size: 0.65rem;
+  }
+
+  .bottom-nav a img {
+    width: 15px;
+    height: 15px;
+  }
   .logo-box {
-    width: 40px;
-    height: 40px;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .search-bar {
+    height: 30px;
   }
 
   .search-bar input {
     font-size: 0.8rem;
   }
-
   .nav a {
-    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.60rem;
   }
 
   .error-section {
-    margin: 1.8rem 0.8rem;
+    margin: 1rem 2rem;
   }
 
   .error-text h1 {
@@ -580,20 +642,39 @@ body {
     display: none;
   }
 }
-
+/* ------------------------------------*/
 @media (max-width: 320px) {
+  /* bottom nav sizing */
+  .bottom-nav {
+    width: calc(100% - 0.6rem);
+    bottom: 4px;
+  }
+
+  .bottom-nav a {
+    font-size: 0.6rem;
+    padding: 0.4rem 0;
+  }
+
+  .bottom-nav a img {
+    width: 16px;
+    height: 16px;
+  }
   .search-bar {
-    width: 100%;
+    height: 28px;
   }
 
   .nav a {
-    font-size: 0.7rem;
-    padding: 0.35rem 0.6rem;
+    font-size: 0.6rem;
+    padding: 0.35rem 0.5rem;
   }
 
   .star-btn {
     width: 34px;
     height: 34px;
+  }
+
+  .error-section {
+    margin: 0 2rem;
   }
 
   .footer {

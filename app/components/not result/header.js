@@ -5,7 +5,7 @@ export default function Header(root) {
     root.innerHTML = `
         <div class=${styles["header-container"]}>
             <div class=${styles["logo-box"]}>
-                <img src="/app/img/Removal-744.png" alt="ShelfSeek Logo" />
+                <img src="/img/Removal-744.png" alt="ShelfSeek Logo" />
             </div>
 
             <div class=${styles["search-bar"]}>
@@ -22,7 +22,7 @@ export default function Header(root) {
             <a href="#">Shopping</a>
 
             <a href="#" class=${styles["star-btn"]}>
-                <img src="/app/img/HIDE-ICON.png" alt="Hidden Icon" />
+                <img src="/img/HIDE-ICON.png" alt="Hidden Icon" />
             </a>
         </nav>
         

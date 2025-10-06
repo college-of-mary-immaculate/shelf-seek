@@ -31,7 +31,7 @@ export default function Nav(root) {
             <a href="#" data-page="Searches"
                 data-icon-default="/img/SEARCHERS-UNSELECTED.png"
                 data-icon-active="/img/SEARCHERS-SELECTED.png">
-                <img src="/img/SEARCHES-UNSELECTED.png" alt="Searches" class=${styles["nav-icon"]} />
+                <img src="/img/SEARCHERS-UNSELECTED.png" alt="Searches" class=${styles["nav-icon"]} />
                 <span>Searches</span>
             </a>
         </div>    

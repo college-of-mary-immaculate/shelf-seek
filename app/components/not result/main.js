@@ -5,8 +5,8 @@ export default function Main(root) {
     root.innerHTML = `
         <section class=${styles["error-section"]}>
       <div class=${styles["error-text"]}>
-        <h1>Our <span class="highlight">librarian</span> flipped every page,<br> 
-        but still couldn’t find <span class="code">“n3inaop**@Y96.”</span></h1>
+        <h1>Our <span class=${styles["highlight"]}>librarian</span> flipped every page,<br> 
+        but still couldn’t find <span class=${styles["code"]}>“n3inaop**@Y96.”</span></h1>
         <ul>
           <li>Even the index is blank on that one.</li>
           <li>You can request your findings to the librarian</li>
