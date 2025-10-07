@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from routers import router
 from config import settings
-from schemas import SearchRequest, SearchResult, SearchResponse
+from models import Book
+from schemas import ShelfSeekModel, SearchRequest, SearchResult, SearchResponse
 
 app = FastAPI(
     title=settings.APP_NAME, 
