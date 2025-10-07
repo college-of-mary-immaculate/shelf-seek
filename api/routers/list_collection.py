@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from db import db  # your MongoClient instance
 
-router = APIRouter()
+router = APIRouter(prefix="/db", tags=["Database"])
 
 @router.get("/collections")
 def list_collections():
