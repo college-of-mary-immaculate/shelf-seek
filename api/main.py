@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import router
+from routers import router, collection_router
 from config import settings
 from models import Book
 from schemas import ShelfSeekModel, SearchRequest, SearchResult, SearchResponse
@@ -12,6 +12,7 @@ app = FastAPI(
 
 # Include greeting router with API prefix
 app.include_router(router, prefix=settings.API_PREFIX)
+app.include_router(collection_router, prefix=settings.API_PREFIX)
 
 @app.get("/")
 def root():
