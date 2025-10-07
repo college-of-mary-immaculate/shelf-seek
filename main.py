@@ -18,11 +18,6 @@ import snippy
 #     total_tabs = 3
 # )
 
-
-
-
-
-
 snippy.seek_barnesnobles_book(
     link = "cache",
     headless = False
