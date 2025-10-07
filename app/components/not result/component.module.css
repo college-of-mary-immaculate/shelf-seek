@@ -61,6 +61,15 @@ body {
   border: none;
   border-radius: 0 9999px 9999px 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar .search-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
 }
 
 .search-bar button:hover {
@@ -387,12 +396,14 @@ body {
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    padding: 10px; /* Add padding to prevent image from touching edges */
   }
 
   .star-btn img {
-    width: 100%;
-    height: 100%;
+    width: 24px; /* Fixed size for better control */
+    height: 24px; /* Fixed size for better control */
     object-fit: contain;
+    filter: brightness(0) invert(1); /* Ensure the icon is white */
   }
 
   .error-section {
@@ -493,7 +504,7 @@ body {
     padding: 0.5rem 0; 
   }
 
-  .bottom-nav a img {
+  .bottom-nav a .nav-icon {
     width: 24px;
     height: 24px;
   }
@@ -505,10 +516,10 @@ body {
     padding: 0.5rem 0; 
     font-weight: 600;
   }
-
-  .bottom-nav a.active img {
-    filter: invert(1) brightness(2);
-  }
+  
+  /* Export explicit class names used from JS */
+  .active { outline: 0; }
+  .nav-icon { display: block; }
 
   .footer-container,
   .footer-bottom {
@@ -533,7 +544,7 @@ body {
     padding: 0.45rem 0;
   }
 
-  .bottom-nav a img {
+  .bottom-nav a .nav-icon {
     width: 18px;
     height: 18px;
   }
@@ -552,8 +563,14 @@ body {
   }
 
   .star-btn {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+  }
+  
+  .star-btn img {
+    width: 20px;
+    height: 20px;
   }
 
   .error-section {
@@ -583,8 +600,32 @@ body {
   }
 }
 /* --------------------------------------------*/
+@media (max-width: 480px) {
+  .star-btn {
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+  }
+  
+  .star-btn img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 @media (max-width: 375px) {
   /* bottom nav sizing */
+  .star-btn {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+  }
+  
+  .star-btn img {
+    width: 16px;
+    height: 16px;
+  }
+  
   .bottom-nav {
     width: calc(100% - 0.8rem);
     bottom: 6px;
@@ -594,7 +635,7 @@ body {
     font-size: 0.65rem;
   }
 
-  .bottom-nav a img {
+  .bottom-nav a .nav-icon {
     width: 15px;
     height: 15px;
   }
@@ -644,6 +685,17 @@ body {
 }
 /* ------------------------------------*/
 @media (max-width: 320px) {
+  .star-btn {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+  
+  .star-btn img {
+    width: 14px;
+    height: 14px;
+  }
+  
   /* bottom nav sizing */
   .bottom-nav {
     width: calc(100% - 0.6rem);
@@ -655,7 +707,7 @@ body {
     padding: 0.4rem 0;
   }
 
-  .bottom-nav a img {
+  .bottom-nav a .nav-icon {
     width: 16px;
     height: 16px;
   }
