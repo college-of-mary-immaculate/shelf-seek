@@ -9,6 +9,7 @@ body {
   color: #333;
   font-family: 'Inter', Arial, sans-serif;
   line-height: 1.5;
+  padding-top: 0;
 }
 
 .header {
@@ -44,26 +45,39 @@ body {
 .search-bar {
   display: flex;
   width: 60%;
+  align-items: center;
+  border: 1px solid #073243;
+  border-radius: 9999px;
+  background: #F4EEE2;
+  overflow: hidden;
+  height: 40px;
 }
 
 .search-bar input {
   flex: 1;
-  padding: 0.5rem 1rem;
-  border: 1px solid #aaa;
-  border-radius: 9999px 0 0 9999px;
+  padding: 0 1rem;
+  border: none;
+  border-right: none;
   font-size: 0.9rem;
+  background-color: #F4EEE2;
+  color: #333;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .search-bar button {
   background: #0f4257;
   color: #fff;
-  padding: 0.5rem 1rem;
+  width: 80px;
+  height: 100%;
+  padding: 0;
   border: none;
-  border-radius: 0 9999px 9999px 0;
+  border-radius: 9999px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .search-bar .search-icon {
@@ -300,7 +314,7 @@ body {
   }
 
   .logo-box {
-    width: 6rem; /* larger logo on tablet */
+    width: 6rem; 
     height: 6rem;
     border: none;
     background: transparent;
@@ -319,41 +333,46 @@ body {
     width: 80%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border: 1px solid #bbb;
+    border: 1px solid #073243;
     border-radius: 9999px;
-    background: #fff;
+    background: #F4EEE2;
     overflow: hidden;
-    height: 40px; 
-    margin: 0 auto; 
+    height: 40px;
+    margin: 0 auto;
   }
 
   .search-bar input {
     flex: 1;
     border: none;
+    border-right: none;
     padding: 0 1rem;
     font-size: clamp(0.85rem, 2.3vw, 0.95rem);
     outline: none;
+    background: #F4EEE2;
     color: #333;
     height: 100%;
+    box-sizing: border-box;
   }
 
   .search-bar button {
     background: #0f4257;
     color: #fff;
-    padding: 0 1rem; 
+    width: 80px;
+    height: 100%;
+    padding: 0;
     border: none;
-    border-radius: 0 9999px 9999px 0;
+    border-radius: 9999px;
     cursor: pointer;
-    flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    flex-shrink: 0;
   }
 
-  .search-bar button i {
-    font-size: 1rem;
+  .search-bar .search-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
   }
 
   .nav {
@@ -396,14 +415,14 @@ body {
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    padding: 10px; /* Add padding to prevent image from touching edges */
+    padding: 10px; 
   }
 
   .star-btn img {
-    width: 24px; /* Fixed size for better control */
-    height: 24px; /* Fixed size for better control */
+    width: 24px; 
+    height: 24px; 
     object-fit: contain;
-    filter: brightness(0) invert(1); /* Ensure the icon is white */
+    filter: brightness(0) invert(1); 
   }
 
   .error-section {
@@ -451,14 +470,13 @@ body {
 
   .error-img {
     width: 100%;
-    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #FF6868;
-    padding: 1px; 
+    padding: 1.25rem; 
     border-radius: 18px; 
-    margin-top: 1px;
+    margin-top: 0.5rem;
   }
 
   .error-img img {
@@ -485,7 +503,7 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     align-items: center;
-    padding: 0; /* no inner padding so active can reach edge */
+    padding: 0; 
     overflow: hidden; 
     z-index: 1000;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -518,7 +536,6 @@ body {
     font-weight: 600;
   }
   
-  /* Export explicit class names used from JS */
   .active { outline: 0; }
   .nav-icon { display: block; }
 
@@ -558,6 +575,10 @@ body {
     height: 40px
   }
 
+  .search-bar button {
+    width: 60px;
+  }
+
   .nav a {
     padding: 0.4rem 0.75rem;
     margin-bottom: 1rem;
@@ -575,90 +596,16 @@ body {
   }
 
   .error-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: left;
-    gap: 1.2rem;
-    margin: 2.5rem 1.5rem;
+    margin: 2px 2.2rem;
   }
 
   .error-text h1 {
-    font-size: 1.05rem;
-    font-weight: 500;
-    line-height: 1.7;
-    color: #0f4257;
-    max-width: 340px;
-    margin-bottom: 1rem;
-  }
-
-  .error-text .highlight {
-    color: #FF6868; 
-    font-weight: 600;
-  }
-
-  .error-text .code {
-    color: #0f4257;
-    font-weight: 700;
-  }
-
-  .error-text ul {
-    list-style-type: disc;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    max-width: 320px;
-  }
-
-  .error-text ul li {
-    font-size: 0.9rem;
-    color: #333;
-    line-height: 1.5;
-  }
-
-  .error-img {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: #FF6868; 
-  }
-
-  .error-img img {
-    width: 55%;
-    max-width: 180px;
-    height: auto;
-    display: block;
-    border-radius: 12px; 
-  }
-
-  .footer {
-    display: none;
-  }
-}
-/* --------------------------------------------*/
-@media (max-width: 480px) {
-  .star-btn {
-    width: 34px;
-    height: 34px;
-    padding: 7px;
-  }
-  
-  .star-btn img {
-    width: 18px;
-    height: 18px;
-  }
-  .error-section {
-    margin: 2px 1rem;
-  }
-
-  .error-text h1 {
-    font-size: 1rem;
+    font-size: 1.4rem;
     line-height: 1.6;
   }
 
   .error-text ul li {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .error-img {
@@ -669,10 +616,30 @@ body {
     width: 60%;
     max-width: 160px;
   }
+
+  .footer {
+    display: none;
+  }
 }
 
+/* --------------------------------------------*/
+/* @media (max-width: 480px) {
+  .star-btn {
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+  }
+  
+  .star-btn img {
+    width: 18px;
+    height: 18px;
+  }
+} */
+
 @media (max-width: 375px) {
-  /* bottom nav sizing */
+  .search-bar button {
+    width: 50px;
+  }
   .star-btn {
     width: 32px;
     height: 32px;
@@ -716,7 +683,7 @@ body {
   }
 
   .error-section {
-    margin: 1.8rem 0.8rem;
+    margin: 1rem 2rem;
   }
 
   .error-text h1 {
@@ -736,6 +703,7 @@ body {
     width: 65%;
     max-width: 140px;
   }
+
   .footer {
     display: none;
   }

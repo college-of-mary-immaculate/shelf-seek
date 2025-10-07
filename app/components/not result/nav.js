@@ -61,7 +61,6 @@ export default function Nav(root) {
             </div>
         `;
 
-        // Add click event listeners to all nav items
         const navItems = root.querySelectorAll(`.${styles["bottom-nav"]} a`);
         navItems.forEach(item => {
             item.addEventListener('click', handleNavClick);
@@ -70,24 +69,20 @@ export default function Nav(root) {
 
     function handleNavClick(e) {
         e.preventDefault();
-        e.stopPropagation(); // Prevent event bubbling
+        e.stopPropagation(); 
         
         const target = e.currentTarget;
         const page = target.getAttribute('data-page');
         
         // Update URL hash without triggering SPA navigation
         if (window.history && window.history.replaceState) {
-            // Use replaceState instead of pushState to avoid adding to history
             window.history.replaceState({}, '', `#${page}`);
         } else {
-            // Fallback for older browsers
             window.location.hash = `#${page}`;
         }
         
-        // Update the UI
         updateActiveState(page);
         
-        // Dispatch a custom event that other parts of the app can listen to
         window.dispatchEvent(new CustomEvent('navChange', { detail: { page } }));
     }
 
@@ -101,10 +96,8 @@ export default function Nav(root) {
             const defaultIcon = item.getAttribute('data-icon-default');
             const activeIcon = item.getAttribute('data-icon-active');
             
-            // Update active class
             if (isActive) {
                 item.classList.add(styles.active);
-                // Force a new image load by removing and re-adding the src attribute
                 img.src = '';
                 setTimeout(() => {
                     img.src = activeIcon;
@@ -114,12 +107,10 @@ export default function Nav(root) {
                 img.src = defaultIcon;
             }
             
-            // Debug log to verify values
             console.log(`Page: ${page}, Active: ${isActive}, Src: ${isActive ? activeIcon : defaultIcon}`);
         });
     }
 
-    // Handle browser back/forward buttons
     window.addEventListener('popstate', (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -128,12 +119,10 @@ export default function Nav(root) {
         updateActiveState(currentPage);
     });
     
-    // Initial state setup with a small delay to ensure DOM is ready
     setTimeout(() => {
         const initialPage = window.location.hash.slice(1) || 'Explore';
         updateActiveState(initialPage);
         
-        // Force update images after a short delay to ensure they're loaded
         setTimeout(() => {
             updateActiveState(initialPage);
         }, 50);
