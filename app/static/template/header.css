@@ -1,0 +1,15 @@
+
+.searchbar-button-container {
+    background-color: #073243;
+    border-radius: 50px;
+    width: 74px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.searchbar-button-container img {
+    width: 25px;
+}
