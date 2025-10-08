@@ -1,4 +1,5 @@
 import snippy
+import bookbrains
 
 # snippy.seek_checkup(headless = True)
 
@@ -18,7 +19,13 @@ import snippy
 #     total_tabs = 3
 # )
 
-snippy.seek_barnesnobles_book(
-    link = "cache",
-    headless = False
-)
+# snippy.seek_barnesnobles_book(
+#     link = "cache",
+#     headless = False
+# )
+
+
+tokenization = bookbrains.tokenize("UwUUUUU")
+leven = bookbrains.correct("Dawg")
+
+print(tokenization)
