@@ -551,7 +551,6 @@ body {
 
 /* ---------------------------------------------*/
 @media (max-width: 480px) {
-  /* bottom nav sizing */
   .bottom-nav {
     width: calc(100% - 1rem);
     bottom: 8px;
@@ -566,10 +565,12 @@ body {
     width: 18px;
     height: 18px;
   }
+  
   .logo-box {
     width: 5.8rem; 
     height: 5.8rem;
   }
+  
   .search-bar {
     width: 85%;
     height: 40px
@@ -621,20 +622,6 @@ body {
     display: none;
   }
 }
-
-/* --------------------------------------------*/
-/* @media (max-width: 480px) {
-  .star-btn {
-    width: 34px;
-    height: 34px;
-    padding: 7px;
-  }
-  
-  .star-btn img {
-    width: 18px;
-    height: 18px;
-  }
-} */
 
 @media (max-width: 375px) {
   .search-bar button {
@@ -721,7 +708,6 @@ body {
     height: 14px;
   }
   
-  /* bottom nav sizing */
   .bottom-nav {
     width: calc(100% - 0.6rem);
     bottom: 4px;
@@ -736,6 +722,7 @@ body {
     width: 16px;
     height: 16px;
   }
+
   .search-bar {
     height: 28px;
   }

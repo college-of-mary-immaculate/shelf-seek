@@ -3,8 +3,12 @@ import styles from './component.module.css';
 export default function Header(root) {
     root.innerHTML = `
         <div class=${styles["header-container"]}>
-            <div class=${styles["logo-wrapper"]}>
-                <img src="/img/Removal-744.png" alt="ShelfSeek Logo" class=${styles["logo-img"]} id="site-logo" />
+            <div class=${styles["logo-box"]}>
+                <picture>
+                    <source media="(min-width: 770px)" srcset="/img/desktop-logo.png" />
+                    <source media="(max-width: 1024px)" srcset="/img/mobile-logo.png" />
+                    <img src="/img/desktop-logo.png" alt="ShelfSeek Logo" />
+                </picture>
             </div>
 
             <nav class=${styles["nav"]}>
@@ -14,7 +18,7 @@ export default function Header(root) {
                 <a href="#" class=${styles["nav-link"]} data-page="About">About</a>
             </nav>
 
-            <div>
+            <div class=${styles["search-btn-container"]}>
                 <a href="#" class=${styles["search-btn nav-link"]} data-page="Searches">Searches</a>
             </div>
         </div>

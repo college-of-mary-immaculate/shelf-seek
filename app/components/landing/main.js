@@ -5,7 +5,7 @@ export default function Main(root) {
         <section class=${styles["hero"]}>
             <div class=${styles["hero-content"]}>
             <div class=${styles["hero-title"]}>
-                <h1>Every Shelf has <span class=${styles["highlight"]}>a story</span></h1>
+                <h1>Every Shelf <br><span>has <span class=${styles["highlight"]}>a story</span></span></h1>
             </div>
             <div class=${styles["searchbar-container"]}>
                 <input type="text" placeholder="Seek Books.">
