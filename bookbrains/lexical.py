@@ -104,3 +104,9 @@ if __name__ == "__main__":
     tokenize = Tokenization()
 
     print(tokenize.tokenize("Hello World??"))
+
+    """
+    TODO:
+    1. Make a lexicon of dictionary of words contains on all of the datasets we scraped
+    2. Apply pickle for lexicon processing
+    """
