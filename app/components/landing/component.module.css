@@ -78,7 +78,6 @@ body {
   border-radius: 50px;
   overflow: hidden;
   background: #FBF3E6;
-  font-family: "Roboto Regular";
 }
 
 .nav-link {
@@ -102,7 +101,6 @@ body {
   color: white;
   border-radius: 50px; 
 }
-
 .hero {
   width: 100%;
   height: auto;
