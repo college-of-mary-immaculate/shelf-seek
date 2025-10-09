@@ -16,22 +16,22 @@ body {
 
 @font-face {
   font-family: "New York";
-  src: url("../../public/fonts/newyork/NewYork\ PERSONAL\ USE.otf");
+  src: url("../fonts/newyork/NewYork\ PERSONAL\ USE.otf");
 }
 
 @font-face {
   font-family: "Roboto Regular";
-  src: url("../../public/fonts/Roboto/static/Roboto-Regular.ttf");
+  src: url("../fonts/Roboto/static/Roboto-Regular.ttf");
 }
 
 @font-face {
   font-family: "Playfair Regular";
-  src: url("../../public/fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf");
+  src: url("../fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf");
 }
 
 @font-face {
   font-family: "Playfair Medium";
-  src: url("../../public/fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf");
+  src: url("../fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf");
 }
 
 .header {
