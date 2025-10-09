@@ -11,18 +11,47 @@
 </head>
 <body>
     <header id="header">
+        <div class="content-container">
             <div class="searchbar-container">
                 <div class="header-searchbar-container">
-                <input type="text" id="header-searchbar-input">
-                <div class="searchbar-button-container">
-                    <img src="../images/Result Page/SEARCH-ICON.png" alt="">
+                    <input type="text" id="header-searchbar-input" placeholder="Seek Books.">
+                    <div class="searchbar-button-container">
+                        <img src="../images/Result Page/SEARCH-ICON.png" alt="">
+                    </div>
+                </div>
+                <div class="header-navigations-container">
+                    <div class="selected" id="all-btn">
+                        <span>All</span>
+                    </div>
+                    <div class="not-selected" id="genres-btn">
+                        <span>Genres</span>
+                    </div>
+                    <div class="not-selected" id="authors-btn">
+                        <span>Authors</span>
+                    </div>
+                    <div class="not-selected" id="ratings-btn">
+                        <span>Ratings</span>
+                    </div>
+                    <div class="not-selected" id="shoppings-btn">
+                        <span>Shopping</span>
+                    </div>
+                    <div class="navigation-icon">
+                        <img src="../images/Result Page/HIDE-ICON.png" alt="">
+                    </div>
                 </div>
             </div>
-            <div class="header-navigations-container"></div>
         </div>
     </header>
 
-    <main id="main"></main>
+    <main id="main">
+        <div class="main-content">
+            <!-- * results right here -->
+            <div class="left-container"></div>
+
+            <!-- * author facts right here -->
+            <div class="right-container"></div>
+        </div>
+    </main>
     
     <footer id="footer">
         <div class="upper-container">
