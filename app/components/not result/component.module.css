@@ -171,19 +171,30 @@ body {
 }
 
 .footer {
-  border-top: 1px solid #000000;
   background: #F4EEE2;
-  margin-top: 2rem;
-  padding-top: 2rem;
+  margin-top: 2rem; 
+  position: relative;
 }
 
 .footer-container {
   max-width: 1000px;
-  margin: auto;
+  margin: 0 auto;
   padding: 2rem 1rem;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
+  position: relative;
+}
+
+.footer-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background: #000000;
 }
 
 .footer h2 {

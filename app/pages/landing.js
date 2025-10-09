@@ -5,6 +5,9 @@ import Main from "../components/landing/main";
 import Nav from "../components/landing/nav";
 
 export default function Landing() {
+    if (document && document.documentElement) {
+        document.documentElement.style.overflowY = 'hidden';
+    }
     const { footer, header, main, nav} = LandingPageLayout(this.root);
     Footer(footer)
     Header(header);

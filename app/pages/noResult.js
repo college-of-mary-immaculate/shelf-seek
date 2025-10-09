@@ -10,6 +10,9 @@ import Nav from "../components/not result/nav"
 
 
 export default function NoResult() {
+    if (document && document.documentElement) {
+        document.documentElement.style.overflowY = '';
+    }
     const {footer, header, main, nav} = NoResultPageLayout(this.root);
     Footer(footer)
     Header(header)
