@@ -1,9 +1,9 @@
 import styles from './component.module.css';
 
-export default function Main(root) {
+export default function Nav(root) {
     root.innerHTML = `
         <div>main</div>
     `;
 
-    root.className = styles['main'];
+    root.className = styles['nav'];
 }
