@@ -5,6 +5,7 @@
 html, body {
     margin: 0;
     background-color: #FBF3E6;
+    height: 100vh;
 }
 
 @font-face {
