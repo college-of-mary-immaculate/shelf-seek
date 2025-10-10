@@ -100,6 +100,15 @@ class Correction:
         return word, best_score
 
 
+class Lexicon:
+    def __init__(self):
+        pass
+
+        
+    
+
+
+
 if __name__ == "__main__":
     tokenize = Tokenization()
 
