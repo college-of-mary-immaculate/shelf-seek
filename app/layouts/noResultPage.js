@@ -1,7 +1,7 @@
 export default function NoResultPageLayout(root) {
     root.innerHTML = `
 
-        <header id="header"></header>
+        <header id="result-header"></header>
         <main id="main"></main>
         <footer id="footer"></footer>
         <nav id="nav"></nav>
@@ -9,7 +9,7 @@ export default function NoResultPageLayout(root) {
 
     return {
         footer: document.getElementById('footer'),
-        header: document.getElementById('header'),
+        header: document.getElementById('result-header'),
         main: document.getElementById('main'),
         nav: document.getElementById('nav'),
     }

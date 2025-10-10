@@ -34,7 +34,8 @@ body {
   src: url("../fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf");
 }
 
-header {
+
+.header {
   width: 100%;
   display: flex;
   justify-content: center;
