@@ -99,5 +99,27 @@ class FileManager:
     # * -------------------------------------------- ---------  --------------------------------------------
 
 
+    # * -------------------------------------------- TXT FILES --------------------------------------------
+    def load_txt(self, file_path: str, auto_create: bool = False, default_data: Any = None) -> List:
+        """ Loads data on the specified txt file name. """
+        if auto_create:
+            self.create_file(file_path)
+
+        with open(file_path, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f if line.strip()]
+
+        return lines
+    
+
+    def save_txt(self, file_path: str, data: List[str], auto_create: bool = False, default_data: Any = None) -> List:
+        """ Saves data on the specified txt file name. """
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.writelines(f"{line}\n" for line in data)
+
+        return data
+
+    # * -------------------------------------------- ---------  --------------------------------------------
+
+
 if __name__ == "__main__":
     file = FileManager(size_limit = 1_000)
