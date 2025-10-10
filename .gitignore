@@ -1,3 +1,5 @@
 .env
 __pycache__
 node_modules
+tempCodeRunnerFile.py
+daily_scraped.json
