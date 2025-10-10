@@ -12,14 +12,14 @@ export default function Header(root) {
             </div>
 
             <nav class=${styles["nav"]}>
-                <a href="#" class=${styles["nav-link active"]} data-page="Explore">Explore</a>
+                <a href="#" class="${styles["nav-link"]} ${styles["active"]}" data-page="Explore">Explore</a>
                 <a href="#" class=${styles["nav-link"]} data-page="Genres">Genres</a>
                 <a href="#" class=${styles["nav-link"]} data-page="Authors">Authors</a>
                 <a href="#" class=${styles["nav-link"]} data-page="About">About</a>
             </nav>
 
             <div class=${styles["search-btn-container"]}>
-                <a href="#" class=${styles["search-btn nav-link"]} data-page="Searches">Searches</a>
+                <a href="#" class="${styles["search-btn"]} ${styles["nav-link"]}" data-page="Searches">Searches</a>
             </div>
         </div>
         `;
