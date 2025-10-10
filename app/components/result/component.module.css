@@ -9,18 +9,18 @@ html, body {
 }
 
 @font-face {
-    font-family: "Roboto Regular";
-    src: url("../../../font/roboto/static/Roboto-Regular.ttf");
+  font-family: "Roboto Regular";
+  src: url("../../font/roboto/static/Roboto-Regular.ttf");
 }
 
 @font-face {
-    font-family: "Roboto Semibold";
-    src: url("../fonts/Roboto/static/Roboto-SemiBold.ttf");
+  font-family: "Roboto Semibold";
+  src: url("../../font/roboto/static/Roboto-SemiBold.ttf");
 }
 
 @font-face {
-    font-family: "Roboto Medium";
-    src: url("../../../font/Roboto/static/Roboto-Medium.ttf");
+  font-family: "Roboto Medium";
+  src: url("../../font/roboto/static/Roboto-Medium.ttf");
 }
 
 .header {
