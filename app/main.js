@@ -9,7 +9,7 @@ const app = new SPA({
 
 window.app = app;
 
-app.add('/', Result);
+app.add('/', Landing);
 app.add('/landing', Landing);
 app.add('/result', Result);
 app.add('/noresult', NoResult)
