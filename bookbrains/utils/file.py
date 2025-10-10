@@ -38,7 +38,7 @@ class FileManager:
 
 
     # * -------------------------------------------- JSON FILES --------------------------------------------
-    def load_json(self, file_name: str) -> List | Dict | Any:
+    def load_json(self, file_name: str) -> Any:
         """ Loads data on the specified json file name. """
         if not self.is_file_exist(file_name):
             print("File not found: ", file_name)
