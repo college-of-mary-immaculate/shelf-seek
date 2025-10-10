@@ -34,21 +34,18 @@ body {
   src: url("../fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf");
 }
 
-.header {
-  background-color: #FBF3E6;
-  position: fixed;   
-  top: 0;
-  left: 0;
-  width: 100%;       
-  z-index: 1000;     
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  min-width: 1346px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 40px;
 }
 
 
