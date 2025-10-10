@@ -25,7 +25,9 @@ import bookbrains
 # )
 
 
-tokenization = bookbrains.tokenize("UwUUUUU")
-leven = bookbrains.correct("Dawg")
+# tokenization = bookbrains.tokenize("UwUUUUU")
+# leven = bookbrains.correct("Dawg")
 
-print(tokenization)
+# print(tokenization)
+
+bookbrains.prepare_data()
