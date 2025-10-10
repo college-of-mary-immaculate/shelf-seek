@@ -3,63 +3,146 @@ import styles from './component.module.css';
 
 export default function Footer(root) {
     root.innerHTML = `
-        <div class=${styles["footer-container"]}>
-            <div>
-                <h2>Shelf<span class=${styles["highlight"]}>Seek</span></h2>
-                <p>Every Shelf has <span class=${styles["highlight"]}>a story</span></p>
-                <h3>About Us</h3>
-                <p>We're constantly improving ShelfSeek to make book discovery easier, 
-                helping you explore new titles and authors every day.</p>
-            </div>
+        <footer id="footer">
 
-            <div>
-                <h3>Tech Stacks</h3>
-                <ul>
-                <li>HTML</li><li>Tailwind</li><li>React</li>
-                <li>FASTAPI</li><li>MongoDB</li><li>Docker</li>
-                </ul>
-            </div>
+        <div class=${styles["upper-container"]}>
+            <div class=${styles["upper-container-content"]}>
 
-            <div>
-                <h3>Content</h3>
-                <ul>
-                <li>All</li><li>Genres</li><li>Authors</li>
-                <li>Ratings</li><li>Shopping</li>
-                </ul>
-            </div>
-
-            <div>
-                <h3>Sources</h3>
-                <ul>
-                <li>Open Library</li><li>Goodreads</li>
-                <li>Project Guttenburg</li><li>Barnes & Nobles</li>
-                </ul>
-            </div>
-
-            <div>
-                <div class=${styles["language-selector"]}>
-                <button>English</button>
-                <div class=${styles["dropdown"]}><i class="fa fa-caret-down"></i></div>
+                <div class=${styles["shelfseek-about-us-container"]}>
+                    <div class=${styles["title-subtitle-container"]}>
+                        <h1>Shelf<span class=${styles["highlight"]}>Seek</span>  </h1>
+                        <h3>Every Shelf has <span class="highlight">a story</span></h3>
+                    </div>
+                    
+                    <div class=${styles["about-us-container"]}>
+                        <h3>About Us</h3>
+                        <p>We’re constantly improving ShelfSeek to make book discovery even easier, helping you explore new titles and authors every day.</p>
+                    </div>
                 </div>
 
-                <h3>Follow Us</h3>
-                <div class=${styles["socials"]}>
-                <a href="#"><i class=${styles["fa-brands fa-x-twitter"]}></i></a>
-                <a href="#"><i class=${styles["fa-brands fa-github"]}></i></a>
-                <a href="#"><i class=${styles["fa-brands fa-facebook"]}></i></a>
-                <a href="#"><i class=${styles["fa-brands fa-instagram"]}></i></a>
+                <div class=${styles["shelfseek-info-lists-container"]}>
+                    <div class=${styles["teck-stack-list-container"]}>
+                        <h3>Tech Stack</h3>
+                        <div class=${styles["list-container"]}>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>HTML</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>CSS</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>SPA</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>FASTAPI</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>MongoDB</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Docker</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class=${styles["content-list-container"]}>
+                        <h3>Content</h3>
+                        <div class=${styles["list-container"]}>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>All</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Genres</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Authors</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Ratings</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Shopping</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class=${styles["source-list-container"]}>
+                        <h3>Source</h3>
+                        <div class=${styles["list-container"]}>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Open Library</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Goodreads</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Project Guttenburg</span>
+                            </span>
+                             <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
+                                <span>Barnes & Nobles</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
 
-            <div class=${styles["footer-bottom"]}>
-            <div class=${styles["links"]}>
-                <a href="#">Send Feedback</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact</a>
+                <div class=${styles["shelfseek-social-container"]}>
+                    <div class=${styles["social-container"]}>
+                        <div class=${styles["language-dropdown"]}>
+                            <div class=${styles["language-display-container"]}>
+                                <span>English</span>
+                            </div>
+                            <div id="dropdown-language-button">
+                                <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083138/drop-down-arrow_qgoncr.svg" alt="Dropdown Lnaguage Button icon">
+                            </div>
+                        </div>
+
+                        <div class=${styles["follow-us-container"]}>
+                            <div class=${styles["social-medias-container"]}>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083117/twitter-alt_zqxihw.png" alt="Twitter icon" id="twitter-icon"></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083117/github_7_qz4fsz.png" alt="Github icon" id="github-icon"></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083117/facebook-app-symbol_2_l7jojc.png" alt="Facebook icon" id="facebook-icon"></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083118/instagram_6_abj80g.png" alt="Instagram icon" id="instagram-icon"></div>
+                            </div>
+                            <h3>Follow Us</h3>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <p>© 2025 ShelfSeek, For educational purposes only.</p>
         </div>
+
+        <div class=${styles["lower-container"]}>
+            <div class=${styles["lower-container-content"]}>
+                <div class=${styles["lower-left-container"]}>
+                    <span>Send Feedback</span>
+                    <div class=${styles["bullet"]}></div>
+                    <span>About us</span>
+                    <div class=${styles["bullet"]}></div>
+                    <span>Contact</span>
+                </div>
+
+                <div class=${styles["lower-right-container"]}>
+                        <img src="../static/images/copyright.png" alt="">
+                        <span>2025 ShelfSeek, For educational purposes only.</span>
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
     `;
 
     // NOTE: If need ng css design ng footer, kindly add the css to the component.module.css and uncomment this
