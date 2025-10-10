@@ -1,11 +1,14 @@
 from typing import Dict
 
+from ..file import FileManager
 from ..scrapers import Precaution
 
 class PrecautionController:
-    def __init__(self):
-        """ Control center for Snippy's precations safety checks. """
-        self.target = Precaution()
+    """ Control center for Snippy's precations safety checks. """
+
+    def __init__(self, file_manager: FileManager):
+        self.file_manager = file_manager
+        self.target = Precaution(self.file_manager)
 
 
     def validate_checkup(self, agent: Dict[str, str | Dict[str, str]], headless: bool = True) -> bool:
