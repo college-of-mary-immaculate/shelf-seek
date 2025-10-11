@@ -7,11 +7,10 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  height: 100vh;
   background-color: #FBF3E6;
   font-family: "Georgia", serif;
   margin: 0;
-  padding-top: 80px; 
 }
 
 @font-face {
@@ -192,8 +191,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 57px;
+  padding-right: 57px;
   border-radius: 50px;
   font-family: "Roboto Regular";
   font-size: 15px;
@@ -207,7 +206,7 @@ body {
 
 .books {
   width: 100%;
-  margin-top: 40px; /* Reduced from 126px to 40px */
+  margin-top: 126px; /* Reduced from 126px to 40px */
   display: flex;
   justify-content: center;
   padding-bottom: 40px; /* Added padding instead of fixed height */
