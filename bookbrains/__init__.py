@@ -15,6 +15,7 @@ Package By:
 from .utils import FileManager
 from .classifier import Classifier
 from .lexical import Tokenization, Correction
+from .ngrams import Unigram, Bigram, Trigram, InterpolatedNGram
 
 from typing import List, Callable
 
