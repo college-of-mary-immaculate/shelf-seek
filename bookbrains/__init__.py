@@ -55,9 +55,11 @@ def prepare_data() -> None:
 
     lexicon_preparation: LexiconPreparation = create_instance(LexiconPreparation, file_manager)
 
-    join.join_data()
+    # join.join_data()
 
-    lexicon_preparation.prepare_word_frequency()
+    # lexicon_preparation.prepare_word_frequency()
+
+    lexicon_preparation.prepare_sentences()
 
 
 

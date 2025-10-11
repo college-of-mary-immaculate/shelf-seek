@@ -171,6 +171,38 @@ class LexiconPreparation:
         self.file_manager.save_txt(r"data\lexicon\words.txt", words)
 
 
+    def prepare_sentences(self) -> None:
+        """ Creates a sentence corpus data base on scraped data """
+        book_data = []
+
+        for data in self.books_data["books"]:
+            book = data["book"]
+            author = data["author"]
+
+            data1 = {
+                "book_id": book["_id"],
+                "type": "book",
+                "description": (book["description"] or "").replace("\n", " ")
+            }
+
+            if data1 not in book_data:
+                book_data.append(data1)
+
+            data2 = {
+                "book_id": book["_id"],
+                "type": "author",
+                "description": (author["about"] or "").replace("\n", " ")
+            }
+
+            if data2 not in book_data:
+                book_data.append(data2)
+        
+        self.file_manager.save_csv(r"data\corpus\sentences.csv", book_data)
+
+
+
+           
+
 if __name__ == "__main__":
     tokenize = Tokenization()
 

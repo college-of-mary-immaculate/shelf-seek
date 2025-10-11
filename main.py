@@ -31,20 +31,18 @@ import bookbrains
 
 # bookbrains.prepare_data()
 
-data = bookbrains.FileManager().load_txt(r"data\lexicon\words.txt")
+# data = bookbrains.FileManager().load_txt(r"data\lexicon\words.txt")
 
-leven = bookbrains.correct("buxy", choices=data)
+# leven = bookbrains.correct("buxy", choices=data)
 
-sentence = "Busins Liyfe - Insiranal"
+# sentence = "Busins Liyfe - Insiranal"
 
-tokenized = bookbrains.tokenize(sentence)
+# tokenized = bookbrains.tokenize(sentence)
 
-suggested = ""
+# suggested = ""
 
-for token in tokenized:
-    suggested += " "
-    suggested += bookbrains.correct(token.lower(), choices=data)[0]
+# for token in tokenized:
+#     suggested += " "
+#     suggested += bookbrains.correct(token.lower(), choices=data)[0]
 
-print("searched: ", sentence)
-print()
-print("Did you mean?: ", suggested)
+bookbrains.prepare_data()
