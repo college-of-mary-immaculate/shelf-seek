@@ -14,7 +14,7 @@ Package By:
 
 from .classifier import Classifier
 from .utils import FileManager, Join
-from .lexical import Tokenization, Correction
+from .lexical import Tokenization, Correction, LexiconPreparation
 
 from typing import List, Callable
 
@@ -37,16 +37,14 @@ def tokenize(sentence: str) -> List[str]:
     return tokenization.tokenize(sentence)
 
 
-def correct(word: str, threshold: float = 0.55) -> str:
+def correct(word: str, choices: List, threshold: float = 0.55) -> str:
     """ auto corrections of word """
 
     file_manager: FileManager = create_instance(FileManager)
 
-    dictionary: List[str] = file_manager.load_json()
-
     correction : Correction = create_instance(Correction)
 
-    return correction.correction(word, threshold, choices = dictionary)
+    return correction.correction(word, threshold, choices)
 
 
 def prepare_data() -> None:
@@ -55,7 +53,13 @@ def prepare_data() -> None:
 
     join: Join = create_instance(Join, file_manager)
 
+    lexicon_preparation: LexiconPreparation = create_instance(LexiconPreparation, file_manager)
+
     join.join_data()
+
+    lexicon_preparation.prepare_word_frequency()
+
+
 
 
 __all__ = []
