@@ -4,15 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShelfSeek</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="public.css">
     <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="header.css">
 </head>
 <body>
-    <header id="header"></header>
-    <main id="main"></main>
-    <footer id="footer">
+    <header id="header">
+        <div class="content-container">
+            <div class="searchbar-container">
+                <div class="header-searchbar-container">
+                    <input type="text" id="header-searchbar-input" placeholder="Seek Books.">
+                    <div class="searchbar-button-container">
+                        <img src="../images/Result Page/SEARCH-ICON.png" alt="">
+                    </div>
+                </div>
+                <div class="header-navigations-container">
+                    <div class="selected" id="all-btn">
+                        <span>All</span>
+                    </div>
+                    <div class="not-selected" id="genres-btn">
+                        <span>Genres</span>
+                    </div>
+                    <div class="not-selected" id="authors-btn">
+                        <span>Authors</span>
+                    </div>
+                    <div class="not-selected" id="ratings-btn">
+                        <span>Ratings</span>
+                    </div>
+                    <div class="not-selected" id="shoppings-btn">
+                        <span>Shopping</span>
+                    </div>
+                    <div class="navigation-icon">
+                        <img src="../images/Result Page/HIDE-ICON.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
+    <main id="main">
+        <div class="main-content">
+            <!-- * results right here -->
+            <div class="left-container"></div>
+
+            <!-- * author facts right here -->
+            <div class="right-container"></div>
+        </div>
+    </main>
+    
+    <footer id="footer">
         <div class="upper-container">
             <div class="upper-container-content">
 
