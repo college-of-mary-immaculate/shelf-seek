@@ -1,0 +1,143 @@
+#main {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+}
+
+.main-content {
+    min-width: 1088px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-content .left-container {
+    width: 669px;
+    min-height: 339px;
+}
+
+.main-content .right-container {
+    width: 318px;
+    min-height: 339px;
+}
+
+/* * Book Result Container  */
+
+.book-container  {
+    display: flex;
+    width: 100%;
+    height: 223px;
+    gap: 37px;
+}
+
+.book-container .book-image-container {
+    height: 100%;
+    width: 145px;
+}
+
+.book-image-container img {
+    width: 100%;
+    box-shadow: 14px 13px 5px rgba(0, 0, 0, 0.25);
+}
+
+.book-container .book-meta-container {
+    height: 100%;
+    width: 485px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-meta-container .meta-header {
+    height: 54px;
+    display: flex;
+}
+
+.meta-title-container ,.meta-date-published-container {
+    font-family: "Roboto Semibold";
+    font-size: 18px;
+    color: #073243;
+}
+
+.meta-header .meta-title-container {
+    width: 60%;
+    height: 100%;
+}
+
+.meta-title-container span {
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    text-align: justify;
+}
+
+.meta-header .meta-date-published-container {
+    width: 40%;
+    height: 100%;
+}
+
+.meta-date-published-container span {
+    display: block;
+    text-align: right;
+}
+
+.book-meta-container .meta-description {
+    height: 107px;
+    font-size: 15px;
+    font-family: "Roboto Medium";
+    overflow: hidden;
+    color: #073243;
+}
+
+.book-meta-container .meta-description span {
+    display: block;
+    width: 100%;
+    white-space: normal;
+    overflow: hidden;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    text-overflow: ellipsis;
+    text-align: justify;
+}
+
+.book-meta-container .meta-chips {
+    height: 27px;
+    display: flex;
+    justify-content: space-between;
+    color: #073243;
+}
+
+.meta-chips .chip,
+.meta-chips .more-chip {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #073243;
+    font-size: 15px;
+    font-family: "Roboto Medium";
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.more-chip {
+    gap: 5px;
+}
+
+.more-chips .bullet {
+    width: 7px;
+    height: 7px;
+    background-color: #0C6182;
+}
+
+/* * ---------------------  */
