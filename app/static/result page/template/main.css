@@ -9,21 +9,21 @@ html, body {
 }
 
 @font-face {
-  font-family: "Roboto Regular";
-  src: url("../../font/roboto/static/Roboto-Regular.ttf");
+    font-family: "Roboto Regular";
+    src: url("../fonts/Roboto/static/Roboto-Regular.ttf");
 }
 
 @font-face {
-  font-family: "Roboto Semibold";
-  src: url("../../font/roboto/static/Roboto-SemiBold.ttf");
+    font-family: "Roboto Semibold";
+    src: url("../fonts/Roboto/static/Roboto-SemiBold.ttf");
 }
 
 @font-face {
-  font-family: "Roboto Medium";
-  src: url("../../font/roboto/static/Roboto-Medium.ttf");
+    font-family: "Roboto Medium";
+    src: url("../fonts/Roboto/static/Roboto-Medium.ttf");
 }
 
-.header {
+#header {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -31,7 +31,7 @@ html, body {
     margin-bottom: 25px;
 }
 
-.header .content-container {
+#header .content-container {
     width: 1088px;
     height: 114px;
 }
@@ -136,7 +136,7 @@ html, body {
     transform: scale(0.9);
 }
 
-.main {
+#main {
     width: 100%;
     height: auto;
 
@@ -231,7 +231,7 @@ html, body {
     font-weight: 500px;
     color: #073243;
     margin: 0;
-    left: 159px;
+    left: 140px;
 }
 
 .button-container {
@@ -272,7 +272,7 @@ html, body {
 
 @font-face {
   font-family: "NewYork";
-  src: url("../../../font/newyork/NewYork PERSONAL USE.otf") format("opentype");
+  src: url("../fonts/newyork/NewYork\ PERSONAL\ USE.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -400,8 +400,8 @@ html, body {
     position: relative;
     width: 144px;
     height: 222px;
-    top: 90px;
-    left: 296px;
+    top: 35px;
+    left: 285px;
 }
 
 .name-author {
@@ -415,8 +415,8 @@ html, body {
     font-family: 'NewYork', sans-serif;
     width: 183.9px;
     height: 239px;
-    top: 5px;
-    left: 300px;
+    bottom: 55px;
+    left: 290px;
     word-spacing: 10px;
     white-space: nowrap;
 }
@@ -426,11 +426,11 @@ html, body {
     font-family: 'Roboto', sans-serif;
     display: flex;
     gap: 85px;
-    bottom: 100px;
+    bottom: 150px;
     position: relative;
     flex-direction: row;
     text-align: left;
-    left: 300px;
+    left: 290px;
     
     
 }
@@ -514,7 +514,7 @@ html, body {
     font-weight: 500px;
     color: #073243;
     margin: 0;
-    left: 159px;
+    left: 140px;
 }
 
 .button-container {
@@ -692,7 +692,7 @@ html, body {
     font-weight: 500px;
     color: #073243;
     margin: 0;
-    left: 159px;
+    left: 140px;
 }
 
 .button-container {
@@ -895,7 +895,7 @@ html, body {
     right: 10px;
 }
 
-.footer {
+#footer {
     position: relative;
     margin: 0;
     top: 3023px;
@@ -983,20 +983,20 @@ html, body {
     gap: 40px;
 }
 
-.twitter-icon,
-.instagram-icon {
+#twitter-icon,
+#instagram-icon {
     width: 15px;
 }
 
-.github-icon {
+#github-icon {
     width: 18px;
 }
 
-.facebook-icon {
+#facebook-icon {
     width: 16px;
 }
 
-.dropdown-language-button {
+#dropdown-language-button {
     width: 55px;
     height: 32px;
     display: flex;
