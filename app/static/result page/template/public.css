@@ -22,3 +22,8 @@ html, body {
     font-family: "Roboto Medium";
     src: url("../fonts/Roboto/static/Roboto-Medium.ttf");
 }
+
+@font-face {
+    font-family: "Playfair Medium";
+    src: url("../fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf");
+}
