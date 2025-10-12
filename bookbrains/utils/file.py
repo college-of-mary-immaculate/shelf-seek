@@ -38,7 +38,7 @@ class FileManager:
 
 
     # * -------------------------------------------- JSON FILES --------------------------------------------
-    def load_json(self, file_name: str) -> List | Dict | Any:
+    def load_json(self, file_name: str) -> Any:
         """ Loads data on the specified json file name. """
         if not self.is_file_exist(file_name):
             print("File not found: ", file_name)
@@ -96,6 +96,28 @@ class FileManager:
         with open(file_name, 'r', newline='', encoding='utf-8') as file:
             reader = csv.DictReader(file)
             return list(reader)
+    # * -------------------------------------------- ---------  --------------------------------------------
+
+
+    # * -------------------------------------------- TXT FILES --------------------------------------------
+    def load_txt(self, file_path: str, auto_create: bool = False, default_data: Any = None) -> List:
+        """ Loads data on the specified txt file name. """
+        if auto_create:
+            self.create_file(file_path)
+
+        with open(file_path, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f if line.strip()]
+
+        return lines
+    
+
+    def save_txt(self, file_path: str, data: List[str], auto_create: bool = False, default_data: Any = None) -> List:
+        """ Saves data on the specified txt file name. """
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.writelines(f"{line}\n" for line in data)
+
+        return data
+
     # * -------------------------------------------- ---------  --------------------------------------------
 
 

@@ -3,6 +3,7 @@ import pickle
 
 from typing import Any
 
+
 class PickleFileManager:
     """ Pickle file manager """
 
@@ -14,10 +15,10 @@ class PickleFileManager:
             with open(pickle_path, 'wb') as file:
                 pickle.dump(data, file)
                 return True
-            
-        except Exception as error:
-            print(f"[ PickleFileManager ] Failed to save pickle file at {pickle_path}: {error}")
 
+        except Exception as error:
+            print(
+                f"[ PickleFileManager ] Failed to save pickle file at {pickle_path}: {error}")
 
     def pickle_load_processed(self, pickle_path: str, auto_create: bool = False, default_data: Any = None) -> Any:
         """ loads into pickle data on a given path """
@@ -29,20 +30,20 @@ class PickleFileManager:
                 data = pickle.load(file)
 
             return data
-        
+
         except Exception as error:
-            print(f"[ PickleFileManager ] Failed to load pickle file at {pickle_path}: {error}")
+            print(
+                f"[ PickleFileManager ] Failed to load pickle file at {pickle_path}: {error}")
             return None
 
-
-    def _pickle_create_file(self, pickle_path: str, default_data = None) -> None:
+    def _pickle_create_file(self, pickle_path: str, default_data=None) -> None:
         """ Creates a pickle file if not exist """
-        os.makedirs(os.path.dirname(pickle_path), exist_ok = True)
+        os.makedirs(os.path.dirname(pickle_path), exist_ok=True)
 
         if not os.path.exists(pickle_path):
             with open(pickle_path, 'wb') as file:
                 pickle.dump(default_data or {}, file)
-        
+
 
 if __name__ == "__main__":
     pass

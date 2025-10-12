@@ -1,3 +1,5 @@
+import styles from './component.module.css';
+
 export default function LandingPageLayout(root) {
     root.innerHTML = `
         <header id="header"></header>
