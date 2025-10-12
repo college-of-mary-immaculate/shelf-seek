@@ -3,116 +3,116 @@ import styles from './component.module.css';
 
 export default function Footer(root) {
     root.innerHTML = `
-        <div class=$styles"upper-container">
-            <div class="upper-container-content">
+        <div class=${styles["upper-container"]}>
+            <div class=${styles["upper-container-content"]}>
 
-                <div class="shelfseek-about-us-container">
-                    <div class="title-subtitle-container">
-                        <h1>Shelf<span class="highlight">Seek</span>  </h1>
-                        <h3>Every Shelf has <span class="highlight">a story</span></h3>
+                <div class=${styles["shelfseek-about-us-container"]}>
+                    <div class=${styles["title-subtitle-container"]}>
+                        <h1>Shelf<span class=${styles["highlight"]}>Seek</span>  </h1>
+                        <h3>Every Shelf has <span class=${styles["highlight"]}>a story</span></h3>
                     </div>
                     
-                    <div class="about-us-container">
+                    <div class=${styles["about-us-container"]}>
                         <h3>About Us</h3>
                         <p>We’re constantly improving ShelfSeek to make book discovery even easier, helping you explore new titles and authors every day.</p>
                     </div>
                 </div>
 
-                <div class="shelfseek-info-lists-container">
-                    <div class="teck-stack-list-container">
+                <div class=${styles["shelfseek-info-lists-container"]}>
+                    <div class=${styles["teck-stack-list-container"]}>
                         <h3>Tech Stack</h3>
-                        <div class="list-container">
-                            <span class="list">
-                                <div class="bullet"></div>
+                        <div class=${styles["list-container"]}>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>HTML</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>CSS</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>SPA</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>FASTAPI</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>MongoDB</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Docker</span>
                             </span>
                         </div>
                     </div>
-                    <div class="content-list-container">
+                    <div class=${styles["content-list-container"]}>
                         <h3>Content</h3>
-                        <div class="list-container">
-                            <span class="list">
-                                <div class="bullet"></div>
+                        <div class=${styles["list-container"]}>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>All</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Genres</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Authors</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Ratings</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Shopping</span>
                             </span>
                         </div>
                     </div>
-                    <div class="source-list-container">
+                    <div class=${styles["source-list-container"]}>
                         <h3>Source</h3>
-                        <div class="list-container">
-                            <span class="list">
-                                <div class="bullet"></div>
+                        <div class=${styles["list-container"]}>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Open Library</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Goodreads</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Project Guttenburg</span>
                             </span>
-                             <span class="list">
-                                <div class="bullet"></div>
+                            <span class=${styles["list"]}>
+                                <div class=${styles["bullet"]}></div>
                                 <span>Barnes & Nobles</span>
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <div class="shelfseek-social-container">
-                    <div class="social-container">
-                        <div class="language-dropdown">
-                            <div class="language-display-container">
+                <div class=${styles["shelfseek-social-container"]}>
+                    <div class=${styles["social-container"]}>
+                        <div class=${styles["language-dropdown"]}>
+                            <div class=${styles["language-display-container"]}>
                                 <span>English</span>
                             </div>
-                            <div id="dropdown-language-button">
-                                <img src="../images/drop-down-arrow.svg" alt="Dropdown Lnaguage Button icon">
+                            <div id=${styles["dropdown-language-button"]}>
+                                <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197423/drop-down-arrow_fvni77.svg" alt="Dropdown Lnaguage Button icon">
                             </div>
                         </div>
 
-                        <div class="follow-us-container">
-                            <div class="social-medias-container">
-                                <div class="social-media-button"><img src="../images/twitter-alt.png" alt="Twitter icon" id="twitter-icon"></div>
-                                <div class="social-media-button"><img src="../images/github (7).png" alt="Github icon" id="github-icon"></div>
-                                <div class="social-media-button"><img src="../images/facebook-app-symbol (2).png" alt="Facebook icon" id="facebook-icon"></div>
-                                <div class="social-media-button"><img src="../images/instagram (6).png" alt="Instagram icon" id="instagram-icon"></div>
+                        <div class=${styles["follow-us-container"]}>
+                            <div class=${styles["social-medias-container"]}>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/twitter-alt_ozjj0x.png" id=${styles["twitter-icon"]}></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/github_7_yewqxd.png" alt="Github icon" id=${styles["github-icon"]}></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/facebook-app-symbol_2_jjcmhh.png" alt="Facebook icon" id=${styles["facebook-icon"]}></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/instagram_6_c9yzdl.png" alt="Instagram icon" id=${styles["instagram-icon"]}></div>
                             </div>
                             <h3>Follow Us</h3>
                         </div>
@@ -122,17 +122,17 @@ export default function Footer(root) {
             </div>
         </div>
 
-        <div class="lower-container">
-            <div class="lower-container-content">
-                <div class="lower-left-container">
+        <div class=${styles["lower-container"]}>
+            <div class=${styles["lower-container-content"]}>
+                <div class=${styles["lower-left-container"]}>
                     <span>Send Feedback</span>
-                    <div class="bullet"></div>
+                    <div class=${styles["bullet"]}></div>
                     <span>About us</span>
-                    <div class="bullet"></div>
+                    <div class=${styles["bullet"]}></div>
                     <span>Contact</span>
                 </div>
-                <div class="lower-right-container">
-                        <img src="../images/copyright.png" alt="">
+                <div class=${styles["lower-right-container"]}>
+                        <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/copyright_epnxey.png" alt="">
                         <span>2025 ShelfSeek, For educational purposes only.</span>
                 </div>
             </div>

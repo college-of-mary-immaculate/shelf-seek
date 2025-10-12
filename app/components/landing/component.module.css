@@ -73,6 +73,7 @@ body {
   border-radius: 50px;
   overflow: hidden;
   background: #FBF3E6;
+  font-family: "Roboto Regular";
 }
 
 .nav-link {

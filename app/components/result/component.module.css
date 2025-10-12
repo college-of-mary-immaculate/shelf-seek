@@ -100,14 +100,6 @@
 /* *         */
 
 /* * Main */
-#main {
-    width: 100%;
-    height: auto;
-
-    display: flex;
-    justify-content: center;
-}
-
 .main-content {
     min-width: 1088px;
     height: auto;
