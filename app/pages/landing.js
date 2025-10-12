@@ -1,12 +1,17 @@
-import LandingPageLayout from "../layouts/landingPage.js";
-import Header from "../components/landing/header.js";
-import Main from "../components/landing/main.js";
+import LandingPageLayout from "../layouts/landingPage";
+import Footer from "../components/landing/footer";
+import Header from "../components/landing/header";
+import Main from "../components/landing/main";
+import Nav from "../components/landing/nav";
 
 export default function Landing() {
-
-    const { footer, header, main } = LandingPageLayout(this.root);
-
+    if (document && document.documentElement) {
+        document.documentElement.style.overflowY = 'hidden';
+    }
+    const { footer, header, main, nav} = LandingPageLayout(this.root);
+    Footer(footer)
     Header(header);
     Main(main);
+    Nav(nav)
 
 }
