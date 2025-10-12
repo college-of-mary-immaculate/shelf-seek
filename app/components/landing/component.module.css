@@ -8,7 +8,6 @@ html {
 
 body {
   height: 100vh;
-  background-color: #FBF3E6;
   font-family: "Georgia", serif;
   margin: 0;
 }
@@ -48,7 +47,6 @@ body {
   margin-top: 40px;
 }
 
-
 .logo-box {
   width: 50px;
   height: 50px;
@@ -65,7 +63,6 @@ body {
   height: 100%;
   object-fit: contain;
 }
-
 
 .nav {
   display: flex;
@@ -199,6 +196,7 @@ body {
   font-size: 15px;
   cursor: pointer;
   white-space: nowrap;
+  color: #073243;
 }
 
 .highlight {
@@ -207,11 +205,11 @@ body {
 
 .books {
   width: 100%;
-  margin-top: 126px; /* Reduced from 126px to 40px */
+  margin-top: 126px; 
   display: flex;
   justify-content: center;
-  padding-bottom: 40px; /* Added padding instead of fixed height */
-  min-height: 0; /* Allows the container to shrink below its content size */
+  padding-bottom: 40px; 
+  min-height: 0; 
 }
 
 .books-columns {
@@ -221,7 +219,7 @@ body {
   display: flex;
   gap: 100px;
   margin: 0 auto;
-  padding: 0 16px; /* avoid subtle overflow and keep symmetry on ultra-wide */
+  padding: 0 16px;
 }
 
 .book-column1, .book-column2,
@@ -243,7 +241,6 @@ body {
 .book-column3 {
   margin-top: 84px
 }
-
 
 .recom-book-middle-container, .recom-book-side-container {
   cursor: pointer;
@@ -279,34 +276,91 @@ body {
 }
 
 /* --------------------------------------------- */
-@media (max-width: 1280px) {
-  /* tighten gaps on laptop widths */
-  .books-columns { 
-    gap: 50px; 
-    max-width: 1200px; 
-  }
-  .book-column3 {
-    width: 250px;
-  }
-  
-  /* Adjust image size in the center column */
-  .book-column3 .recom-book-middle-container img {
-    width: 250px;
-  }
-}
-
-/* --------------------------------------------- */
-@media (max-width: 1024px) {
-  /* Adjust spacing for tablet view */
+@media (min-width: 1024px) {
   body {
     padding-top: 0;
+    overflow-x: hidden;
   }
-  /* .hero { 
-    margin-top: 20px; 
-  } */
+
+  .header {
+    padding: 0 24px;
+  }
+
+  .header-container {
+    min-width: auto;
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .nav {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+
   .hero-title { 
-    font-size: 2rem;
-    margin-top: 0;
+    font-size: 2.5rem;
+    margin: 80px auto 0;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .hero {
+    margin-top: 40px;
+  }
+
+  .books {
+    width: 100%;
+    margin-top: 80px;
+    padding: 0 24px 40px;
+    display: flex;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  .books-columns {
+    width: 100%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    margin: 0 auto;
+    justify-items: center;
+  }
+
+  .book-column1, .book-column2,
+  .book-column4, .book-column5 {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .book-column2, .book-column4 {
+    margin-top: 50px;
+  }
+
+  .book-column3 {
+    width: 200px;
+    margin-top: 80px;
+  }
+
+  .recom-book-side-container {
+    width: 100%;
+  }
+
+  .recom-book-side-container img {
+    width: 100%;
+    height: auto;
+    box-shadow: 14px 13px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .recom-book-middle-container img {
+    width: 100%;
+    height: auto;
+    box-shadow: 14px 13px 4px rgba(0, 0, 0, 0.25);
   }
 }
 
@@ -315,6 +369,11 @@ body {
   body {
     padding-top: 0;
     padding-bottom: 90px; 
+    overflow-x: hidden;
+  }
+
+  .hero-title { 
+    margin: 0;
   }
   
   .hero-title h1 {
@@ -333,11 +392,6 @@ body {
     display: inline;
   }
   
-  .header {
-    padding: 1rem 0.6rem;
-    background: #F4EEE2;
-  }
-
   .header-container {
     flex-direction: column;
     align-items: center;
@@ -371,9 +425,13 @@ body {
     display: none;
   }
 
+  .previous-searches-container .result-container {
+    padding: 0 30px 0;
+  }
 
   .books {
     padding: 0 24px;
+    margin-top: 40px;
   }
 
   .hero { margin-top: 80px; }
@@ -407,7 +465,6 @@ body {
     width: 320px;
   }
   
-  /* Adjust image size in the center column */
   .book-column3 .recom-book-middle-container img {
     width: 320px;
   }
@@ -494,8 +551,12 @@ body {
 /* --------------------------------------------- */
 @media (max-width: 480px) {
   body {
-    padding-top: 120px;
     overflow-x: hidden;
+  }
+
+  .previous-searches-container .result-container {
+    font-size: 12px;
+    padding: 0 20px 0;
   }
   
   .books {
@@ -522,7 +583,6 @@ body {
     width: 130px;
   }
   
-  /* Adjust image size in the center column */
   .book-column3 .recom-book-middle-container img {
     width: 130px;
   }
@@ -532,34 +592,42 @@ body {
   }
 
   .recom-book-side-container h4 {
-    font-size: 13px;
-    margin-top: 12px;
-    margin-bottom: 4px;
+    font-size: 12px;
+    margin: 11px 0 4px 0;
+    padding: 0;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    line-height: 1.2;
+    display: block;
   }
 
   .recom-book-side-container span {
-    font-size: 12px;
+    font-size: 11px;
+    display: block;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    line-height: 1.2;
+    width: 100%;
+  }
+
+  .recom-book-side-container {
+    width: 100%;
+    max-width: 80px;
+    overflow: visible;
   }
 
   .recom-book-middle-container h4 {
-    font-size: 15px;
+    font-size: 14px;
     margin-top: 12px;
     margin-bottom: 4px;
   }
 
   .recom-book-middle-container span {
-    font-size: 14px;
+    font-size: 13px;
   }
-  
-  /* .books-columns {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-  } */
 
   .hero { 
     margin-top: 50px;
@@ -584,6 +652,10 @@ body {
   .previous-searches-container { 
     gap: 8px;
     padding: 0 16px;
+  }
+
+  .result-container {
+    font-size: 12px;
   }
   
   .book-card {
@@ -633,8 +705,8 @@ body {
     width: 5.8rem; 
     height: 5.8rem;
   }
-
 }
+
 /* --------------------------------------------*/
 @media (max-width: 375px) {
   .searchbar-container {
@@ -651,14 +723,11 @@ body {
   
   .previous-searches-container {
     padding: 0 5%;
-    margin-top: 15px;
+    margin-top: 20px;
   }
   
   .previous-searches-container .result-container {
-    height: 30px;
-    margin-bottom: 8px;
-    padding: 0 12px;
-    font-size: 0.8rem;
+    font-size: 11px;
     border-width: 1px;
   }
 
@@ -672,9 +741,15 @@ body {
     width: auto;
   }
 
+  .books{
+     margin-top: 15px;
+  }
+
   .books-columns {
     grid-template-columns: 70px 120px 70px;
     column-gap: 30px;
+    margin: 0 5px;
+    padding:0;
   }
 
   .recom-book-middle-container img, .recom-book-side-container img{
@@ -685,7 +760,6 @@ body {
     width: 120px;
   }
   
-  /* Adjust image size in the center column */
   .book-column3 .recom-book-middle-container img {
     width: 120px;
   }
@@ -746,7 +820,6 @@ body {
 
 /* ------------------------------------*/
 @media (max-width: 320px) {
-  /* Hero Title */
   .hero h1 {
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -784,6 +857,10 @@ body {
   }
 
   /* Book Grid */
+  .books {
+    margin-top: 0;
+  }
+
   .books-columns {
     grid-template-columns: 60px 100px 60px;
     column-gap: 20px;
@@ -878,54 +955,3 @@ body {
   }
 }
 
-/* .nav-icon {
-  width: 22px;
-  height: 22px;
-  margin-bottom: 4px;
-  transition: opacity 0.2s ease;
-} */
-
-/* @media (max-width: 768px) {
-  .bottom-nav {
-    position: fixed;
-    bottom: 20px; 
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff8f1;
-    border: 1px solid #ddd;
-    border-radius: 40px; 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1px 0px;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    width: 90%;
-    max-width: 500px;
-  }
-
-  .bottom-nav a {
-    flex: 1;
-    text-align: center;
-    font-size: 12px;
-    color: #0f4257;
-    text-decoration: none;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 8px 0;
-    border-radius: 30px; 
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-
-  .bottom-nav a.active {
-    background-color: #0f4257;
-    color: #fff;
-  }
-
-  .bottom-nav a.active img {
-    filter: brightness(0) invert(1); 
-  }
-} */
