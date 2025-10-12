@@ -15,6 +15,7 @@ Package By:
 from .classifier import Classifier
 from .utils import FileManager, Join
 from .lexical import Tokenization, Correction, LexiconPreparation
+from .ngrams import Unigram, Bigram, Trigram, InterpolatedNGram
 
 from typing import List, Callable
 
