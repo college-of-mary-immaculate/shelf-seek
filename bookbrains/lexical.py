@@ -102,6 +102,17 @@ class Correction:
         return word, best_score
 
 
+class Normalization:
+    def __init__(self):
+        pass
+
+
+    def normalize(self) -> str:
+        pass
+
+    def normalize_data(self) -> str:
+        pass
+
 class LexiconPreparation:
     def __init__(self, file_manager: FileManager):
         self.file_manager = file_manager
@@ -116,8 +127,18 @@ class LexiconPreparation:
         self.tokenization = Tokenization()
 
     
-    def prepare_word_frequency(self) -> None:
+    def prepare_word_frequency(self, force_rebuild: bool) -> None:
         """ Creates a lexicon of all listed words base on scraped data """
+        if force_rebuild:
+            self.file_manager.delete_file(r"data\lexicon\words.txt")
+            self.file_manager.delete_file(r"data\lexicon\word_frequency.json")
+
+        if self.file_manager.is_file_exist(r"data\lexicon\words.txt") and self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json") and not force_rebuild:
+            print("[ BookBrains ] Data existed and already prepared for word frequency. ")
+            return
+
+        print("[ BookBrains ] Preparing word frequency ")
+
         words = []
         word_frequency = {}
 
@@ -167,12 +188,24 @@ class LexiconPreparation:
                 else:
                     word_frequency[token] += 1
         
-        self.file_manager.save_json(r"data\lexicon\word_frequency.json", word_frequency)
-        self.file_manager.save_txt(r"data\lexicon\words.txt", words)
+        if not self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json"):
+            self.file_manager.save_json(r"data\lexicon\word_frequency.json", word_frequency)
+
+        if not self.file_manager.is_file_exist(r"data\lexicon\words.txt"):
+            self.file_manager.save_txt(r"data\lexicon\words.txt", words)
 
 
-    def prepare_sentences(self) -> None:
+    def prepare_sentences(self, force_rebuild) -> None:
         """ Creates a sentence corpus data base on scraped data """
+        if force_rebuild:
+            self.file_manager.delete_file(r"data\corpus\sentences.csv")
+
+        if self.file_manager.is_file_exist(r"data\corpus\sentences.csv") and not force_rebuild:
+            print("[ BookBrains ] Sentences already prepared.")
+            return
+        
+        print("[ BookBrains ] Preparing sentences.")
+
         book_data = []
 
         for data in self.books_data["books"]:
