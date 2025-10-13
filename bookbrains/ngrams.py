@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from collections import defaultdict, Counter
 from typing import List, Tuple
-from utils import PickleFileManager
+from .utils import PickleFileManager
 
 
 CandidateList = List[Tuple[str, float]]
