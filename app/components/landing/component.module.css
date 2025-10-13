@@ -289,10 +289,11 @@ body {
   .header-container {
     min-width: auto;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1346px;
     margin: 40px auto 0;
-    padding: 0;
     box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .nav {
@@ -322,17 +323,17 @@ body {
 
   .books-columns {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1346px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 40px;
     margin: 0 auto;
     justify-items: center;
+    padding: 0;
   }
 
   .book-column1, .book-column2,
   .book-column4, .book-column5 {
-    width: 140px;
+    width: 157px;
     display: flex;
     flex-direction: column;
     gap: 60px;
@@ -343,7 +344,7 @@ body {
   }
 
   .book-column3 {
-    width: 200px;
+    width: 325px;
     margin-top: 80px;
   }
 
