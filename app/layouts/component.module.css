@@ -23,6 +23,13 @@ html, body {
     src: url("../fonts/Roboto/static/Roboto-Medium.ttf");
 }
 
+#main {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
 #footer {
     height: 411px;
     width: 100%;

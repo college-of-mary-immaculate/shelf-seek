@@ -16,22 +16,46 @@ class Join:
 
         self.joined_data = None
 
+        self.is_joined = False
 
-    def setup(self) -> None:
+
+    def setup(self, force_rebuild: bool) -> None:
         """ Loads all of the data """
-        self.shelf = self.file_manager.load_json(r"data\barnesnobles_shelf\shelf.json")
+        default_data = {
+            "name": "Barnes and Nobles Book List",
+            "description": "Contais book meta datas",
+            "date_updated": datetime.today().strftime('%Y-%m-%d'),
+            "main_source": "https://www.barnesandnoble.com/",
+            "total_books": 128,
+            "books": []
+        }
 
+        if force_rebuild:
+            self.file_manager.delete_file(r"data\joined_data\barnesnobles.json")
+
+        self.shelf = self.file_manager.load_json(r"data\barnesnobles_shelf\shelf.json")
+        self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json", default_data)
+
+        if len(self.joined_data["books"]) == len(self.shelf["books"]) and not force_rebuild:
+               print("[ BookBrains ] Joined Data already prepared.")
+               self.is_joined = True
+               return
+        
         self.books = self.file_manager.load_json(r"data\barnesnobles_shelf\book.json")
         self.book_genres = self.file_manager.load_json(r"data\barnesnobles_shelf\categories.json")
         self.book_authors = self.file_manager.load_json(r"data\barnesnobles_shelf\author.json")
         self.book_publishers = self.file_manager.load_json(r"data\barnesnobles_shelf\publisher.json")
 
-        self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
 
 
-    def join_data(self) -> None:
+    def join_data(self, force_rebuild: bool) -> None:
         """ Creates a json file that joins the book data into single data of book """
-        self.setup()
+        self.setup(force_rebuild)
+
+        if self.is_joined:
+            return
+        
+        print("[ BookBrains ] Preparing Joining Scraped data.")
 
         for shelfs_data in self.shelf["books"]:
             data = {

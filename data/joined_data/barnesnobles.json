@@ -1,7 +1,7 @@
 {
     "name": "Barnes and Nobles Book List",
     "description": "Contais book meta datas",
-    "date_updated": "2025-10-11",
+    "date_updated": "2025-10-13",
     "main_source": "https://www.barnesandnoble.com/",
     "total_books": 128,
     "books": [

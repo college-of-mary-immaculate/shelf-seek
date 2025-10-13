@@ -12,12 +12,12 @@ Package By:
 `sudonotrey`
 """
 
-from .classifier import Classifier
-from .utils import FileManager, Join
+from .classifier import NaiveBayes, CorpusPreparation
+from .utils import FileManager, Join, PickleFileManager
+from .ngrams import Unigram, Bigram, Trigram, InterpolatedNigram
 from .lexical import Tokenization, Correction, LexiconPreparation
-from .ngrams import Unigram, Bigram, Trigram, InterpolatedNGram
 
-from typing import List, Callable
+from typing import List, Callable, Dict
 
 # * INSTANCIATE ONLY ONCE
 _instances = {}
@@ -48,19 +48,36 @@ def correct(word: str, choices: List, threshold: float = 0.55) -> str:
     return correction.correction(word, threshold, choices)
 
 
-def prepare_data() -> None:
-    """ Prepares data this may take a while. use this if your data have gone modifed """
+def identify(sentence: str) -> Dict:
+    """ Uses Naive Bayes that can identify sentences intention """
+
+    pickle_manager: PickleFileManager = create_instance(PickleFileManager)
+
+    bayes: NaiveBayes = create_instance(NaiveBayes, pickle_manager)
+
+
+def prepare_data(force_rebuild: bool = False) -> None:
+    """ Prepares data this may take a while. use this if your scraped data have gone modifed """
     file_manager: FileManager = create_instance(FileManager)
+    pickle_manager: PickleFileManager = create_instance(PickleFileManager)
 
     join: Join = create_instance(Join, file_manager)
+    join.join_data(force_rebuild)
 
     lexicon_preparation: LexiconPreparation = create_instance(LexiconPreparation, file_manager)
 
-    # join.join_data()
+    naive_bayes_preparation: CorpusPreparation = create_instance(CorpusPreparation, file_manager, pickle_manager)
 
-    # lexicon_preparation.prepare_word_frequency()
+    lexicon_preparation.prepare_word_frequency(force_rebuild)
 
-    lexicon_preparation.prepare_sentences()
+    lexicon_preparation.prepare_sentences(force_rebuild)
+
+    naive_bayes_preparation.build_training_data(force_rebuild)
+
+    if force_rebuild:
+        print("\n[ BookBrains ] Prepared Data Rebuilded")
+
+    print("\n[ BookBrains ] Data prepared nice and smoothly. ")
 
 
 

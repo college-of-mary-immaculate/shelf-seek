@@ -39,6 +39,7 @@ fail
 shelley
 parker
 chan
+1
 bestselling
 author
 suninspired
@@ -2903,6 +2904,7 @@ paranormal
 kindling
 scottish
 firewood
+🍂
 cosy
 walsh
 leonie
@@ -2930,6 +2932,7 @@ faster
 booktok's
 hottest
 18
+🌶
 proximity
 fish
 water
