@@ -48,7 +48,7 @@ def correct(word: str, choices: List, threshold: float = 0.55) -> str:
     return correction.correction(word, threshold, choices)
 
 
-def classify(sentence: str) -> Dict:
+def identify(sentence: str) -> Dict:
     """ Uses Naive Bayes that can identify sentences intention """
 
     pickle_manager: PickleFileManager = create_instance(PickleFileManager)
