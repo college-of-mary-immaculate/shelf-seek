@@ -302,15 +302,14 @@ body {
 
   .hero-title { 
     font-size: 2.5rem;
-    margin: 80px auto 0;
-    text-align: center;
+    margin-top: 80px;
     max-width: 800px;
   }
 
   .hero {
     margin-top: 40px;
   }
-
+  
   .books {
     width: 100%;
     margin-top: 80px;
@@ -389,6 +388,12 @@ body {
     margin-top:0;
   }
 
+  .searchbar-container {
+    width: 95%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
   .logo-box {
     width: 100px;
     height: 100px;
@@ -414,6 +419,25 @@ body {
     width: 100%;
   }
 
+  .hero-title { 
+    margin: 0;
+  }
+  
+  .hero-title h1 {
+    text-align: left;
+    line-height: 1.2;
+    white-space: pre-line;
+  }
+  
+  .hero-title h1 br {
+    display: block;
+    content: "";
+    margin: 0;
+  }
+  
+  .hero-title h1 span {
+    display: inline;
+  }
   
   .books {
     padding: 0 24px;
@@ -514,26 +538,6 @@ body {
     overflow-x: hidden;
   }
 
-  .hero-title { 
-    margin: 0;
-  }
-  
-  .hero-title h1 {
-    text-align: left;
-    line-height: 1.2;
-    white-space: pre-line;
-  }
-  
-  .hero-title h1 br {
-    display: block;
-    content: "";
-    margin: 0;
-  }
-  
-  .hero-title h1 span {
-    display: inline;
-  }
-  
   .header-container {
     flex-direction: column;
     align-items: center;
@@ -547,6 +551,9 @@ body {
     padding: 0 30px 0;
   }
 
+  .books-columns {
+    gap: clamp(5px, 8vw, 110px);
+  }
 }
 
 /* --------------------------------------------- */
@@ -585,8 +592,10 @@ body {
 
   .books-columns {
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 90px;
+    padding:0;
   }
+
 
   .book-column1,
   .book-column2,
@@ -594,7 +603,7 @@ body {
   .book-column4,
   .book-column5 {
     width: 100%;
-    max-width: 140px;
+    max-width: 130px;
     margin: 0 auto;
   }
 
@@ -606,7 +615,7 @@ body {
   .book-column3 {
     margin: 60px auto 0;
     width: 100%;
-    max-width: 180px;
+    max-width: 210px;
     grid-column: 1 / -1;
     order: -1;
   }
@@ -619,51 +628,64 @@ body {
     margin: 0 auto;
   }
 
-  .book-column1,
-  .book-column2,
-  .book-column4,
-  .book-column5 {
-    max-width: 120px;
-  }
 }
 
 /* --------------------------------------------- */
 @media (min-width: 426px) and (max-width: 588px) {
+  .books {
+    margin-top: 30px;
+    /* padding: 0 12px; */
+  }
+
+  .books-columns {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    padding: 0;
+    max-width: 95%;
+    margin: 0;
+  }
+
   .book-column1,
   .book-column2,
+  .book-column3,
   .book-column4,
   .book-column5 {
-    width: 100px;
+    max-width: 100px;  /* Adjust this value as needed */
+    width: 100%;
+    margin: 0 auto;
   }
-  
+
   .book-column2,
   .book-column4 {
-    margin-top: 40px;
+    margin-top: 30px;
   }
-  
+
   .book-column3 {
-    width: 150px;
-    margin: 60px auto 0;
+    margin: 50px auto 0;
+    max-width: 160px;
+    grid-column: 1 / -1;
     order: -1;
   }
-  
+
   .book-column3 .recom-book-middle-container img {
-    width: 150px;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
     box-shadow: 10px 10px 3px rgba(0, 0, 0, 0.25);
   }
-  
-  .books-columns {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    justify-items: center;
+
+  .recom-book-side-container {
+    width: 100%;
   }
-  
-  .book-column2 { grid-column: 1; grid-row: 1; }
-  .book-column3 { grid-column: 2; grid-row: 1; }
-  .book-column4 { grid-column: 3; grid-row: 1; }
-  .book-column1 { grid-column: 1; grid-row: 2; }
-  .book-column5 { grid-column: 3; grid-row: 2; }
+
+  .recom-book-side-container img {
+    width: 100% !important;
+    height: auto;
+    display: block;
+    box-shadow: 8px 8px 2px rgba(0, 0, 0, 0.1);
+  }
 }
 
 /* --------------------------------------------- */
