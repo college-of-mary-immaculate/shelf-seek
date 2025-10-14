@@ -1,22 +1,88 @@
 import re
 
+from .lexical import Tokenization
+from .ngrams import InterpolatedNigram
 from .utils import PickleFileManager, FileManager
 
+from math import log
 from typing import List, Dict
+from collections import defaultdict, Counter
 
 class NaiveBayes:
     """ Can identify sentence intention """
-    def __init__(self, pickle_manager: PickleFileManager):
+    def __init__(self, pickle_manager: PickleFileManager, tokenization: Tokenization):
+
+        self.tokenization = tokenization
         self.pickle_manager = pickle_manager
 
-    def identify(self, text: str) -> Dict[str, str]:
-        pass
+        self.datasets = self.pickle_manager.pickle_load_processed(r"data\classification\label.pkl")
 
-    def train(self) -> None:
-        pass
+        self.class_models: Dict[str, InterpolatedNigram] = {}
+        self.class_priors: Dict[str, float] = {}
 
-    def predict(self) -> None:
-        pass
+
+    def train(self) -> Dict:
+        grouped = defaultdict(list)
+        for text, label in self.datasets:
+            grouped[label].append(text)
+
+        total_samples = len(self.datasets)
+
+        for label, samples in grouped.items():
+            print(f"🧠 Training model for '{label}' with {len(samples)} samples...")
+
+            model = InterpolatedNigram()
+
+            tokens = []
+            for sentence in samples:
+                tokens.extend(self.tokenization.tokenize(sentence))
+
+            model.train(tokens)
+
+            self.class_models[label] = model
+            self.class_priors[label] = len(samples) / total_samples
+
+            self.pickle_manager.pickle_save_processed(fr"data\classification\models\{label}_model.pkl", model)
+
+        return {
+            "trained_labels": list(grouped.keys()),
+            "total_samples": total_samples,
+            "priors": self.class_priors,
+        }
+
+
+    def predict(self, query) -> None:
+        """ Predict the most likely label for a given query. """
+        tokens = self.tokenization.tokenize(query.lower())
+
+        scores = {}
+
+        for label, model in self.class_models.items():
+            prior = self.class_priors.get(label, 1e-9)
+            log_prob = log(prior)
+
+            for i, word in enumerate(tokens):
+                context = tokens[max(0, i-2):i]
+                probability = model.get_probability(word)
+                    
+                log_prob += log(probability + 1e-9)
+
+            scores[label] = log_prob
+
+        sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+        top_label, top_score = sorted_scores[0]
+        second_label, second_score = sorted_scores[1]
+        confidence_gap = abs(top_score - second_score)
+
+        if confidence_gap < 3.0:
+            top_labels = [top_label, second_label]
+        else:
+            top_labels = [top_label]
+
+        return top_labels, dict(sorted_scores)
+
+
 
     def classify(self) -> None:
         pass
