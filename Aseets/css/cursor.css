@@ -1,0 +1,17 @@
+body {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 9999;
+  background: url('../cursor/cursor-default.png') no-repeat center center;
+  background-size: contain;
+  transform: translate(-50%, -50%);
+  transition: background-image 0.1s ease;
+}
