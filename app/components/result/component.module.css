@@ -113,10 +113,11 @@
 
 /* * Main  */
 .main-content {
-    min-width: 1088px;
-    height: auto;
-    display: flex;
-    justify-content: space-between;
+  min-width: 1088px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 55px;
 }
 
 .main-content .left-container {
