@@ -53,7 +53,17 @@ def identify(sentence: str) -> Dict:
 
     pickle_manager: PickleFileManager = create_instance(PickleFileManager)
 
-    bayes: NaiveBayes = create_instance(NaiveBayes, pickle_manager)
+    tokenization: Tokenization = create_instance(Tokenization)
+
+    naive_bayes: NaiveBayes = create_instance(NaiveBayes, pickle_manager, tokenization)
+
+    trained_data = naive_bayes.train()
+
+    predicted, all_scores = naive_bayes.predict(query=sentence)
+
+    print("🧭 Predicted label:", predicted)
+
+    print("📊 All scores:", all_scores)
 
 
 def prepare_data(force_rebuild: bool = False) -> None:
