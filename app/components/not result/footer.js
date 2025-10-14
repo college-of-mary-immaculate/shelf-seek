@@ -3,15 +3,13 @@ import styles from './component.module.css';
 
 export default function Footer(root) {
     root.innerHTML = `
-        <footer id="footer">
-
         <div class=${styles["upper-container"]}>
             <div class=${styles["upper-container-content"]}>
 
                 <div class=${styles["shelfseek-about-us-container"]}>
                     <div class=${styles["title-subtitle-container"]}>
                         <h1>Shelf<span class=${styles["highlight"]}>Seek</span>  </h1>
-                        <h3>Every Shelf has <span class="highlight">a story</span></h3>
+                        <h3>Every Shelf has <span class=${styles["highlight"]}>a story</span></h3>
                     </div>
                     
                     <div class=${styles["about-us-container"]}>
@@ -28,23 +26,23 @@ export default function Footer(root) {
                                 <div class=${styles["bullet"]}></div>
                                 <span>HTML</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>CSS</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>SPA</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>FASTAPI</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>MongoDB</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Docker</span>
                             </span>
@@ -57,19 +55,19 @@ export default function Footer(root) {
                                 <div class=${styles["bullet"]}></div>
                                 <span>All</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Genres</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Authors</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Ratings</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Shopping</span>
                             </span>
@@ -82,15 +80,15 @@ export default function Footer(root) {
                                 <div class=${styles["bullet"]}></div>
                                 <span>Open Library</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Goodreads</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Project Guttenburg</span>
                             </span>
-                             <span class=${styles["list"]}>
+                            <span class=${styles["list"]}>
                                 <div class=${styles["bullet"]}></div>
                                 <span>Barnes & Nobles</span>
                             </span>
@@ -104,17 +102,17 @@ export default function Footer(root) {
                             <div class=${styles["language-display-container"]}>
                                 <span>English</span>
                             </div>
-                            <div id="dropdown-language-button">
-                                <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083138/drop-down-arrow_qgoncr.svg" alt="Dropdown Lnaguage Button icon">
+                            <div id=${styles["dropdown-language-button"]}>
+                                <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197423/drop-down-arrow_fvni77.svg" alt="Dropdown Lnaguage Button icon">
                             </div>
                         </div>
 
                         <div class=${styles["follow-us-container"]}>
                             <div class=${styles["social-medias-container"]}>
-                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083117/twitter-alt_zqxihw.png" alt="Twitter icon" id="twitter-icon"></div>
-                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083117/github_7_qz4fsz.png" alt="Github icon" id="github-icon"></div>
-                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083117/facebook-app-symbol_2_l7jojc.png" alt="Facebook icon" id="facebook-icon"></div>
-                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/deogcjil5/image/upload/v1760083118/instagram_6_abj80g.png" alt="Instagram icon" id="instagram-icon"></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/twitter-alt_ozjj0x.png" id=${styles["twitter-icon"]}></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/github_7_yewqxd.png" alt="Github icon" id=${styles["github-icon"]}></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/facebook-app-symbol_2_jjcmhh.png" alt="Facebook icon" id=${styles["facebook-icon"]}></div>
+                                <div class=${styles["social-media-button"]}><img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/instagram_6_c9yzdl.png" alt="Instagram icon" id=${styles["instagram-icon"]}></div>
                             </div>
                             <h3>Follow Us</h3>
                         </div>
@@ -133,16 +131,12 @@ export default function Footer(root) {
                     <div class=${styles["bullet"]}></div>
                     <span>Contact</span>
                 </div>
-
                 <div class=${styles["lower-right-container"]}>
-                        <img src="../static/images/copyright.png" alt="">
+                        <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760197079/copyright_epnxey.png" alt="">
                         <span>2025 ShelfSeek, For educational purposes only.</span>
                 </div>
             </div>
-
         </div>
-
-    </footer>
     `;
 
     // NOTE: If need ng css design ng footer, kindly add the css to the component.module.css and uncomment this
