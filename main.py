@@ -48,13 +48,30 @@ import bookbrains
 # bookbrains.prepare_data(force_rebuild = True)
 
 # queries = [
-#     "Indie bestselling author of critically acclaimed",
-#     "Her books have been sold in over twenty foreign territories",
-#     "Book created by ann laing",
-#     "books about mythology",
-#     "show me books about fantasy"
+#     "who wrote The Housemaid",
+#     "summary of A Song to Drown Rivers"
+#     "romance novels with small town settings",
+#     "books by Adalyn Grace",
+#     "list business or motivation self-help books"
 # ]
 
 # for query in queries:
-#     bookbrains.identify(query, retrain = False)
-    
+#     labels, scores = bookbrains.classify(query, retrain = False)
+
+#     print(f"\nQuery: {query}")
+#     print(f"🧭 Predicted label: {labels}")
+#     print(f"📊 All scores: {scores}")
+
+
+# docs = [
+#     "geeks for geeks",
+#     "geeks",
+#     "r2j"
+# ]
+
+# vector = bookbrains.vectorizer(
+#     query = "i love geeks <3",
+#     documents = docs
+# )
+
+# print(vector)
