@@ -409,4 +409,67 @@ export default function Main(root) {
     `;
 
     root.className = styles['main'];
+
+    setTimeout(() => {
+        const elements = root.querySelectorAll(
+            `.${styles["book-container"]}, 
+            .${styles["author-container"]}, 
+            .${styles["find-elsewhere-container"]}, 
+            .${styles["related-findings-container"]}`
+        );
+
+        const bookImages = root.querySelectorAll(
+            `.${styles["book-container"]} img`
+        );
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(styles["show"]);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        elements.forEach(el => {
+            el.classList.add(styles["fadeElement"]);
+            observer.observe(el);
+        });
+
+        const bookObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(styles["bookImageVisible"]);
+                    bookObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        bookImages.forEach(img => {
+            img.classList.add(styles["bookImage"]);
+            bookObserver.observe(img);
+        });
+
+        const metaBullets = root.querySelectorAll(`.${styles["book-container"]} .${styles["bullet"]}`);
+
+        const bulletObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bullets = entry.target.querySelectorAll(`.${styles["bullet"]}`);
+                    bullets.forEach((b, i) => {
+                        setTimeout(() => {
+                            b.classList.add(styles["show"]);
+                        }, i * 120); 
+                    });
+                    bulletObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        root.querySelectorAll(`.${styles["book-container"]}`).forEach(container => {
+            bulletObserver.observe(container);
+        });
+
+    }, 100);
+
 }
