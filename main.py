@@ -47,14 +47,14 @@ import bookbrains
 
 # bookbrains.prepare_data(force_rebuild = True)
 
-queries = [
-    "Indie bestselling author of critically acclaimed",
-    "Her books have been sold in over twenty foreign territories",
-    "Book created by ann laing",
-    "books about mythology",
-    "show me books about fantasy"
-]
+# queries = [
+#     "Indie bestselling author of critically acclaimed",
+#     "Her books have been sold in over twenty foreign territories",
+#     "Book created by ann laing",
+#     "books about mythology",
+#     "show me books about fantasy"
+# ]
 
-for query in queries:
-    bookbrains.identify(query, retrain = False)
+# for query in queries:
+#     bookbrains.identify(query, retrain = False)
     
