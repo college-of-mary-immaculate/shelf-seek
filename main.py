@@ -25,7 +25,24 @@ import bookbrains
 # )
 
 
-tokenization = bookbrains.tokenize("UwUUUUU")
-leven = bookbrains.correct("Dawg")
+# tokenization = bookbrains.tokenize("UwUUUUU")
 
-print(tokenization)
+# print(tokenization)
+
+# bookbrains.prepare_data()
+
+# data = bookbrains.FileManager().load_txt(r"data\lexicon\words.txt")
+
+# leven = bookbrains.correct("buxy", choices=data)
+
+# sentence = "Busins Liyfe - Insiranal"
+
+# tokenized = bookbrains.tokenize(sentence)
+
+# suggested = ""
+
+# for token in tokenized:
+#     suggested += " "
+#     suggested += bookbrains.correct(token.lower(), choices=data)[0]
+
+bookbrains.prepare_data()

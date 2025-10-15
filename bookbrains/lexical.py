@@ -2,6 +2,8 @@ import re
 
 from typing import List
 
+from .utils import FileManager
+
 class Tokenization:
     """ Separates sentence in word by word """
 
@@ -99,6 +101,140 @@ class Correction:
 
         return word, best_score
 
+
+class Normalization:
+    def __init__(self):
+        pass
+
+
+    def normalize(self) -> str:
+        pass
+
+    def normalize_data(self) -> str:
+        pass
+
+class LexiconPreparation:
+    def __init__(self, file_manager: FileManager):
+        self.file_manager = file_manager
+
+        self.text_fields = []
+
+        self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
+        self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
+
+        self.books_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
+
+        self.tokenization = Tokenization()
+
+    
+    def prepare_word_frequency(self, force_rebuild: bool) -> None:
+        """ Creates a lexicon of all listed words base on scraped data """
+        if force_rebuild:
+            self.file_manager.delete_file(r"data\lexicon\words.txt")
+            self.file_manager.delete_file(r"data\lexicon\word_frequency.json")
+
+        if self.file_manager.is_file_exist(r"data\lexicon\words.txt") and self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json") and not force_rebuild:
+            print("[ BookBrains ] Data existed and already prepared for word frequency. ")
+            return
+
+        print("[ BookBrains ] Preparing word frequency ")
+
+        words = []
+        word_frequency = {}
+
+        for data in self.books_data["books"]:
+            book = data["book"]
+            author = data["author"]
+            publisher = data["publisher"]
+            genres = data["genres"]
+
+            # * BOOK DATA
+            tokenized_book_title = self.tokenization.tokenize((book["title"] or "").lower())
+            tokenized_book_description = self.tokenization.tokenize((book["description"] or "").lower())
+
+            # * AUTHOR DATA
+            author_name = (author["name"] or "").lower()
+            tokenized_author_about = self.tokenization.tokenize((author["about"] or "").lower())
+
+            # * PUBLISHER DATA
+            publisher_name = ((publisher or {}).get("name") or "").lower()
+
+            # * GENRES DATA
+            genres_tokens = []
+            for genre_data in genres:
+                genre_name = self.tokenization.tokenize((genre_data["name"] or "").lower())
+
+                if genre_name not in genres_tokens:
+                    genres_tokens.extend(genre_name)
+
+            
+            combined_tokens = (
+                tokenized_book_title +
+                tokenized_book_description +
+                tokenized_author_about +
+                [author_name] +
+                [publisher_name] +
+                genres_tokens
+            )
+
+            for token in combined_tokens:
+                if token in self.stop_words or token in self.punctuations:
+                    continue  
+
+                if token not in word_frequency:
+                    word_frequency[token] = 1
+                    words.append(token)
+
+                else:
+                    word_frequency[token] += 1
+        
+        if not self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json"):
+            self.file_manager.save_json(r"data\lexicon\word_frequency.json", word_frequency)
+
+        if not self.file_manager.is_file_exist(r"data\lexicon\words.txt"):
+            self.file_manager.save_txt(r"data\lexicon\words.txt", words)
+
+
+    def prepare_sentences(self, force_rebuild) -> None:
+        """ Creates a sentence corpus data base on scraped data """
+        if force_rebuild:
+            self.file_manager.delete_file(r"data\corpus\sentences.csv")
+
+        if self.file_manager.is_file_exist(r"data\corpus\sentences.csv") and not force_rebuild:
+            print("[ BookBrains ] Sentences already prepared.")
+            return
+        
+        print("[ BookBrains ] Preparing sentences.")
+
+        book_data = []
+
+        for data in self.books_data["books"]:
+            book = data["book"]
+            author = data["author"]
+
+            data1 = {
+                "book_id": book["_id"],
+                "type": "book",
+                "description": (book["description"] or "").replace("\n", " ")
+            }
+
+            if data1 not in book_data:
+                book_data.append(data1)
+
+            data2 = {
+                "book_id": book["_id"],
+                "type": "author",
+                "description": (author["about"] or "").replace("\n", " ")
+            }
+
+            if data2 not in book_data:
+                book_data.append(data2)
+        
+        self.file_manager.save_csv(r"data\corpus\sentences.csv", book_data)
+
+
+
+           
 
 if __name__ == "__main__":
     tokenize = Tokenization()
