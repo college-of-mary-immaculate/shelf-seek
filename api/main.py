@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from routers import greet, collections, auto_suggest
-from config import settings
-from models import Book
-from schemas import ShelfSeekModel, SearchRequest, SearchResult, SearchResponse
+from .routers import greet, collections, auto_suggest
+from .config import settings
+from .models import Book
+from .schemas import ShelfSeekModel, SearchRequest, SearchResult, SearchResponse
 
 app = FastAPI(
     title=settings.APP_NAME, 

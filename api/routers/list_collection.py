@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from db import db  # your MongoClient instance
+from ..db import db  # your MongoClient instance
 
 collections = APIRouter(prefix="/db", tags=["Database"])
 
