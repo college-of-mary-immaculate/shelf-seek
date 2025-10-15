@@ -4,6 +4,10 @@ import Result from "./pages/result.js";
 import NoResult from "./pages/noResult.js";
 import About from "./pages/about.js"
 
+import "./assets/css/cursor.css";
+import "./assets/js/cursor.js";
+
+
 const app = new SPA({
     root: document.getElementById('site'),
 });

@@ -99,14 +99,35 @@
 .navigation-icon img {
     width: 23px;
 }
+<<<<<<< HEAD
+
+.extra-button {
+  width: fit-content;
+  padding: 10px 20px;
+  border: 1px solid #073243;
+  border-radius: 50px;
+  font-size: 15px;
+  background-color: #FBF3E6;
+  margin-top: 15px;
+}
+=======
+>>>>>>> origin/main
 /* *         */
 
 /* * Main  */
 .main-content {
+<<<<<<< HEAD
+  min-width: 1088px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 55px;
+=======
     min-width: 1088px;
     height: auto;
     display: flex;
     justify-content: space-between;
+>>>>>>> origin/main
 }
 
 .main-content .left-container {
@@ -1325,6 +1346,9 @@
     align-items: center;
     gap: 9px;
 }
+<<<<<<< HEAD
+/* *         */
+=======
 
 /* Auto-suggest container */
 .auto-suggest-container {
@@ -1388,3 +1412,4 @@
     color: #073243;
     font-weight: 500;
 }
+>>>>>>> origin/main
