@@ -11,7 +11,7 @@ export default function Landing() {
     const { footer, header, main, nav} = LandingPageLayout(this.root);
     Footer(footer)
     Header(header);
-    Main(main);
-    Nav(nav)
+    Main(main, this.navigate);
+    Nav(nav);
 
 }

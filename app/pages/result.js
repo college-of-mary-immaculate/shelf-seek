@@ -5,7 +5,7 @@ import Footer from "../components/result/footer.js";
 import Main from "../components/result/main.js";
 
 export default function Result() {
-    const { nav, header, main, footer } = ResultPageLayout(this.root);
+    const { header, main, footer } = ResultPageLayout(this.root);
 
     Header(header);
     Main(main);

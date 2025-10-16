@@ -28,6 +28,28 @@ export default function Main(root) {
         </section>
     `;
 
+    const input = root.querySelector('#search-input');
+    const button = root.querySelector(`.${styles["search-bbtn"]}`);
+
+    const handleSearch = () => {
+        const query = input.value.trim();
+
+        if (query) {
+        window.app.pushRoute("/result");
+        } else {
+        window.app.pushRoute("/noresult");
+        }
+    };
+
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+        event.preventDefault();
+        handleSearch();
+        }
+    });
+
+    button.addEventListener("click", handleSearch);
+}
+
     // NOTE: If need ng css design ng main, kindly add the css to the component.module.css and uncomment this
     // root.className = styles['main']
-}
