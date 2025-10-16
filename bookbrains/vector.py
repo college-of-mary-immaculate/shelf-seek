@@ -1,4 +1,5 @@
 from .lexical import Tokenization
+from .utils import FileManager, PickleFileManager
 
 from math import log, sqrt
 from typing import Dict, List
@@ -86,5 +87,50 @@ class InverseDocumentFrequency:
 
         return self.idf
     
+
+class CorpusVectorPreparation:
+    def __init__(self, file_manager: FileManager):
+        self.file_manager = file_manager
+
+        self.vectorizer = Vectorizer()
+
+        self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
+
+        self.documents = []
+
+    
+    def prepare_document_vector(self, force_rebuild: bool) -> None:
+        """ Creates each document vectorized """
+        if not self.file_manager.is_file_exist(r"data\joined_data\barnesnobles.json"):
+            return
+
+        for book_data in self.joined_data["books"]:
+            book = book_data["book"]
+            author = book_data["author"]
+            genres = book_data["genres"]
+
+            author_name = author["name"]
+            author_about = author["about"]
+
+            book_title = book["title"]
+            book_description = book["description"]
+
+            genre_names = " ".join([genre["name"] for genre in genres])
+
+            document = " ".join(author_name, author_about, book_title, book_description, genre_names)
+
+            self.documents.append(document)
+        
+        
+        self.vectorizer.fit(self.documents)
+
+
+
+    def vectorize(self, document: str) -> List[float]:
+        """ Convers into vector """
+        pass
+
+
+        
 if __name__ == "__main__":
       pass
