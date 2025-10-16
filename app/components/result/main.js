@@ -413,7 +413,6 @@ export default function Main(root) {
     setTimeout(() => {
         const elements = root.querySelectorAll(
             `.${styles["book-container"]}, 
-            .${styles["author-container"]}, 
             .${styles["find-elsewhere-container"]}, 
             .${styles["related-findings-container"]}`
         );
@@ -421,6 +420,12 @@ export default function Main(root) {
         const bookImages = root.querySelectorAll(
             `.${styles["book-container"]} img`
         );
+
+        const authorHeaders = root.querySelectorAll(`.${styles["other-author-header-container"]}`);
+        const findElseWhere = root.querySelectorAll(`.${styles["find-elsewhere-header-container"]}`);
+        const otherRelated = root.querySelectorAll(`.${styles["related-findings-header-container"]}`);
+        
+        const authorContainers = root.querySelectorAll(`.${styles["author-container"]}`);
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -434,6 +439,47 @@ export default function Main(root) {
         elements.forEach(el => {
             el.classList.add(styles["fadeElement"]);
             observer.observe(el);
+        });
+
+        const headerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(styles["slideLeftVisible"]);
+                    headerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        authorHeaders.forEach(header => {
+            header.classList.add(styles["slideLeft"]);
+            headerObserver.observe(header);
+        });
+
+        findElseWhere.forEach(header => {
+            header.classList.add(styles["slideLeft"]);
+            headerObserver.observe(header);
+        });
+
+        otherRelated.forEach(header => {
+            header.classList.add(styles["slideLeft"]);
+            headerObserver.observe(header);
+        });
+
+        const authorObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(authorContainers).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add(styles["slideUpVisible"]);
+                    }, index * 150); 
+                    authorObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        authorContainers.forEach(author => {
+            author.classList.add(styles["slideUp"]);
+            authorObserver.observe(author);
         });
 
         const bookObserver = new IntersectionObserver((entries) => {
@@ -450,26 +496,42 @@ export default function Main(root) {
             bookObserver.observe(img);
         });
 
-        const metaBullets = root.querySelectorAll(`.${styles["book-container"]} .${styles["bullet"]}`);
+        const findElsewhereItems = root.querySelectorAll(`.${styles["find-elsewhere-list-container"]} > div`);
 
-        const bulletObserver = new IntersectionObserver((entries) => {
+        const findElsewhereObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const bullets = entry.target.querySelectorAll(`.${styles["bullet"]}`);
-                    bullets.forEach((b, i) => {
-                        setTimeout(() => {
-                            b.classList.add(styles["show"]);
-                        }, i * 120); 
-                    });
-                    bulletObserver.unobserve(entry.target);
+                    const index = Array.from(findElsewhereItems).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add(styles["slideLeftVisible"]);
+                    }, index * 200); 
+                    findElsewhereObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.1 });
 
-        root.querySelectorAll(`.${styles["book-container"]}`).forEach(container => {
-            bulletObserver.observe(container);
+        findElsewhereItems.forEach(item => {
+            item.classList.add(styles["slideLeft"]);
+            findElsewhereObserver.observe(item);
         });
 
-    }, 100);
+        const relatedFindItems = root.querySelectorAll(`.${styles["related-findings-list-container"]} > div`);
 
+        const relatedFindObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(relatedFindItems).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add(styles["slideLeftVisible"]);
+                    }, index * 200); 
+                    relatedFindObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        relatedFindItems.forEach(item => {
+            item.classList.add(styles["slideLeft"]);
+            relatedFindObserver.observe(item);
+        });
+    }, 100);
 }

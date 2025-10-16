@@ -67,7 +67,6 @@ export default function Header(root) {
     </div>
   `;
 
-  // Auto-suggest functionality
   const searchInput = document.getElementById('header-searchbar-input');
   const autoSuggest = document.getElementById('auto-suggest');
 
@@ -80,11 +79,39 @@ export default function Header(root) {
       }
     });
 
-    // Close auto-suggest when clicking outside
     document.addEventListener('click', (e) => {
       if (!searchInput.contains(e.target) && !autoSuggest.contains(e.target)) {
         autoSuggest.classList.remove(styles['show']);
       }
     });
   }
+
+  const navContainer = document.querySelector(`.${styles["header-navigations-container"]}`);
+  const navButtons = navContainer.querySelectorAll(`div:not(.${styles["navigation-icon"]})`);
+  const circle = navContainer; 
+
+  function moveCircle(target) {
+    const rect = target.getBoundingClientRect();
+    const containerRect = navContainer.getBoundingClientRect();
+    const offset = rect.left - containerRect.left + rect.width / 2 - 35; 
+    navContainer.style.setProperty("--circle-left", `${offset}px`);
+    navContainer.classList.add("active");
+    setTimeout(() => navContainer.classList.remove("active"), 400);
+  }
+
+  navButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      navButtons.forEach((b) => {
+        b.classList.remove(styles["selected"]);
+        b.classList.add(styles["not-selected"]);
+      });
+      btn.classList.add(styles["selected"]);
+      btn.classList.remove(styles["not-selected"]);
+      moveCircle(btn);
+    });
+  });
+
+  const initialSelected = navContainer.querySelector(`.${styles["selected"]}`);
+  if (initialSelected) moveCircle(initialSelected);
+
 }
