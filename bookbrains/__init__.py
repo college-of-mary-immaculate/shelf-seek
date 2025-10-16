@@ -12,17 +12,16 @@ Package By:
 `sudonotrey`
 """
 
-from .vector import Vectorizer
 from .classifier import NaiveBayes, CorpusPreparation
 from .utils import FileManager, Join, PickleFileManager
+from .vector import Vectorizer, CorpusVectorPreparation
 from .ngrams import Unigram, Bigram, Trigram, InterpolatedNigram
-from .lexical import Tokenization, Correction, LexiconPreparation
+from .lexical import Tokenization, Correction, LexiconPreparation, Normalization
 
 from typing import List, Callable, Dict
 
 # * INSTANCIATE ONLY ONCE
 _instances = {}
-
 
 def _create_instance(class_object: Callable, *args, **kwargs) -> object:
     """ Lazily create and cache class instances. Prevents creating multiple instances of the same class. """
@@ -81,7 +80,7 @@ def classify(sentence: str, retrain: bool = False) -> Dict:
 
 def vectorizer(query: str, documents: List[str] | str = None) -> Dict[str, float]:
     """
-    ### Vector 
+    ### Vector
      
     Converts your document into meaningful language for computers 
     """
@@ -101,6 +100,15 @@ def vectorizer(query: str, documents: List[str] | str = None) -> Dict[str, float
     similarities.sort(key=lambda x: x[1], reverse=True)
 
     return dict(similarities)
+
+
+def normalize(sentence: str) -> str:
+    """ cleans sentence into just plain text """
+    file_manager: FileManager = _create_instance(FileManager)
+
+    normalizer: Normalization = _create_instance(Normalization, file_manager)
+
+    return normalizer.normalize(sentence)
 
 
 def prepare_data(force_rebuild: bool = False) -> None:
@@ -124,6 +132,11 @@ def prepare_data(force_rebuild: bool = False) -> None:
     lexicon_preparation.prepare_sentences(force_rebuild)
 
     naive_bayes_preparation.build_training_data(force_rebuild)
+
+    vector_preparation: CorpusVectorPreparation = _create_instance(CorpusVectorPreparation, file_manager)
+
+    vector_preparation.prepare_document_vector(force_rebuild)
+
 
     if force_rebuild:
         print("\n[ BookBrains ] Prepared Data Rebuilded")
