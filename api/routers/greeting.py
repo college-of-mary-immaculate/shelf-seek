@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from config import settings
+from ..config import settings
 
 greet = APIRouter(prefix="/greet", tags=["greeting"])
 

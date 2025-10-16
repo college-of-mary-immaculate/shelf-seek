@@ -97,14 +97,25 @@
 .navigation-icon img {
     width: 23px;
 }
+
+.extra-button {
+  width: fit-content;
+  padding: 10px 20px;
+  border: 1px solid #073243;
+  border-radius: 50px;
+  font-size: 15px;
+  background-color: #FBF3E6;
+  margin-top: 15px;
+}
 /* *         */
 
 /* * Main  */
 .main-content {
-    min-width: 1088px;
-    height: auto;
-    display: flex;
-    justify-content: space-between;
+  min-width: 1088px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 55px;
 }
 
 .main-content .left-container {
@@ -1041,6 +1052,7 @@
     align-items: center;
     gap: 9px;
 }
+/* *         */
 
 /* * --------------- */
 .auto-suggest-container {
@@ -1150,3 +1162,4 @@
     opacity: 1;
     transform: translateY(0);
 }
+

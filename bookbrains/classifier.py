@@ -1,22 +1,127 @@
 import re
-
+import random
+from .lexical import Tokenization
+from .ngrams import InterpolatedNigram
 from .utils import PickleFileManager, FileManager
 
+from math import log
 from typing import List, Dict
+from collections import defaultdict, Counter
 
 class NaiveBayes:
     """ Can identify sentence intention """
-    def __init__(self, pickle_manager: PickleFileManager):
+    def __init__(self, pickle_manager: PickleFileManager, tokenization: Tokenization, file_manager: FileManager):
+
+        self.tokenization = tokenization
+
+        self.file_manager = file_manager
         self.pickle_manager = pickle_manager
 
-    def identify(self, text: str) -> Dict[str, str]:
-        pass
+        self.datasets = self.pickle_manager.pickle_load_processed(r"data\classification\label.pkl")
 
-    def train(self) -> None:
-        pass
+        self.class_models: Dict[str, InterpolatedNigram] = {}
+        self.class_priors: Dict[str, float] = {}
 
-    def predict(self) -> None:
-        pass
+        self.need_train = True
+
+    def load_models(self) -> None:
+        labels = ['book_title_search', 'book_content_search',
+                  'author_name_search', 'author_content_search',
+                  'genre_name_search', 'publisher_name_search']
+    
+        for label in labels:
+            model_path = fr"data\classification\models\{label}_model.pkl"
+            if self.file_manager.is_file_exist(model_path):
+                self.class_models[label] = self.pickle_manager.pickle_load_processed(model_path)
+                self.need_train = False
+            else:
+                return
+
+        if self.file_manager.is_file_exist(r"data\classification\models\priors.pkl"):
+            self.class_priors = self.pickle_manager.pickle_load_processed(r"data\classification\models\priors.pkl")
+            self.need_train = False
+        else:
+            return
+
+    def train(self, retrain: bool) -> Dict:
+        if not retrain:
+            self.load_models()
+
+        if not self.need_train:
+            return 
+        
+        grouped = defaultdict(list)
+        for text, label in self.datasets:
+            grouped[label].append(text)
+
+        max_len = max(len(samples) for samples in grouped.values())
+        for label, samples in grouped.items():
+            oversampled = samples.copy()
+            while len(oversampled) < max_len:
+                oversampled.append(random.choice(samples))
+            grouped[label] = oversampled  # replace with balanced
+
+        total_samples = sum(len(samples) for samples in grouped.values())
+
+        for label, samples in grouped.items():
+            print(f"🧠 Training model for '{label}' with {len(samples)} samples...")
+
+            model = InterpolatedNigram()
+
+            tokens = []
+            for sentence in samples:
+                tokens.extend(self.tokenization.tokenize(sentence))
+
+            model.train(tokens)
+
+            self.class_models[label] = model
+
+            alpha = 1.0 
+            num_labels = len(grouped)
+            self.class_priors[label] = (len(samples) + alpha) / (total_samples + alpha * num_labels)
+
+            self.pickle_manager.pickle_save_processed(fr"data\classification\models\{label}_model.pkl", model)
+
+        self.pickle_manager.pickle_save_processed(fr"data\classification\models\priors.pkl", self.class_priors)
+
+        return {
+            "trained_labels": list(grouped.keys()),
+            "total_samples": total_samples,
+            "priors": self.class_priors,
+        }
+
+
+    def predict(self, query) -> None:
+        """ Predict the most likely label for a given query. """
+        tokens = self.tokenization.tokenize(query.lower())
+
+        scores = {}
+
+        for label, model in self.class_models.items():
+            prior = self.class_priors.get(label, 1e-9)
+            log_prob = log(prior)
+
+            for i, word in enumerate(tokens):
+                probability = model.get_probability(word)
+                    
+                log_prob += log(probability + 1e-9)
+
+            scores[label] = log_prob
+
+        sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+        top_label, top_score = sorted_scores[0]
+        second_label, second_score = sorted_scores[1]
+        confidence_gap = abs(top_score - second_score)
+
+        if confidence_gap < 3.0:
+            top_labels = [top_label, second_label]
+        else:
+            top_labels = [top_label]
+
+        return top_labels, dict(sorted_scores)
+
+
 
     def classify(self) -> None:
         pass
@@ -79,7 +184,7 @@ class CorpusPreparation:
 
             self._get_book_labels(book)
             self._get_author_labels(author)
-            self._get_publisher_labels(publisher)
+            # self._get_publisher_labels(publisher)
             self._get_genre_labels(genres)
 
         # print(len(self.training_data))
@@ -106,6 +211,10 @@ class CorpusPreparation:
         
         if normalized_name[0] and normalized_name not in self.training_data:
             self.training_data.append(normalized_name)
+            self.training_data.append((f"books by {self._normalize_text(author["name"])}", "author_name_search"))
+            self.training_data.append((f"wrote by {self._normalize_text(author["name"])}", "author_name_search"))
+            self.training_data.append((f"written by {self._normalize_text(author["name"])}", "author_name_search"))
+
 
         if normalized_description[0] and normalized_description not in self.training_data:
             self.training_data.append(normalized_description)
@@ -118,8 +227,9 @@ class CorpusPreparation:
 
             if normalized_name[0] and normalized_name not in self.training_data:
                 self.training_data.append(normalized_name)
+                self.training_data.append((f"published by {self._normalize_text(publisher["name"])}", "publisher_name_search"))
+                
 
-    
     def _get_genre_labels(self, genres: List[Dict[str, str]]) -> None:
         """ identifies genres labels """
         for genre in genres:
@@ -134,6 +244,9 @@ class CorpusPreparation:
                 data = (self._normalize_text(g), "genre_name_search")
                 if g and data not in self.training_data and data[0]:
                     self.training_data.append(data)
+                    self.training_data.append((f"books about {self._normalize_text(g)}", "genre_name_search"))
+                   
+
 
 
 if __name__ == "__main__":

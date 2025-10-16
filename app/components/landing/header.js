@@ -6,9 +6,8 @@ export default function Header(root) {
             <div class=${styles["header-container"]}>
                 <div class=${styles["logo-box"]}>
                     <picture>
-                        <source media="(min-width: 770px)" srcset="/img/desktop-logo.png" />
-                        <source media="(max-width: 1024px)" srcset="/img/mobile-logo.png" />
-                        <img src="/img/desktop-logo.png" alt="ShelfSeek Logo" />
+                        <source media="(min-width: 969px)" srcset="/img/desktop-logo.png" />
+                        <img src="/img/mobile-logo.png" alt="ShelfSeek Logo" />
                     </picture>
                 </div>
 
