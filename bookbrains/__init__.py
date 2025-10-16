@@ -12,13 +12,14 @@ Package By:
 `sudonotrey`
 """
 
+from .db import MongoManager
 from .classifier import NaiveBayes, CorpusPreparation
 from .utils import FileManager, Join, PickleFileManager
 from .vector import Vectorizer, CorpusVectorPreparation
 from .ngrams import Unigram, Bigram, Trigram, InterpolatedNigram
 from .lexical import Tokenization, Correction, LexiconPreparation, Normalization
 
-from typing import List, Callable, Dict
+from typing import List, Callable, Dict, Any
 
 # * INSTANCIATE ONLY ONCE
 _instances = {}
@@ -102,21 +103,22 @@ def vectorizer(query: str, documents: List[str] | str = None) -> Dict[str, float
     return dict(similarities)
 
 
-def normalize(sentence: str) -> str:
+def normalize(sentence: str, normalize_num: bool = True) -> str:
     """ cleans sentence into just plain text """
     file_manager: FileManager = _create_instance(FileManager)
 
     normalizer: Normalization = _create_instance(Normalization, file_manager)
 
-    return normalizer.normalize(sentence)
+    return normalizer.normalize(sentence, normalize_num)
 
 
-def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = False) -> None:
+def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = True, vectorize: bool = True, database_insert: bool = False) -> None:
     """
     ### Corpus and Lexicon Creation
      
     Prepares data this may take a while. use this if your scraped data have gone modifed 
     """
+
     file_manager: FileManager = _create_instance(FileManager)
     pickle_manager: PickleFileManager = _create_instance(PickleFileManager)
 
@@ -133,15 +135,68 @@ def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = False)
 
     naive_bayes_preparation.build_training_data(force_rebuild)
 
-    vector_preparation: CorpusVectorPreparation = _create_instance(CorpusVectorPreparation, file_manager)
+    if vectorize:
+        normalizer: Normalization = _create_instance(Normalization, file_manager)
+        vector_preparation: CorpusVectorPreparation = _create_instance(CorpusVectorPreparation, file_manager, normalizer)
 
-    vector_preparation.prepare_document_vector(force_rebuild)
+        vector_preparation.prepare_document_vector(force_rebuild)
 
+    if database_insert:
+        tokenizer: Tokenization = _create_instance(Tokenization)
+
+        mongo_manager: MongoManager = _create_instance(MongoManager, tokenizer)
+
+        data = file_manager.load_json(r"data\joined_data\barnesnobles.json")
+
+        mongo_manager.insert_batch(data["books"], force_rebuild)
+
+        mongo_manager.create_text_index()
+
+        print(f"Available collections: {mongo_manager.db.list_collection_names()}")
 
     if force_rebuild:
         print("\n[ BookBrains ] Prepared Data Rebuilded")
 
     print("\n[ BookBrains ] Data prepared nice and smoothly. ")
+
+
+def get_database_document(query: str) -> List[Dict[str, Any]]:
+    """ Query on database to find some result documents """
+    tokenizer: Tokenization = _create_instance(Tokenization)
+
+    mongo_manager: MongoManager = _create_instance(MongoManager, tokenizer)
+
+    result: List = mongo_manager.get_result(query)
+
+    return result
+
+
+def check_database_status() -> None:
+    """ Check if database is working """
+    try:
+        mongo_manager: MongoManager = _create_instance(MongoManager)
+
+        client = mongo_manager.client
+        database = mongo_manager.db
+
+        client.admin.command('ping')
+
+        print()
+        print("-"*60)
+        print("Welcome to MongoDB 🍃")
+        print("-"*60)
+        print("[ BookBrains ] MongoDB connection successful! 🥳🎉")
+
+        print("[ BookBrains ] Connected to database:", database.name)
+
+        print("[ BookBrains ] Collections:", database.list_collection_names())
+        print("-"*60)
+        print("from Bookbrains")
+        print("-"*60)
+        print()
+    except Exception as e:
+        print("[ BookBrains ] MongoDB connection failed! 😐🔴")
+        print("Error:", e)
 
 
 __all__ = [
