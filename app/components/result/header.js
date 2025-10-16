@@ -112,7 +112,7 @@ export default function Header(root) {
 
       setTimeout(() => {
         starButton.classList.remove("twinkle-once");
-      }, 3000);
+      }, 2000);
     });
   }
 
