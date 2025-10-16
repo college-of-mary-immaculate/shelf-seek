@@ -34,6 +34,31 @@ export default function Header(root) {
             </div>
         </div>
     `;
+    const input = root.querySelector('#header-searchbar-input');
+    const button = root.querySelector(`.${styles["searchbar-button-container"]}`);
+
+    if (!input || !button) {
+        console.error("NoResult Header: search input or button not found.");
+        return;
+    }
+
+    const handleSearch = () => {
+        const query = input.value.trim();
+        if (query) {
+            window.app.pushRoute('/result');
+        } else {
+            console.warn("Empty search — staying on noresult page.");
+        }
+    };
+
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleSearch();
+        }
+    });
+
+    button.addEventListener('click', handleSearch);
 
     // NOTE: If need ng css design ng footer, kindly add the css to the component.module.css and uncomment this
     // root.className = styles['footer']
