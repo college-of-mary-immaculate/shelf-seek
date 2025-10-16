@@ -523,7 +523,7 @@ export default function Main(root) {
                     const index = Array.from(relatedFindItems).indexOf(entry.target);
                     setTimeout(() => {
                         entry.target.classList.add(styles["slideLeftVisible"]);
-                    }, index * 200); 
+                    }, index * 80); 
                     relatedFindObserver.unobserve(entry.target);
                 }
             });
