@@ -1,4 +1,4 @@
-from .lexical import Tokenization
+from .lexical import Tokenization, Normalization
 from .utils import FileManager, PickleFileManager
 
 from math import log, sqrt
@@ -89,7 +89,8 @@ class InverseDocumentFrequency:
     
 
 class CorpusVectorPreparation:
-    def __init__(self, file_manager: FileManager):
+    def __init__(self, file_manager: FileManager, normalization: Normalization):
+        self.normalization = normalization
         self.file_manager = file_manager
 
         self.vectorizer = Vectorizer()
@@ -103,34 +104,38 @@ class CorpusVectorPreparation:
         """ Creates each document vectorized """
         if not self.file_manager.is_file_exist(r"data\joined_data\barnesnobles.json"):
             return
+        
+        print("[ BookBrains ] Joined Data vectorized and normalized. ")
 
         for book_data in self.joined_data["books"]:
             book = book_data["book"]
             author = book_data["author"]
             genres = book_data["genres"]
 
-            author_name = author["name"]
-            author_about = author["about"]
+            author_name = self.normalization.normalize(author["name"])
+            author_about = self.normalization.normalize(author["about"])
 
-            book_title = book["title"]
-            book_description = book["description"]
+            book_title = self.normalization.normalize(book["title"])
+            book_description = self.normalization.normalize(book["description"])
 
-            genre_names = " ".join([genre["name"] for genre in genres])
+            genre_names = " ".join([self.normalization.normalize_genre(genre["name"]) for genre in genres])
 
-            document = " ".join(author_name, author_about, book_title, book_description, genre_names)
+            document = " ".join([author_name, author_about, book_title, book_description, genre_names])
 
             self.documents.append(document)
         
-        
         self.vectorizer.fit(self.documents)
 
+        for book_data, doc in zip(self.joined_data["books"], self.documents):
+            vector = self.vectorizer.transform(document = doc)
 
+            tokens = self.vectorizer.tokenization.tokenize(doc)
 
-    def vectorize(self, document: str) -> List[float]:
-        """ Convers into vector """
-        pass
+            book_data["vector"] = vector
 
+            book_data["tokens"] = list(set(tokens))
 
+        self.file_manager.save_json(r"data\joined_data\barnesnobles.json", self.joined_data)
         
 if __name__ == "__main__":
       pass
