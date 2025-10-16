@@ -1,3 +1,4 @@
+import time
 import snippy
 import bookbrains
 
@@ -45,7 +46,14 @@ import bookbrains
 #     suggested += " "
 #     suggested += bookbrains.correct(token.lower(), choices=data)[0]
 
-# bookbrains.prepare_data(force_rebuild = True)
+# bookbrains.prepare_data(
+#     force_rebuild =  True,
+#     remove_primary_keys = True,
+#     vectorize = True,
+#     database_insert = True
+# )
+
+# bookbrains.database_status()
 
 # queries = [
 #     "funny zombie story"
@@ -72,6 +80,18 @@ import bookbrains
 
 # print(vector)
 
-sentence = bookbrains.normalize("A REESE'S BOOK CLUB PICKA #1 New York Times bestseller, Wall Street Journal Best Book of the Year, and soon to be a major motion picture, this unforgettable novel of love and strength in the face of war has enthralled a generation. With courage, grace, and powerful insight, bestselling author Kristin Hannah captures the epic panorama of World War II and illuminates an intimate part of history seldom seen: the women's war. The Nightingale tells the stories of two sisters, separated by years and experience, by ideals, passion and circumstance, each embarking on her own dangerous path toward survival, love, and freedom in German-occupied, war-torn France—a heartbreakingly beautiful novel that celebrates the resilience of the human spirit and the durability of women. It is a novel for everyone, a novel for a lifetime.Goodreads Best Historical Novel of the Year • People's Choice Favorite Fiction Winner • #1 Indie Next Selection • A Buzzfeed and The Week Best Book of the Year")
+# normalized_sentence = bookbrains.normalize(
+#     sentence = "A REESE'S BOOK CLUB PICKA #1 New York Times bestseller, Wall Street Journal Best Book of the Year, Best Historical Novel of the Year • People's Choice Favorite Fiction Winner • #1 Indie Next Selection • A Buzzfeed and The Week Best Book of the Year",
+#     normalize_num = True
+# )
 
-print(sentence)
+# print(normalized_sentence)
+
+query = "ann patchett"
+
+print("Query: ", query)
+
+start = time.time()
+results = bookbrains.get_database_document(query)
+
+print("Time:", round(time.time() - start, 3), "s")
