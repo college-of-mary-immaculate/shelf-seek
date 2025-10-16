@@ -111,7 +111,7 @@ def normalize(sentence: str) -> str:
     return normalizer.normalize(sentence)
 
 
-def prepare_data(force_rebuild: bool = False) -> None:
+def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = False) -> None:
     """
     ### Corpus and Lexicon Creation
      
@@ -121,7 +121,7 @@ def prepare_data(force_rebuild: bool = False) -> None:
     pickle_manager: PickleFileManager = _create_instance(PickleFileManager)
 
     join: Join = _create_instance(Join, file_manager)
-    join.join_data(force_rebuild)
+    join.join_data(force_rebuild, remove_primary_keys)
 
     lexicon_preparation: LexiconPreparation = _create_instance(LexiconPreparation, file_manager)
 
