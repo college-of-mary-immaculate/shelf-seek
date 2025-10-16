@@ -103,15 +103,45 @@ class Correction:
 
 
 class Normalization:
-    def __init__(self):
-        pass
+    def __init__(self, file_manager: FileManager):
+        self.file_manager = file_manager
+
+        self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
 
 
-    def normalize(self) -> str:
-        pass
+    def normalize(self, sentence) -> str:
+        """ Normalize sentence into just plain text """
 
-    def normalize_data(self) -> str:
-        pass
+        if not sentence:
+            return ""
+
+        sentence = sentence.lower()
+
+        for punc in self.punctuations:
+            sentence = sentence.replace(punc, " ")
+
+        sentence = re.sub(r"[^a-z0-9\s]", " ", sentence)
+
+        sentence = re.sub(r"\s+", " ", sentence).strip()
+
+        return sentence
+
+
+    def normalize_genre(self, sentence) -> str:
+        """ Separates two genres into one genre """
+        if not text:
+            return None
+
+        text = text.replace("&", "and")
+
+        # * REMOVES EMOJIS AND SPECIAL CHARACTERS
+        text = re.sub(r"[^a-zA-Z0-9\s]", "", text)
+
+        # * REPLACE DOUBLE SPACES WITH SINGEL SPACES
+        text = re.sub(r"\s+", " ", text)
+
+        return text.strip().lower()
+
 
 class LexiconPreparation:
     def __init__(self, file_manager: FileManager):
@@ -213,7 +243,6 @@ class LexiconPreparation:
             author = data["author"]
 
             data1 = {
-                "book_id": book["_id"],
                 "type": "book",
                 "description": (book["description"] or "").replace("\n", " ")
             }
@@ -222,7 +251,6 @@ class LexiconPreparation:
                 book_data.append(data1)
 
             data2 = {
-                "book_id": book["_id"],
                 "type": "author",
                 "description": (author["about"] or "").replace("\n", " ")
             }
