@@ -107,9 +107,10 @@ class Normalization:
         self.file_manager = file_manager
 
         self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
+        self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
 
 
-    def normalize(self, sentence) -> str:
+    def normalize(self, sentence, normalize_num: bool = True, remove_stop_words: bool = True) -> str:
         """ Normalize sentence into just plain text """
 
         if not sentence:
@@ -124,23 +125,31 @@ class Normalization:
 
         sentence = re.sub(r"\s+", " ", sentence).strip()
 
+        if normalize_num:
+            sentence = re.sub(r"\d+", "<NUM>", sentence)
+
+        if remove_stop_words:
+            words = sentence.split()
+            words = [w for w in words if w not in self.stop_words]
+            sentence = " ".join(words)
+
         return sentence
 
 
-    def normalize_genre(self, sentence) -> str:
+    def normalize_genre(self, sentence: str) -> str:
         """ Separates two genres into one genre """
-        if not text:
+        if not sentence:
             return None
 
-        text = text.replace("&", "and")
+        sentence = sentence.replace("&", "and")
 
         # * REMOVES EMOJIS AND SPECIAL CHARACTERS
-        text = re.sub(r"[^a-zA-Z0-9\s]", "", text)
+        sentence = re.sub(r"[^a-zA-Z0-9\s]", "", sentence)
 
         # * REPLACE DOUBLE SPACES WITH SINGEL SPACES
-        text = re.sub(r"\s+", " ", text)
+        sentence = re.sub(r"\s+", " ", sentence)
 
-        return text.strip().lower()
+        return sentence.strip().lower()
 
 
 class LexiconPreparation:
