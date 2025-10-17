@@ -14,7 +14,7 @@ export default function NoResult() {
     Header(header)
     Main(main)
     Footer(footer)
-    // Nav(nav)
+    Nav(nav)
 
     // const { footer, header, main } = LandingPageLayout(this.root);
 
