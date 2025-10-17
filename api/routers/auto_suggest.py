@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Query
-from bookbrains import InterpolatedNigram
+from bookbrains import InterpolatedNigram, tokenize
 
 auto_suggest = APIRouter(prefix="/suggestions", tags=["autosuggest"])
 
@@ -19,7 +19,7 @@ def suggest(query: str = Query(..., min_length=1)):
         }
 
     # Tokenize the query
-    tokens = query.lower().split()
+    tokens = tokenize(query)
 
     # Generate top-k predictions
     candidates = model.get_candidates(tokens, top_k=5)
