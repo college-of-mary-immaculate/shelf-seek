@@ -1,29 +1,31 @@
 from fastapi import APIRouter, Query
-from bookbrains import InterpolatedNigram, tokenize
+import bookbrains
 
-auto_suggest = APIRouter(prefix="/suggestions", tags=["autosuggest"])
+auto_suggest = APIRouter(prefix="/suggestions", tags=["Auto Suggest"])
 
-# Load the trained model once
-model = InterpolatedNigram.load("data/processed/interpolated_ngram.pkl")
+model = bookbrains.InterpolatedNigram.load("data/processed/interpolated_ngram.pkl")
 
 @auto_suggest.get("/suggest")
-def suggest(query: str = Query(..., min_length=1)):
-    """
-    Auto-suggestion endpoint.
-    Example: GET /suggestions/suggest?query=fiction
-    """
+def suggest(query: str = Query(..., min_length=3)):
     if model is None:
-        return {
-            "success": False,
-            "message": "Model not loaded or missing"
-        }
+        return {"success": False, "message": "Model not loaded or missing"}
 
-    # Tokenize the query
-    tokens = tokenize(query)
+    normalized_qry = bookbrains.normalize(query)
+    tokens = bookbrains.tokenizer(normalized_qry)
+    candidates = model.get_candidates(tokens, top_k=9)
 
-    # Generate top-k predictions
-    candidates = model.get_candidates(tokens, top_k=5)
-    suggestions = [w for w, _ in candidates]
+    suggestions = []
+    for word, _ in candidates:
+        if not word.isalpha():
+            continue
+
+        # 🔥 Get related books directly from the model
+        books = model.word_to_books.get(word, [])
+        if books:
+            suggestions.append({
+                "next_word": word,
+                "books": books[:1]
+            })
 
     return {
         "success": True,
