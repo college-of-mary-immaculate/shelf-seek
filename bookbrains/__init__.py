@@ -43,7 +43,7 @@ def tokenizer(sentence: str) -> List[str]:
     return tokenization.tokenize(sentence)
 
 
-def correct(word: str, choices: List, threshold: float = 0.55) -> str:
+def levenshtein(word: str, choices: List, threshold: float = 0.55) -> str:
     """
     ### Lexicon Auto Correction
 
@@ -79,7 +79,7 @@ def classify(sentence: str, retrain: bool = False) -> Tuple:
     return prediction
 
 
-def vectorizer(query: str, documents: List[str] | str = None) -> Dict[str, float]:
+def vectorizer(query: str = None, documents: List[str] | str = None, similarity: bool = True, document_vectors: List[Dict[str, float]] = None, existing_model: bool = False) -> List[Dict[str, float]] | Vectorizer:
     """
     ### Vector
      
@@ -87,21 +87,37 @@ def vectorizer(query: str, documents: List[str] | str = None) -> Dict[str, float
     """
     vectorize: Vectorizer = _create_instance(Vectorizer)
 
-    vectorize.fit(documents)
+    if not query and not documents:
+        return Vectorizer
+    
+    if not document_vectors:
+        vectorize.fit(documents)
 
-    query_vector = vectorize.transform(query)
+        document_vectors = [vectorize.transform(doc) for doc in documents]
 
-    document_vectors = [vectorize.transform(doc) for doc in documents]
+        if not similarity:
+            return document_vectors
+        
+    if similarity and document_vectors:
+        if not existing_model:
+            query_vector = vectorize.transform(query)
+        else:
+            pickle_manager: PickleFileManager = _create_instance(PickleFileManager)
+            precomputed_vectorizer: Vectorizer = pickle_manager.pickle_load_processed(r"data\vector\vector.pkl")
 
-    similarities = []
-    for document, vector in zip(documents, document_vectors):
-        similarity = vectorize.cosine_similarity(query_vector, vector)
-        similarities.append((document, similarity))
+            query_vector = precomputed_vectorizer.transform(query)
 
-    similarities.sort(key=lambda x: x[1], reverse=True)
+        similarities = []
+        for document, vector in zip(documents, document_vectors):
+            similarity = vectorize.cosine_similarity(query_vector, vector)
+            similarities.append((document, similarity))
 
-    return dict(similarities)
+        similarities.sort(key=lambda x: x[1], reverse=True)
 
+        return similarities
+    
+    return Vectorizer
+    
 
 def normalize(sentence: str, normalize_num: bool = True) -> str:
     """ 
