@@ -1,6 +1,7 @@
-from .greeting import router
-from .list_collection import router as collection_router
+from .greeting import greet
+from .list_collection import collections
+from .auto_suggest import auto_suggest
 
-__all__ = ["router", "collection_router"]
+__all__ = ["greet", "collections", "auto_suggest"]
 
 

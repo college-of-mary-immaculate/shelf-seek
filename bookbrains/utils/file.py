@@ -18,7 +18,7 @@ class FileManager:
         return os.path.exists(path)
 
 
-    def create_file(self, file_name: str) -> bool:
+    def create_file(self, file_name: str, default_data: Any = {}) -> bool:
         """ Creates a specified file with its file name and designated directrory """
         os.makedirs(os.path.dirname(file_name), exist_ok=True)
 
@@ -26,23 +26,26 @@ class FileManager:
             return False
 
         with open(file_name, "w", encoding="utf-8") as f:
-            return True
+            if isinstance(default_data, (dict, list)):
+                json.dump(default_data, f, ensure_ascii=False, indent=4)
+            else:
+                f.write(str(default_data))
 
+        return True
+    
 
-    def create_folder(self, directory_name: str) -> bool:
-        """ Creates a folder by its given name. """
-        if not os.path.exists(directory_name):
-            os.makedirs(directory_name, exist_ok=True)
+    def delete_file(self, file_name: str) -> bool:
+        """ Deletes a file if it exists. """
+        if self.is_file_exist(file_name):
+            os.remove(file_name)
             return True
         return False
 
 
     # * -------------------------------------------- JSON FILES --------------------------------------------
-    def load_json(self, file_name: str) -> List | Dict | Any:
+    def load_json(self, file_name: str, default_data: Any = {}) -> Any:
         """ Loads data on the specified json file name. """
-        if not self.is_file_exist(file_name):
-            print("File not found: ", file_name)
-            return
+        self.create_file(file_name, default_data)
         
         with open(fr"{file_name}", "r", encoding="utf-8") as file:
             return json.load(file)
@@ -75,7 +78,7 @@ class FileManager:
         new_rows = [row for row in data if tuple(sorted(row.items())) not in existing_set]
 
         if not new_rows:
-            print("[ File 🍏 ] Data already saved. ")
+            print("[ BookBrains ] File Data already saved. ")
             return
 
         with open(file_name, 'a', newline='', encoding="utf-8") as file:
@@ -96,6 +99,28 @@ class FileManager:
         with open(file_name, 'r', newline='', encoding='utf-8') as file:
             reader = csv.DictReader(file)
             return list(reader)
+    # * -------------------------------------------- ---------  --------------------------------------------
+
+
+    # * -------------------------------------------- TXT FILES --------------------------------------------
+    def load_txt(self, file_path: str, auto_create: bool = False, default_data: Any = None) -> List:
+        """ Loads data on the specified txt file name. """
+        if auto_create:
+            self.create_file(file_path)
+
+        with open(file_path, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f if line.strip()]
+
+        return lines
+    
+
+    def save_txt(self, file_path: str, data: List[str], auto_create: bool = False, default_data: Any = None) -> List:
+        """ Saves data on the specified txt file name. """
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.writelines(f"{line}\n" for line in data)
+
+        return data
+
     # * -------------------------------------------- ---------  --------------------------------------------
 
 

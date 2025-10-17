@@ -1,15 +1,17 @@
+import styles from './component.module.css';
+
 export default function ResultPageLayout(root) {
     root.innerHTML = `
-
-        <header id="header"></header>
-        <main id="main"></main>
-        <footer id="footer"></footer>
+        <header id=${styles["header"]}></header>
+        <main id=${styles["main"]}></main>
+        <footer id=${styles["footer"]}></footer>
+        <nav id=${styles["nav"]}></nav>
     `;
 
     return {
-        nav: document.getElementById('nav'),
-        footer: document.getElementById('footer'),
-        header: document.getElementById('header'),
-        main: document.getElementById('main'),
+        nav: document.getElementById(styles['nav']),
+        footer: document.getElementById(styles['footer']),
+        header: document.getElementById(styles['header']),
+        main: document.getElementById(styles['main']),
     }
 }
