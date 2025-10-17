@@ -65,7 +65,7 @@ export default function Header(root) {
         </div>
       </div>
       <div class=${styles["extra-button"]}>
-        <span>Could it be <b>Hampter?</b></span>
+        <span>Could it be <b>Hampteraaaaaaaaaaaaaaaaaaaaaaaaaa?</b></span>
       </div>
     </div>
   `;

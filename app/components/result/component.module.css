@@ -101,13 +101,16 @@
 }
 
 .extra-button {
-  width: fit-content;
+  display: inline-block;   
+  width: auto;
   padding: 10px 20px;
   border: 1px solid #073243;
   border-radius: 50px;
   font-size: 15px;
   background-color: #FBF3E6;
   margin-top: 15px; 
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .extra-button b{
