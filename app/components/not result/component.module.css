@@ -950,11 +950,11 @@
         margin-bottom: 0;
     }
     
-    .footer-container,
+    /* .footer-container,
     .footer,
     footer {
         display: none !important;
-    }
+    } */
     
     .main-content .left-container,
     .main-content .right-container {
