@@ -140,10 +140,27 @@ export default function Header(root) {
   function moveCircle(target) {
     const rect = target.getBoundingClientRect();
     const containerRect = navContainer.getBoundingClientRect();
-    const offset = rect.left - containerRect.left + rect.width / 2 - 35; 
-    navContainer.style.setProperty("--circle-left", `${offset}px`);
-    navContainer.classList.add("active");
-    setTimeout(() => navContainer.classList.remove("active"), 400);
+
+    const offsetLeft = rect.left - containerRect.left + rect.width / 2;
+    const width = rect.width;
+    const height = rect.height;
+
+    navContainer.style.setProperty("--indicator-left", `${offsetLeft}px`);
+    navContainer.style.setProperty("--indicator-width", `${width}px`);
+    navContainer.style.setProperty("--indicator-height", `${height}px`);
+  }
+
+  const starButton = document.querySelector(`.${styles["searchbar-button-container"]} img`);
+  if (starButton) {
+    starButton.addEventListener("click", () => {
+      starButton.classList.remove("twinkle-once");
+      void starButton.offsetWidth;
+      starButton.classList.add("twinkle-once");
+
+      setTimeout(() => {
+        starButton.classList.remove("twinkle-once");
+      }, 2000);
+    });
   }
 
   navButtons.forEach((btn) => {
