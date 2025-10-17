@@ -52,7 +52,7 @@ def help() -> None:
         print("[ SeekEngine Debug ] If you want to see the list of commands")
         print("[ SeekEngine Debug ] type: python run.py ask help")
         print("-"*70)
-        print("Changes apply because of common changes of the previous run.py file\nbecause of package testing")
+        print("Modifications apply because of common changes of the previous run.py file\nbecause of package testing")
         print("-"*70)
         print()
 
