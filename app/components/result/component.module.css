@@ -1216,8 +1216,8 @@
     }
 
     .searchbar-container {
-        margin-left: 160px !important;
-        max-width: 480px !important;
+        margin-left: 130px !important;
+        max-width: 500px !important;
     }
 
     .main-content {
@@ -1250,15 +1250,6 @@
         padding: 0 16px;
         margin-top: 24px; 
     }
-
-    /* .main-content .left-container {
-        max-width: 480px;
-    }
-
-    .main-content .right-container {
-        max-width: 250px;
-        margin-top: 15px;
-    } */
 
     .book-container {
         gap: 20px;
@@ -1320,56 +1311,6 @@
     }
 }
 
-/* ----------------------------------------------------------------------*/
-@media (max-width: 1084px) and (min-width: 769px) {
-    .shelfseek-about-us-container {
-        margin-right: 40px;
-    }
-    
-    .shelfseek-about-us-container p {
-        font-size: 0.9em;
-        line-height: 1.4;
-    }
-    
-    .upper-container h1 {
-        font-size: 40px;
-    }
-    
-    .upper-container h3 {
-        font-size: 16px;
-    }
-    
-    .shelfseek-info-lists-container {
-        gap: 30px;
-    }
-
-    .social-container{
-        margin-left:20px;
-    }
-
-    .shelfseek-social-container {
-        width: 180px; 
-    }
-    
-    .social-container {
-        width: 150px; 
-        margin-left: 15px;
-    }
-    
-    .social-medias-container {
-        gap: 8px; 
-    }
-
-    .upper-container-content {
-        width: 80%;
-        align-self: center;
-    }
-    .lower-container-content {
-        width: 80%;
-        align-self: center;
-    }
-
-}
 /* ----------------------------------------------------------------------*/
 @media (max-width: 1121px) and (min-width: 769px) {
     .header-wrapper {
@@ -1491,6 +1432,58 @@
         overflow-x: hidden;
     }
 }
+
+/* ----------------------------------------------------------------------*/
+@media (max-width: 1084px) and (min-width: 769px) {
+    .shelfseek-about-us-container {
+        margin-right: 40px;
+    }
+    
+    .shelfseek-about-us-container p {
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+    
+    .upper-container h1 {
+        font-size: 40px;
+    }
+    
+    .upper-container h3 {
+        font-size: 16px;
+    }
+    
+    .shelfseek-info-lists-container {
+        gap: 30px;
+    }
+
+    .social-container{
+        margin-left:20px;
+    }
+
+    .shelfseek-social-container {
+        width: 180px; 
+    }
+    
+    .social-container {
+        width: 150px; 
+        margin-left: 15px;
+    }
+    
+    .social-medias-container {
+        gap: 8px; 
+    }
+
+    .upper-container-content {
+        width: 80%;
+        align-self: center;
+    }
+    .lower-container-content {
+        width: 80%;
+        align-self: center;
+    }
+
+}
+
 
 /* ----------------------------------------------------------------------*/
 @media (max-width: 1000px) and (min-width: 769px) {
