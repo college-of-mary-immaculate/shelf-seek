@@ -43,7 +43,7 @@ def tokenizer(sentence: str) -> List[str]:
     return tokenization.tokenize(sentence)
 
 
-def correct(word: str, choices: List, threshold: float = 0.55) -> str:
+def levenshtein(word: str, choices: List, threshold: float = 0.55) -> str:
     """
     ### Lexicon Auto Correction
 
