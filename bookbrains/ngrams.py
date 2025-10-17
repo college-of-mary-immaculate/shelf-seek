@@ -252,3 +252,6 @@ class InterpolatedNigram:
     #     model.trigram_model.unigram_counts = model.bigram_model.unigram_counts
 
     #     return model
+
+if __name__ == "__main__":
+      pass

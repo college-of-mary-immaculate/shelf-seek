@@ -5,13 +5,13 @@ export default function NoResultPageLayout(root) {
         <header id=${styles["header"]}></header>
         <main id=${styles["main"]}></main>
         <footer id=${styles["footer"]}></footer>
-        <nav id="nav"></nav>
+        <nav id=${styles["nav"]}></nav>
     `;
 
     return {
         footer: document.getElementById(styles['footer']),
         header: document.getElementById(styles['header']),
         main: document.getElementById(styles['main']),
-        nav: document.getElementById('nav'),
+        nav: document.getElementById(styles['nav']),
     }
 }

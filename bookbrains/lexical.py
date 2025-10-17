@@ -2,7 +2,7 @@ import re
 
 from typing import List
 
-from .utils import FileManager
+from .utils import FileManager, PickleFileManager
 
 class Tokenization:
     """ Separates sentence in word by word """
@@ -29,8 +29,70 @@ class Tokenization:
         return pattern.findall(sentence)
     
 
+class BKTreeNode:
+    def __init__(self, word: str):
+        self.word = word
+        self.children = {}
+
+
+class BKTree:
+    def __init__(self, distance_fn):
+        self.root = None
+        self.distance_fn = distance_fn
+    
+
+    def search(self, query: str, max_distance: int) -> List:
+        """ Return list of (word, distance) """
+        results = []
+
+        def _search(node: BKTreeNode):
+            if node is None:
+                return
+
+            d = self.distance_fn(query, node.word)
+            if d <= max_distance:
+                results.append((node.word, d))
+
+            for dist in range(d - max_distance, d + max_distance + 1):
+                child = node.children.get(dist)
+                if child:
+                    _search(child)
+
+        _search(self.root)
+        return results
+
+
+    def add(self, word: str) -> None:
+        if self.root is None:
+            self.root = BKTreeNode(word)
+            return
+
+        node = self.root
+        while True:
+            d = self.distance_fn(word, node.word)
+            if d in node.children:
+                node = node.children[d]
+            else:
+                node.children[d] = BKTreeNode(word)
+                break
+
+
 class Correction:
     """ Corrects word into correct sentence """
+    def __init__(self, choices: List[str], pickle_manager: PickleFileManager, file_manager: FileManager):
+        self.file_manager = file_manager
+        self.pickle_manager = pickle_manager
+
+        if self.file_manager.is_file_exist(r"data\lexicon\model\bk_tree.pkl"):
+            self.bk_tree = self.pickle_manager.pickle_load_processed(r"data\lexicon\model\bk_tree.pkl")
+        else:
+            self.bk_tree = BKTree(self._levenshtein)
+            for word in choices:
+                self.bk_tree.add(word.lower())
+            
+            print("[ BookBrains ] BKTree Model prepared. ")
+            self.pickle_manager.pickle_save_processed(r"data\lexicon\model\bk_tree.pkl", self.bk_tree)
+
 
     def _levenshtein(self, keyword1: str, keyword2: str) -> int:
         """ A function that scales the misspelled words wrongness. """
@@ -79,21 +141,21 @@ class Correction:
         return round((lev + jac) / 2, 2)
 
 
-    def correction(self, word: str, threshold: float = 0.55, choices: List["str"] = []) -> str:
+    def correction(self, word: str, threshold: float = 0.55) -> str:
         """ identifies whats the best match on the given word with the given list of choices with possible matches """
-        if word in choices:
-            return word, 1
-        
-        if len(choices) == 0:
+        # * REFERENCE: BKTree with levenshtein or edit distance - https://www.geeksforgeeks.org/dsa/bk-tree-introduction-implementation/
+        results = self.bk_tree.search(query = word.lower(), max_distance = 3)
+
+        if not results:
             return word, 0
 
         matches = None
         best_score = -1
 
-        for option in choices:
-            score = self._hybrid_score(word, option.lower())
-            if score >= best_score:
-                matches = option
+        for candidate, dist in results:
+            score = self._hybrid_score(word, candidate)
+            if score > best_score:
+                matches = candidate
                 best_score = score
 
         if best_score > threshold:
@@ -103,15 +165,54 @@ class Correction:
 
 
 class Normalization:
-    def __init__(self):
-        pass
+    def __init__(self, file_manager: FileManager):
+        self.file_manager = file_manager
+
+        self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
+        self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
 
 
-    def normalize(self) -> str:
-        pass
+    def normalize(self, sentence, normalize_num: bool = True, remove_stop_words: bool = True) -> str:
+        """ Normalize sentence into just plain text """
 
-    def normalize_data(self) -> str:
-        pass
+        if not sentence:
+            return ""
+
+        sentence = sentence.lower()
+
+        for punc in self.punctuations:
+            sentence = sentence.replace(punc, " ")
+
+        sentence = re.sub(r"[^a-z0-9\s]", " ", sentence)
+
+        sentence = re.sub(r"\s+", " ", sentence).strip()
+
+        if normalize_num:
+            sentence = re.sub(r"\d+", "<NUM>", sentence)
+
+        if remove_stop_words:
+            words = sentence.split()
+            words = [w for w in words if w not in self.stop_words]
+            sentence = " ".join(words)
+
+        return sentence
+
+
+    def normalize_genre(self, sentence: str) -> str:
+        """ Separates two genres into one genre """
+        if not sentence:
+            return None
+
+        sentence = sentence.replace("&", "and")
+
+        # * REMOVES EMOJIS AND SPECIAL CHARACTERS
+        sentence = re.sub(r"[^a-zA-Z0-9\s]", "", sentence)
+
+        # * REPLACE DOUBLE SPACES WITH SINGEL SPACES
+        sentence = re.sub(r"\s+", " ", sentence)
+
+        return sentence.strip().lower()
+
 
 class LexiconPreparation:
     def __init__(self, file_manager: FileManager):
@@ -126,6 +227,7 @@ class LexiconPreparation:
 
         self.tokenization = Tokenization()
 
+        self.words = []
     
     def prepare_word_frequency(self, force_rebuild: bool) -> None:
         """ Creates a lexicon of all listed words base on scraped data """
@@ -139,7 +241,6 @@ class LexiconPreparation:
 
         print("[ BookBrains ] Preparing word frequency ")
 
-        words = []
         word_frequency = {}
 
         for data in self.books_data["books"]:
@@ -183,7 +284,7 @@ class LexiconPreparation:
 
                 if token not in word_frequency:
                     word_frequency[token] = 1
-                    words.append(token)
+                    self.words.append(token)
 
                 else:
                     word_frequency[token] += 1
@@ -192,7 +293,9 @@ class LexiconPreparation:
             self.file_manager.save_json(r"data\lexicon\word_frequency.json", word_frequency)
 
         if not self.file_manager.is_file_exist(r"data\lexicon\words.txt"):
-            self.file_manager.save_txt(r"data\lexicon\words.txt", words)
+            self.file_manager.save_txt(r"data\lexicon\words.txt", self.words)
+        
+        return self.words
 
 
     def prepare_sentences(self, force_rebuild) -> None:
@@ -213,7 +316,6 @@ class LexiconPreparation:
             author = data["author"]
 
             data1 = {
-                "book_id": book["_id"],
                 "type": "book",
                 "description": (book["description"] or "").replace("\n", " ")
             }
@@ -222,7 +324,6 @@ class LexiconPreparation:
                 book_data.append(data1)
 
             data2 = {
-                "book_id": book["_id"],
                 "type": "author",
                 "description": (author["about"] or "").replace("\n", " ")
             }
