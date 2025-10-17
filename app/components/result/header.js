@@ -70,7 +70,6 @@ export default function Header(root) {
     </div>
   `;
 
-  // Auto-suggest functionality
   const searchInput = document.getElementById('header-searchbar-input');
   const autoSuggest = document.getElementById('auto-suggest');
 
@@ -83,11 +82,56 @@ export default function Header(root) {
       }
     });
 
-    // Close auto-suggest when clicking outside
     document.addEventListener('click', (e) => {
       if (!searchInput.contains(e.target) && !autoSuggest.contains(e.target)) {
         autoSuggest.classList.remove(styles['show']);
       }
     });
   }
+
+  const navContainer = document.querySelector(`.${styles["header-navigations-container"]}`);
+  const navButtons = navContainer.querySelectorAll(`div:not(.${styles["navigation-icon"]})`);
+  const circle = navContainer; 
+
+  function moveCircle(target) {
+    const rect = target.getBoundingClientRect();
+    const containerRect = navContainer.getBoundingClientRect();
+
+    const offsetLeft = rect.left - containerRect.left + rect.width / 2;
+    const width = rect.width;
+    const height = rect.height;
+
+    navContainer.style.setProperty("--indicator-left", `${offsetLeft}px`);
+    navContainer.style.setProperty("--indicator-width", `${width}px`);
+    navContainer.style.setProperty("--indicator-height", `${height}px`);
+  }
+
+  const starButton = document.querySelector(`.${styles["searchbar-button-container"]} img`);
+  if (starButton) {
+    starButton.addEventListener("click", () => {
+      starButton.classList.remove("twinkle-once");
+      void starButton.offsetWidth;
+      starButton.classList.add("twinkle-once");
+
+      setTimeout(() => {
+        starButton.classList.remove("twinkle-once");
+      }, 2000);
+    });
+  }
+
+  navButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      navButtons.forEach((b) => {
+        b.classList.remove(styles["selected"]);
+        b.classList.add(styles["not-selected"]);
+      });
+      btn.classList.add(styles["selected"]);
+      btn.classList.remove(styles["not-selected"]);
+      moveCircle(btn);
+    });
+  });
+
+  const initialSelected = navContainer.querySelector(`.${styles["selected"]}`);
+  if (initialSelected) moveCircle(initialSelected);
+
 }
