@@ -19,7 +19,7 @@ from .vector import Vectorizer, CorpusVectorPreparation
 from .ngrams import Unigram, Bigram, Trigram, InterpolatedNigram
 from .lexical import Tokenization, Correction, LexiconPreparation, Normalization
 
-from typing import List, Callable, Dict, Any
+from typing import List, Callable, Dict, Any, Tuple
 
 # * INSTANCIATE ONLY ONCE
 _instances = {}
@@ -57,7 +57,7 @@ def correct(word: str, choices: List, threshold: float = 0.55) -> str:
     return correction.correction(word, threshold, choices)
 
 
-def classify(sentence: str, retrain: bool = False) -> Dict:
+def classify(sentence: str, retrain: bool = False) -> Tuple:
     """
     ### Classifier
 
@@ -104,7 +104,10 @@ def vectorizer(query: str, documents: List[str] | str = None) -> Dict[str, float
 
 
 def normalize(sentence: str, normalize_num: bool = True) -> str:
-    """ cleans sentence into just plain text """
+    """ 
+    ### Normalization
+    Cleans sentence into just plain text
+     """
     file_manager: FileManager = _create_instance(FileManager)
 
     normalizer: Normalization = _create_instance(Normalization, file_manager)
