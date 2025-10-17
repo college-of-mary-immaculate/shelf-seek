@@ -540,4 +540,27 @@ export default function Main(root) {
             relatedFindObserver.observe(item);
         });
     }, 100);
+
+    // --- OTHER AUTHOR LIST ANIMATION ---
+    const otherAuthorItems = root.querySelectorAll(
+    `.${styles["other-author-list-container"]} .${styles["author-container"]}`
+    );
+
+    const otherAuthorObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const index = Array.from(otherAuthorItems).indexOf(entry.target);
+                setTimeout(() => {
+                    entry.target.classList.add(styles["fadeInSlideUpVisible"]);
+                }, index * 200); // delay per author (200ms interval)
+                otherAuthorObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    otherAuthorItems.forEach((item) => {
+        item.classList.add(styles["fadeInSlideUp"]);
+        otherAuthorObserver.observe(item);
+    });
+
 }
