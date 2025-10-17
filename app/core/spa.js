@@ -6,6 +6,8 @@ class SPA {
         root: config?.root || document.getElementById('site'),
       };
 
+      this.context.navigate = this.pushRoute.bind(this);
+
       this.defaultRoute = {
         key: '*',
         callback: (config?.defaultRoute || (() => { })).bind(this.context),

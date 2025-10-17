@@ -63,6 +63,32 @@ export default function Main(root) {
         </section>
     `;
 
+    const input = root.querySelector('#search-input');
+    const button = root.querySelector(`.${styles["search-bbtn"]}`);
+
+    if (!input || !button) {
+        console.error("Main: input or button not found.");
+        return;
+    }
+
+    const handleSearch = () => {
+        const query = input.value.trim();
+        if (query) {
+            window.app.pushRoute("/result");
+        } else {
+            window.app.pushRoute("/noresult");
+        }
+    };
+
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            handleSearch();
+        }
+    });
+
+    button.addEventListener("click", handleSearch);
+
     // Get elements after DOM is created
     const searchInput = root.querySelector('#search-input');
     const autoSuggest = root.querySelector('#auto-suggest');
