@@ -2,7 +2,9 @@ version: "3.9"
 
 services:
   backend:
-    build: ./api
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: shelfseek_backend
     ports:
       - "8000:8000"
