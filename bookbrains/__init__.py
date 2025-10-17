@@ -51,10 +51,11 @@ def levenshtein(word: str, choices: List, threshold: float = 0.55) -> str:
     """
 
     file_manager: FileManager = _create_instance(FileManager)
+    pickle_manager: PickleFileManager = _create_instance(PickleFileManager)
 
-    correction : Correction = _create_instance(Correction)
+    correction : Correction = _create_instance(Correction, choices, pickle_manager, file_manager)
 
-    return correction.correction(word, threshold, choices)
+    return correction.correction(word, threshold)
 
 
 def classify(sentence: str, retrain: bool = False) -> Tuple:
@@ -148,7 +149,10 @@ def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = True, 
 
     naive_bayes_preparation: CorpusPreparation = _create_instance(CorpusPreparation, file_manager, pickle_manager)
 
-    lexicon_preparation.prepare_word_frequency(force_rebuild)
+    words: List = lexicon_preparation.prepare_word_frequency(force_rebuild)
+
+    if force_rebuild:
+        _create_instance(Correction, words, pickle_manager, file_manager)
 
     lexicon_preparation.prepare_sentences(force_rebuild)
 
