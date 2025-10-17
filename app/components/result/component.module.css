@@ -79,6 +79,7 @@
   object-fit: contain;
 }
 
+
 .content-container {
     width: 100%;
     max-width: 1088px;
@@ -127,43 +128,27 @@
 }
 
 .searchbar-button-container img {
-    transition: transform 0.3s ease, filter 0.3s ease;
     width: 25px;
 }
 
-:global(.twinkle-once) {
-  animation: twinkle-once 0.8s ease-in-out infinite;
-}
-
-@keyframes twinkle-once {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 2px #ffffff);
-  }
-  50% {
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 8px #fffbea);
-  }
-}
-
 .header-navigations-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 15px;
-    font-family: "Roboto Regular";
+  position: relative; /* important! */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  font-family: "Roboto Regular";
 }
 
 .header-navigations-container::before {
   content: "";
   position: absolute;
-  top: 56.8%; 
-  left: var(--indicator-left, 0px);
+  top: 50%;
   width: var(--indicator-width, 100px);
   height: var(--indicator-height, 45px);
-  border: 1px solid #002b36; 
+  /* border: 1px solid #002b36; */
   border-radius: 999px;
-  transform: translate(143%, -593%);
+  transform: translateY(-50%);
   transition: left 0.4s ease, width 0.4s ease;
   pointer-events: none;
 }
@@ -217,6 +202,61 @@
     width: 318px;
     min-height: 339px;
 }
+
+.main-content {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.main-content.mainFadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================= */
+/* ✨ Fade and Slide Animations  */
+/* ============================= */
+
+.fadeElement {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slideLeft {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.slideLeftVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Optional smoother entry for all elements when page loads */
+:global(.mainFadeIn) {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.fadeInSlideUp {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fadeInSlideUpVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* * Book Result Container  */
 
@@ -927,7 +967,6 @@
     display: none ;
 }
 
-/* * --------------- */
 .auto-suggest-container {
     position: absolute;
     font-family: "Roboto Regular";
@@ -944,8 +983,6 @@
     transition: all 0.3s ease;
     z-index: 100;
     box-shadow: 0 8px 16px rgba(7, 50, 67, 0.15);
-    overflow: hidden;
-    padding: 20px 0;
 }
 
 .auto-suggest-container.show {
@@ -956,15 +993,16 @@
 
 .suggest-item {
     display: flex;
+    position: relative;
+    top: 20px;
+    left: 20px;
     align-items: center;
-    gap: 12px;
+    gap: 12px; /* spacing between icon and text */
     padding: 12px 20px;
     margin-bottom: 8px;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .suggest-item:last-child {
@@ -987,54 +1025,6 @@
     font-size: 15px;
     color: #073243;
     font-weight: 500;
-}
-
-.fadeElement {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.bookImage {
-  width: 100%;
-  height: auto;
-  transition: transform 0.6s ease, box-shadow 0.6s ease, opacity 0.6s ease;
-  opacity: 0;
-  transform: translateY(20px); 
-  box-shadow: none;
-}
-
-.bookImageVisible {
-  opacity: 1;
-  transform: translateY(0); 
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25); 
-}
-
-.slideLeft {
-    opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.slideLeftVisible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.slideUp {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.slideUpVisible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 
