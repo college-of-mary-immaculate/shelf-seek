@@ -47,8 +47,18 @@ class Join:
         self.book_publishers = self.file_manager.load_json(r"data\barnesnobles_shelf\publisher.json")
 
 
+    def remove_ids(self, obj):
+        """Recursively remove '_id' keys from dictionaries/lists."""
+        if isinstance(obj, dict):
+            obj.pop("_id", None)
+            for key, value in obj.items():
+                self.remove_ids(value)
+        elif isinstance(obj, list):
+            for item in obj:
+                self.remove_ids(item)
 
-    def join_data(self, force_rebuild: bool) -> None:
+
+    def join_data(self, force_rebuild: bool, remove_primary_keys: bool = True) -> None:
         """ Creates a json file that joins the book data into single data of book """
         self.setup(force_rebuild)
 
@@ -88,6 +98,9 @@ class Join:
 
         self.joined_data["total_books"] = len(self.joined_data["books"])
         self.joined_data["date_updated"] = datetime.today().strftime('%Y-%m-%d')
+
+        if remove_primary_keys:
+            self.remove_ids(self.joined_data)
 
         self.file_manager.save_json(r"data\joined_data\barnesnobles.json", self.joined_data)
 

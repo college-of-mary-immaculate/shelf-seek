@@ -103,15 +103,54 @@ class Correction:
 
 
 class Normalization:
-    def __init__(self):
-        pass
+    def __init__(self, file_manager: FileManager):
+        self.file_manager = file_manager
+
+        self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
+        self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
 
 
-    def normalize(self) -> str:
-        pass
+    def normalize(self, sentence, normalize_num: bool = True, remove_stop_words: bool = True) -> str:
+        """ Normalize sentence into just plain text """
 
-    def normalize_data(self) -> str:
-        pass
+        if not sentence:
+            return ""
+
+        sentence = sentence.lower()
+
+        for punc in self.punctuations:
+            sentence = sentence.replace(punc, " ")
+
+        sentence = re.sub(r"[^a-z0-9\s]", " ", sentence)
+
+        sentence = re.sub(r"\s+", " ", sentence).strip()
+
+        if normalize_num:
+            sentence = re.sub(r"\d+", "<NUM>", sentence)
+
+        if remove_stop_words:
+            words = sentence.split()
+            words = [w for w in words if w not in self.stop_words]
+            sentence = " ".join(words)
+
+        return sentence
+
+
+    def normalize_genre(self, sentence: str) -> str:
+        """ Separates two genres into one genre """
+        if not sentence:
+            return None
+
+        sentence = sentence.replace("&", "and")
+
+        # * REMOVES EMOJIS AND SPECIAL CHARACTERS
+        sentence = re.sub(r"[^a-zA-Z0-9\s]", "", sentence)
+
+        # * REPLACE DOUBLE SPACES WITH SINGEL SPACES
+        sentence = re.sub(r"\s+", " ", sentence)
+
+        return sentence.strip().lower()
+
 
 class LexiconPreparation:
     def __init__(self, file_manager: FileManager):
@@ -213,7 +252,6 @@ class LexiconPreparation:
             author = data["author"]
 
             data1 = {
-                "book_id": book["_id"],
                 "type": "book",
                 "description": (book["description"] or "").replace("\n", " ")
             }
@@ -222,7 +260,6 @@ class LexiconPreparation:
                 book_data.append(data1)
 
             data2 = {
-                "book_id": book["_id"],
                 "type": "author",
                 "description": (author["about"] or "").replace("\n", " ")
             }

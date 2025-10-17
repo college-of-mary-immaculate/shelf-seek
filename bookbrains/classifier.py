@@ -1,17 +1,19 @@
 import re
 import random
+
+from .vector import Vectorizer
 from .lexical import Tokenization
 from .ngrams import InterpolatedNigram
 from .utils import PickleFileManager, FileManager
 
 from math import log
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from collections import defaultdict, Counter
 
 class NaiveBayes:
     """ Can identify sentence intention """
     def __init__(self, pickle_manager: PickleFileManager, tokenization: Tokenization, file_manager: FileManager):
-
+        self.vectorizer = Vectorizer()
         self.tokenization = tokenization
 
         self.file_manager = file_manager
@@ -91,7 +93,7 @@ class NaiveBayes:
         }
 
 
-    def predict(self, query) -> None:
+    def predict(self, query) -> Tuple[List[str], Dict[str, float]]:
         """ Predict the most likely label for a given query. """
         tokens = self.tokenization.tokenize(query.lower())
 
@@ -108,7 +110,9 @@ class NaiveBayes:
 
             scores[label] = log_prob
 
-        sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+        final_scores: Dict[str, float] = self._apply_vectorizer(query, scores)
+
+        sorted_scores = sorted(final_scores.items(), key=lambda x: x[1], reverse=True)
 
         top_label, top_score = sorted_scores[0]
         second_label, second_score = sorted_scores[1]
@@ -123,8 +127,39 @@ class NaiveBayes:
 
 
 
-    def classify(self) -> None:
-        pass
+    def _apply_vectorizer(self, query: str, scores: Dict[str, float]) -> Dict[str, float]:
+        """ Apply vector on our classifier """
+        label_texts = {}
+
+        for label in self.class_models.keys():
+            texts = [t for t, l in self.datasets if l == label]
+
+            combined_text: str= " ".join(texts)
+
+            tokens: List[str] = self.tokenization.tokenize(combined_text)
+
+            joined_text: str = " ".join(tokens)
+
+            label_texts[label] = joined_text
+
+        self.vectorizer.fit(list(label_texts.values()))
+
+        query_vector = self.vectorizer.transform(query)
+
+        tfidf_scores = {}
+
+        for label, text in label_texts.items():
+            label_vector = self.vectorizer.transform(text)
+
+            similarity = self.vectorizer.cosine_similarity(query_vector, label_vector)
+
+            tfidf_scores[label] = similarity
+
+        final_score = {}
+        for label in scores:
+            final_score[label] = scores[label] + (tfidf_scores[label] * 5)
+
+        return final_score
 
 
 class CorpusPreparation:
