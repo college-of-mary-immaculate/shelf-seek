@@ -148,6 +148,17 @@
     min-height: 339px;
 }
 
+.main-content {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.main-content.mainFadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* * Book Result Container  */
 
 .book-shelf {
@@ -1098,6 +1109,7 @@
 .suggest-item {
     display: flex;
     position: relative;
+    width: 625px;
     top: 20px;
     left: 20px;
     align-items: center;

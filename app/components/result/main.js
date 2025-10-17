@@ -410,6 +410,12 @@ export default function Main(root) {
 
     root.className = styles['main'];
 
+    const mainContent = root.querySelector(`.${styles["main-content"]}`);
+    setTimeout(() => {
+        mainContent.classList.add(styles["mainFadeIn"]);
+    }, 100); // triggers after slight delay for a smooth entrance
+
+
     setTimeout(() => {
         const elements = root.querySelectorAll(
             `.${styles["book-container"]}, 
