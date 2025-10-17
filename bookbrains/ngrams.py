@@ -219,39 +219,6 @@ class InterpolatedNigram:
         print(f"✅ Model loaded successfully from {pickle_path}")
         return model
 
-    # def save_model(self, filepath: str):
-    #     """Save essential model data to a pickle file."""
-    #     data = {
-    #         "lambda1": self.lambda1,
-    #         "lambda2": self.lambda2,
-    #         "lambda3": self.lambda3,
-    #         "unigram_counts": self.unigram_model.word_counts,
-    #         "bigram_counts": self.bigram_model.bigram_counts,
-    #         "trigram_counts": self.trigram_model.trigram_counts,
-    #         "vocabulary": list(self.vocabulary),
-    #     }
-    #     with open(filepath, "wb") as f:
-    #         pickle.dump(data, f)
-
-    # @classmethod
-    # def load_model(cls, filepath: str):
-    #     with open(filepath, "rb") as f:
-    #         data = pickle.load(f)
-
-    #     model = cls(data["lambda1"], data["lambda2"], data["lambda3"])
-    #     model.vocabulary = set(data["vocabulary"])
-
-    #     model.unigram_model.word_counts = Counter(data["unigram_counts"])
-    #     model.unigram_model.total_count = sum(model.unigram_model.word_counts.values())
-
-    #     model.bigram_model.bigram_counts = defaultdict(Counter, data["bigram_counts"])
-    #     model.bigram_model.unigram_counts = Counter(data["unigram_counts"])
-
-    #     model.trigram_model.trigram_counts = defaultdict(Counter, data["trigram_counts"])
-    #     model.trigram_model.bigram_counts = model.bigram_model.bigram_counts
-    #     model.trigram_model.unigram_counts = model.bigram_model.unigram_counts
-
-    #     return model
 
 if __name__ == "__main__":
       pass
