@@ -95,6 +95,8 @@ class CorpusVectorPreparation:
 
         self.vectorizer = Vectorizer()
 
+        self.pickle_manager = PickleFileManager()
+
         self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
 
         self.documents = []
@@ -115,7 +117,7 @@ class CorpusVectorPreparation:
             author_name = self.normalization.normalize(author["name"])
             author_about = self.normalization.normalize(author["about"])
 
-            book_title = self.normalization.normalize(book["title"])
+            book_title = self.normalization.normalize(book["title"], normalize_num = False)
             book_description = self.normalization.normalize(book["description"])
 
             genre_names = " ".join([self.normalization.normalize_genre(genre["name"]) for genre in genres])
@@ -134,6 +136,8 @@ class CorpusVectorPreparation:
             book_data["vector"] = vector
 
             book_data["tokens"] = list(set(tokens))
+
+        self.pickle_manager.pickle_save_processed(r"data\vector\vector.pkl", self.vectorizer)
 
         self.file_manager.save_json(r"data\joined_data\barnesnobles.json", self.joined_data)
         

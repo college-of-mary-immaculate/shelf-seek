@@ -61,7 +61,7 @@ def apply() -> None:
     """ Gives you list of commands """
     if len(sys.argv) < 3:
         help()
-
+    
         sys.exit(0)
 
     folder, command = sys.argv[1], sys.argv[2]
