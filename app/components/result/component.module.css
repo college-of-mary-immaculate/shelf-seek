@@ -1351,7 +1351,6 @@
     #main{
         overflow-x: hidden;
     }
-    
 }
 
 /* ----------------------------------------------------------------------*/
@@ -1364,27 +1363,78 @@
 /* ----------------------------------------------------------------------*/
 
 @media (max-width: 899px) and (min-width: 769px) {
-    .main-content .right-container {
-        margin: 24px 30px 0 0 ;
-    } 
 
     .searchbar-container {
-        max-width: 530px !important;
-        margin: 0 auto !important;
+        width: 100%;
+        max-width: 100% !important;
+        margin: 0;
         padding: 0 16px;
         box-sizing: border-box;
-        width: 100%;
     }
 
     .content-container {
-        max-width: 530px;
-        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0 16px;
+        box-sizing: border-box;
     }
 
     .header-wrapper {
-        padding: 20px 8rem 0 0;
-        margin-bottom: 30px; 
+        width: 85%;
+        max-width: 100%;
+        margin: 0 0 30px;
+        padding: 0 16px;
+        box-sizing: border-box;
     }
+
+    .main-content .right-container {
+        display: none;
+    }
+
+    .main-content {
+        justify-content: center;
+        padding: 0;
+        width: 80%;
+        max-width: 100%;
+        min-width: auto;
+        box-sizing: border-box;
+    }
+    
+    .header-navigations-container {
+        margin-top: 25px; 
+    }
+    
+    .header-searchbar-container {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .main-content .left-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 25px auto 0; 
+        padding: 0 35px;
+        box-sizing: border-box;
+    }
+
+    .social-container{
+        display:none;
+    }
+
+    .shelfseek-info-lists-container {
+        gap: 60px;
+    }
+
+    .upper-container-content {
+        width: 70%;
+        align-self: center;
+    }
+    .lower-container-content {
+        width: 70%;
+        align-self: center;
+    }
+
 }
 
 /* ----------------------------------------------------------------------*/
@@ -1844,8 +1894,6 @@
         padding-left: 20px !important;
         padding-right: 20px !important;
     }
-
-
 }
 
 /* ----------------------------------------------------------------------*/
@@ -1938,8 +1986,6 @@
         padding: 0 10px !important;
     }
 }
-
-
 
 /* ----------------------------------------------------------------------*/
 @media (max-width: 375px) {
