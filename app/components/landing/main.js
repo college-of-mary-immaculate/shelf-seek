@@ -11,7 +11,7 @@ export default function Main(root) {
 
                 <div class=${styles["searchbar-container"]}
                      style="opacity: 0; transform: translateX(30px); transition: all 0.8s ease-out;">
-                    <input type="text" placeholder="Seek Books." id="search-input">
+                    <input type="text" placeholder="Seek Books." id="search-input" autocomplete="off">
                     <div class=${styles["search-bbtn"]}>
                         <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1759738671/SEARCH-ICON_v4clpf.png" alt="search icon">
                     </div>
@@ -62,6 +62,31 @@ export default function Main(root) {
             </div>
         </section>
     `;
+    const input = root.querySelector('#search-input');
+    const button = root.querySelector(`.${styles["search-bbtn"]}`);
+
+    if (!input || !button) {
+        console.error("Main: input or button not found.");
+        return;
+    }
+
+    const handleSearch = () => {
+        const query = input.value.trim();
+        if (query) {
+            window.app.pushRoute("/result");
+        } else {
+            window.app.pushRoute("/noresult");
+        }
+    };
+
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            handleSearch();
+        }
+    });
+
+    button.addEventListener("click", handleSearch);
 
     // Get elements after DOM is created
     const searchInput = root.querySelector('#search-input');
@@ -117,7 +142,7 @@ export default function Main(root) {
             starButton.classList.remove("twinkle-once");
             void starButton.offsetWidth;
             starButton.classList.add("twinkle-once");
-
+            
             setTimeout(() => {
                 starButton.classList.remove("twinkle-once");
             }, 1000);
