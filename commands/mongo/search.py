@@ -1,7 +1,7 @@
 import time
 import bookbrains
 
-query = "jujutsu kaisen vol 5"
+query = "harry"
 
 normalized_query = bookbrains.normalize(query, normalize_num = False)
 
