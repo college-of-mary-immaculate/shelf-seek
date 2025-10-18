@@ -11,19 +11,17 @@ ngram_model = bookbrains.InterpolatedNigram.load("data/processed/interpolated_ng
 @auto_suggest.get("/suggest")
 def suggest(query: str = Query(..., min_length=3)) -> Dict[str, Any]:
     """
-    Hybrid Auto Suggest endpoint:
     - Detects query type (title, author, genre, description)
     - Fetches matching books from MongoDB
-    - Predicts next words using Interpolated N-Gram model
+    - Returns suggestions appropriate to the detected query type
+    - Predicts next words using Interpolated N-Gram model for description/title
     """
 
-    # Normalize the input
+    # 1️⃣ Normalize the input
     cleaned_query = bookbrains.normalize(query)
-    #cleaned_query = query.lower()
 
-    # Classify the query intent
+    # 2️⃣ Classify the query intent
     classification_result = bookbrains.classify(cleaned_query)
-    # `classify` might return ('title', probability) or (['title'], probability)
     query_type = None
     if isinstance(classification_result, (list, tuple)):
         first_value = classification_result[0]
@@ -50,34 +48,65 @@ def suggest(query: str = Query(..., min_length=3)) -> Dict[str, Any]:
     # 4️⃣ Query MongoDB
     results = bookbrains.get_database_document(cleaned_query)
 
-    # 5️⃣ Extract relevant text field values
+    # 5️⃣ Extract suggestions based on query type
     suggestions = []
-    for doc in results:
-        try:
-            value = doc
-            for part in field.split('.'):
-                value = value.get(part, {}) if isinstance(value, dict) else value
-            if isinstance(value, str) and value not in suggestions:
-                suggestions.append(value)
-        except Exception:
-            continue
-
-    # 6️⃣ Predict next words using N-Gram
     predicted_next = []
-    if query_type in ["title", "description"] and ngram_model:
-        try:
-            candidates = ngram_model.get_candidates(cleaned_query.split(), top_k=5)
-            predicted_next = [w for w, _ in candidates]
-        except Exception:
-            predicted_next = []
 
-    # 7️⃣ Build and return final response
+    if query_type == "description":
+        # For descriptions, only use N-gram predictions (don't return full descriptions)
+        if ngram_model:
+            try:
+                candidates = ngram_model.get_candidates(cleaned_query.split(), top_k=10)
+                predicted_next = [w for w, _ in candidates]
+            except Exception:
+                predicted_next = []
+        # Suggestions remain empty for description queries
+        
+    elif query_type == "title":
+        # For titles, extract matching titles AND predict next words
+        for doc in results:
+            try:
+                value = doc
+                for part in field.split('.'):
+                    value = value.get(part, {}) if isinstance(value, dict) else value
+                if isinstance(value, str) and value not in suggestions:
+                    suggestions.append(value)
+            except Exception:
+                continue
+        
+        # Also predict next words for title queries
+        if ngram_model:
+            try:
+                candidates = ngram_model.get_candidates(cleaned_query.split(), top_k=5)
+                predicted_next = [w for w, _ in candidates]
+            except Exception:
+                predicted_next = []
+                
+    else:  # author or genre
+        # For author/genre, just extract matching values
+        for doc in results:
+            try:
+                value = doc
+                for part in field.split('.'):
+                    value = value.get(part, {}) if isinstance(value, dict) else value
+                
+                # Handle lists (genres might be a list)
+                if isinstance(value, list):
+                    for item in value:
+                        if isinstance(item, str) and item not in suggestions:
+                            suggestions.append(item)
+                elif isinstance(value, str) and value not in suggestions:
+                    suggestions.append(value)
+            except Exception:
+                continue
+
+    # 6️⃣ Build and return final response
     response = {
         "query": query,
         "normalized_query": cleaned_query,
         "query_type": query_type,
         "predicted_next": predicted_next,
-        "suggestions": suggestions[:10]
+        "suggestions": suggestions[:9]
     }
 
     return response
