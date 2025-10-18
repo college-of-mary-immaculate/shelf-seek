@@ -31,4 +31,5 @@ def suggest(query: str = Query(..., min_length=1)):
             "query": query,
             "suggestions": suggestions
         }
+        
     }
