@@ -1,100 +1,119 @@
 import styles from './component.module.css';
 
-export default function Main(root) {
+async function loadBookData() {
+  try {
+    const response = await fetch("/barnesnobles.json");
+    const data = await response.json();
+
+    const listBook = data["books"]
+    
+    const firstTenBooks = listBook.slice(400, 420);
+
+    console.log("10 sample books:", firstTenBooks);
+    return firstTenBooks;
+  } catch (error) {
+    console.error("Error loading JSON:", error);
+  }
+}
+
+function formatDate(dateStr) {
+    if (!dateStr || typeof dateStr !== "string") return "";
+
+    const [month, day, year] = dateStr.split("/");
+    const monthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+    ];
+    
+    const monthName = monthNames[parseInt(month) - 1];
+    return `${monthName}, ${day.padStart(2, "0")} ${year}`;
+}
+
+const createResultCard = (data) => {
+    return `
+        <a href="${data.book.url}" target="_blank" class="${styles["book-link"]}">
+            <div class=${styles["book-container"]}>
+                <div class=${styles["book-image-container"]}>
+                    <img src="${data.book.cover_image_url}" alt="">
+                </div>
+                <div class=${styles["book-meta-container"]}>
+                    <div class=${styles["meta-header"]}>
+                        <div class=${styles["meta-title-container"]}>
+                            <span>${data.book.title}</span>
+                        </div>
+                        <div class=${styles["meta-date-published-container"]}>
+                            <span>${formatDate(data.book.published_date)}</span>
+                        </div>
+                    </div>
+                    <div class=${styles["meta-description"]}>
+                        <span>${data.book.description}</span>
+                    </div>
+                    <div class=${styles["meta-chips"]}>
+                        <div class=${styles["chip"]}><span>${data.author.name}</span></div>
+                      
+                        <div class=${styles["more-chip"]}>
+                            <div class=${styles["bullet"]}></div>
+                            <div class=${styles["bullet"]}></div>
+                            <div class=${styles["bullet"]}></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    `
+}
+
+
+const createBookShelfContainer = (data, num_stack = data.length) => {
+  const books = [];
+
+  for (let i = 0; i < num_stack && data.length > 0; i++) {
+    books.push(data.shift());
+  }
+
+  return `
+    <div class="${styles["book-shelf"]}">
+      ${books.map((book) => createResultCard(book)).join("")}
+    </div>
+  `;
+};
+
+
+const createOtherAuthorResultCard = (data) => `
+    <div class=${styles["author-container"]}>
+        <div class="${styles["author-cover-image-container"]} ${data.author.image_cover_url ? styles["author-cover-image"] : styles["default1"]}">
+            <img src="${data.author.image_cover_url ? data.author.image_cover_url : "https://res.cloudinary.com/dhisbk3b2/image/upload/v1760286193/reading_1_lsukzn.png"}" alt="Adolf Hitler Cover Picture">
+        </div>
+        <h1>${data.author.name} </h1>
+        <span>${data.author.about} </span>
+    </div>
+`;
+
+const createOtherAuthorContainer = (data, num_stack = data.length) => {
+    const authors = [];
+
+  for (let i = 0; i < num_stack && data.length > 0; i++) {
+    authors.push(data.shift());
+  }
+
+  return `
+    <div class=${styles["other-author-list-container"]}>
+      ${authors.map((author) => createOtherAuthorResultCard(author)).join("")}
+    </div>
+  `;
+}
+
+export default async function Main(root) {
+
+    const data = await loadBookData()
+
+    console.log(data)
 
     root.innerHTML = `
         <div class=${styles["main-content"]}>
             <div class=${styles["left-container"]}>
-                <div class=${styles["book-shelf"]}>
 
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                ${createBookShelfContainer(data, 3)}
 
                 <div class=${styles["other-author-container"]}>
                     <div class=${styles["other-author-header-container"]}>
@@ -105,121 +124,10 @@ export default function Main(root) {
                             <span>Other Authors</span>
                         </div>
                     </div>
-                    <div class=${styles["other-author-list-container"]}>
-                        <div class=${styles["author-container"]}>
-                            <div class="${styles["author-cover-image-container"]} ${styles["default1"]}">
-                                <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760286193/reading_1_lsukzn.png" alt="Adolf Hitler Cover Picture">
-                            </div>
-                            <h1>Adolf Hitler</h1>
-                            <span>British author and philanthropist (born 1965)</span>
-                        </div>
-                        <div class=${styles["author-container"]}>
-                            <div class="${styles["author-cover-image-container"]} ${styles["default1"]}">
-                                <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760286193/reading_1_lsukzn.png" alt="Adolf Hitler Cover Picture">
-                            </div>
-                            <h1>Adolf Hitler</h1>
-                            <span>British author and philanthropist (born 1965)</span>
-                        </div>
-                        <div class=${styles["author-container"]}>
-                            <div class="${styles["author-cover-image-container"]} ${styles["default1"]}">
-                                <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760286193/reading_1_lsukzn.png" alt="Adolf Hitler Cover Picture">
-                            </div>
-                            <h1>Adolf Hitler</h1>
-                            <span>British author and philanthropist (born 1965)</span>
-                        </div>
-                    </div>
+                    ${createOtherAuthorContainer(data, 3)}
                 </div>
 
-                <div class=${styles["book-shelf"]}>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                ${createBookShelfContainer(data, 3)}
                 
                 <div class=${styles["find-elsewhere-container"]}>
                     <div class=${styles["find-elsewhere-header-container"]}>
@@ -243,96 +151,7 @@ export default function Main(root) {
                     </div>
                 </div>
                 
-                <div class=${styles["book-shelf"]}>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=${styles["book-container"]}>
-                        <div class=${styles["book-image-container"]}>
-                            <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1759808963/PDF-EPUB-Mediocre-Monk-A-Stumbling-Search-for-Answers-in-a-Forest-Monastery-by-Grant-Lindsley-Download-scaled_ld4pue.jpg" alt="">
-                        </div>
-                        <div class=${styles["book-meta-container"]}>
-                            <div class=${styles["meta-header"]}>
-                                <div class=${styles["meta-title-container"]}>
-                                    <span>Harry Potter The Chamber of Secrets</span>
-                                </div>
-                                <div class=${styles["meta-date-published-container"]}>
-                                    <span>Sept 23, 2025</span>
-                                </div>
-                            </div>
-                            <div class=${styles["meta-description"]}>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat null</span>
-                            </div>
-                            <div class=${styles["meta-chips"]}>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["chip"]}><span>J.K Rowling</span></div>
-                                <div class=${styles["more-chip"]}>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                    <div class=${styles["bullet"]}></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+               ${createBookShelfContainer(data, 3)}
 
                 <div class=${styles["related-findings-container"]}>
                     <div class=${styles["related-findings-header-container"]}>

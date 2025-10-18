@@ -37,6 +37,12 @@
   background: #a8a08f;
 }
 
+.book-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+
 /* * Header */
 #header {
     width: 100%;
@@ -388,11 +394,13 @@
 
 /* * Other Author Container  */
 .other-author-container {
-    height: 417px;
+    height: auto;
+    gap: 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 45px;
 }
 
 .other-author-container .other-author-header-container {
@@ -452,6 +460,10 @@
     background-color: #2F2444;
 }
 
+.author-cover-image img {
+    width: 100%;
+}
+
 .default1 img {
     width: 152px;
 }
@@ -466,6 +478,16 @@
 .author-container span {
     font-family: "Roboto Regular";
     font-size: 15px;
+    display: block;
+    white-space: normal;
+    overflow: hidden;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    text-align: justify;
 }
 
 /* * ----------------------  */
@@ -1699,6 +1721,8 @@
         max-width: 100%;
         box-sizing: border-box;
     }
+
+
 
     .other-author-icon-container {
         width: 40px;
