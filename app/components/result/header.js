@@ -78,6 +78,8 @@ export default function Header(root) {
 
   const input = root.querySelector('#header-searchbar-input');
   const button = root.querySelector(`.${styles["searchbar-button-container"]}`);
+  const buttonHome = root.querySelector(`.${styles["logo-box"]}`);
+  
 
   if (!input || !button) {
       console.error("Main: input or button not found.");
@@ -99,6 +101,8 @@ export default function Header(root) {
           handleSearch();
       }
   });
+
+  buttonHome.addEventListener("click", () => window.app.pushRoute("/landing"))
 
   button.addEventListener("click", handleSearch);
 

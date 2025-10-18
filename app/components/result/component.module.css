@@ -1583,6 +1583,7 @@
         max-width: 100%;
         min-width: auto;
         box-sizing: border-box;
+        margin-bottom: 150px;
     }
     
     .searchbar-container {
@@ -1763,7 +1764,7 @@
         width: auto;
         max-width: 100%;
         box-sizing: border-box;
-        margin: 0 auto;
+        /* margin: 0 auto; */
         padding: 0 15px;
     }
 
@@ -1917,6 +1918,10 @@
 
     .main-content .left-container{
         margin-top: 0 !important;
+    }
+
+    .main-content {
+        margin-bottom: 900px;
     }
 
     .other-author-container {
