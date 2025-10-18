@@ -5,7 +5,7 @@ from datetime import datetime
 class ShelfSeekModel(BaseModel):
     class Config:
         validate_assignment = True
-        populate_by_name = True
+        validate_by_name = True
 
 class SearchRequest(ShelfSeekModel):
     """Request model for book search"""
@@ -35,7 +35,7 @@ class SearchRequest(ShelfSeekModel):
 class SearchResult(ShelfSeekModel):
     """Single book search result"""
     id: str = Field(..., description="Unique book identifier")
-    title: str = Field(..., description="Book title")
+    title: Optional[str] = Field(None, description="Book title")  # FIXED: Changed to Optional
     author: Optional[str] = Field(None, description="Book author")
     isbn: Optional[str] = Field(None, description="ISBN number")
     description: Optional[str] = Field(None, description="Book description")

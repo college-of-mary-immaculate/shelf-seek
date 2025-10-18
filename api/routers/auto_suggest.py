@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Query
 from typing import Dict, Any
-import bookbrains  # ✅ single import
+import bookbrains  
 
 auto_suggest = APIRouter(prefix="/suggestions", tags=["Auto Suggest"])
 

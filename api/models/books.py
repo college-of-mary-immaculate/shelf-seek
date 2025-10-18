@@ -2,14 +2,14 @@ from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 from bson import ObjectId
 
-# Helper for ObjectId fields
 class PydanticObjectId:
     @classmethod
     def __get_validators__(cls):
         yield cls.validate
-    
+
     @classmethod
-    def validate(cls, v):
+    def validate(cls, v, info=None):
+        # 'info' is optional and ignored here
         if isinstance(v, ObjectId):
             return str(v)
         if isinstance(v, str):
@@ -39,25 +39,24 @@ class Genre(BaseModel):
 
 class Book(BaseModel):
     id: Optional[PydanticObjectId] = Field(None, alias="_id")
-    url: Optional[str]
-    title: Optional[str]
-    description: Optional[str]
-    cover_image_url: Optional[str]
-    published_date: Optional[str]
-    isbn_10: Optional[str]
-    isbn_13: Optional[str]
-    page_count: Optional[int]
-    language: Optional[str]
-    rating_count: Optional[int]
-    rating_average: Optional[float]
-    author: Optional[Author]
-    publisher: Optional[Publisher]
-    genres: Optional[List[Genre]]
-    # plus any other fields like `vector` etc, as needed
+    url: Optional[str] = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    cover_image_url: Optional[str] = None
+    published_date: Optional[str] = None
+    isbn_10: Optional[str] = None
+    isbn_13: Optional[str] = None
+    page_count: Optional[int] = None
+    language: Optional[str] = None
+    rating_count: Optional[int] = None
+    rating_average: Optional[float] = None
+    author: Optional[Author] = None
+    publisher: Optional[Publisher] = None
+    genres: Optional[List[Genre]] = None
     vector: Optional[Dict[str, float]] = None
 
     class Config:
-        allow_population_by_field_name = True
+        validate_by_name = True
         extra = "ignore"
 
     def to_mongo(self) -> Dict[str, Any]:
