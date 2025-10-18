@@ -86,14 +86,16 @@ export default function Header(root) {
       return;
   }
 
-  const handleSearch = () => {
-      const query = input.value.trim();
+    const handleSearch = () => {
+     const params = new URLSearchParams(window.location.search);
+      const query = params.get("query") || "";
       if (query) {
-          window.app.pushRoute("/result");
+          window.app.pushRoute(`/result?query=${encodeURIComponent(input.value.trim())}`);
+          
       } else {
-          window.app.pushRoute("/noresult");
+          window.app.pushRoute(`/result?query=${encodeURIComponent(input.value.trim())}`);
       }
-  };
+    };
 
   input.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {

@@ -1,7 +1,8 @@
 import styles from './component.module.css';
 
-async function loadBookData() {
+async function loadBookData(query) {
   try {
+    console.log("ETO NAKUKUHA: ", query)
     const response = await fetch("/barnesnobles.json");
     const data = await response.json();
 
@@ -105,9 +106,12 @@ const createOtherAuthorContainer = (data, num_stack = data.length) => {
 
 export default async function Main(root) {
 
-    const data = await loadBookData()
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("query") || "";
 
-    console.log(data)
+    const data = await loadBookData(query)
+
+    if (data.length === 0 || !query) window.app.pushRoute("/noresult")
 
     root.innerHTML = `
         <div class=${styles["main-content"]}>

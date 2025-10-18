@@ -35,7 +35,10 @@ class SPA {
     }
 
     get(path) {
-      const route = this.routes.find(r => (r.key instanceof RegExp && r.key.test(path)) || r.key === path);
+      const pathname = path.split('?')[0]; // strip query
+      const route = this.routes.find(r => 
+          (r.key instanceof RegExp && r.key.test(pathname)) || r.key === pathname
+      );
       return route || this.defaultRoute;
     }
   
@@ -65,8 +68,8 @@ class SPA {
     }
 
     pushRoute(path){
-      history.pushState({}, '', path);
-      this.execute(path);
+     history.pushState({}, '', path);
+    this.execute(window.location.pathname); // still execute only pathname
     }
   
     handleClick(e) {

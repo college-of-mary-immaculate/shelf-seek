@@ -72,11 +72,15 @@ export default function Main(root) {
     }
 
     const handleSearch = () => {
-        const query = input.value.trim();
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get("query") || "";
+
+        // console.log("Search query:", query); // should log "oninoi"
         if (query) {
-            window.app.pushRoute("/result");
+            window.app.pushRoute(`/result?query=${encodeURIComponent(input.value.trim())}`, true);
+            
         } else {
-            window.app.pushRoute("/noresult");
+            window.app.pushRoute(`/result?query=${encodeURIComponent(input.value.trim())}`, true);
         }
     };
 

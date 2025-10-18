@@ -2,6 +2,9 @@ import styles from './component.module.css';
 // import styles from '../../components/not result/'
 
 export default function Main(root) {
+    const input = document.getElementById("header-searchbar-input");
+    console.log(input.value);
+
     root.innerHTML = `
         <div class=${styles["main-content"]}>
             <div class=${styles["left-container"]}>
