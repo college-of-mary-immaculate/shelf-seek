@@ -740,6 +740,9 @@
 
 /* ----------------------------------------------------------------------*/
 @media (max-width: 1096px) and (min-width: 769px) {
+    html body{
+        overflow-x: hidden;
+    }
     .shelfseek-about-us-container {
         margin-right: 40px;
     }
@@ -860,10 +863,10 @@
     }
     
     .main-content .right-container {
-        display: block;
-        max-width: 100%;
+        display: none;
+        /* max-width: 100%;
         margin: 0;
-        padding: 0;
+        padding: 0; */
     }
     
     .main-content {
@@ -950,21 +953,14 @@
         margin-bottom: 0;
     }
     
-    /* .footer-container,
-    .footer,
-    footer {
-        display: none !important;
-    } */
-    
-    .main-content .left-container,
-    .main-content .right-container {
+    .main-content .left-container{
         width: 100%;
         max-width: 300px;
         margin: 0 auto;
     }
     
     .main-content .right-container {
-        margin-top: 20px;
+        display:none;
     }
 
     .error-text h1 {
@@ -1075,10 +1071,6 @@
     .active { outline: 0; }
     .nav-icon { display: block; }
 
-    .footer-container,
-    .footer-bottom {
-        display: none;
-    }
 
     .footer,
     .footer-container,
@@ -1088,10 +1080,8 @@
     .lower-container-content {
         display: none !important;
     }
+    
 
-    #footer {
-        display: none !important;
-    } 
 }
 
 /* ----------------------------------------------------------------------*/
