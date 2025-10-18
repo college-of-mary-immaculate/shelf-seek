@@ -1,7 +1,7 @@
 from .greeting import greet
-from .list_collection import collections
 from .auto_suggest import auto_suggest
+from .search import search_router
 
-__all__ = ["greet", "collections", "auto_suggest"]
+__all__ = ["greet", "auto_suggest", "search_router"]
 
 
