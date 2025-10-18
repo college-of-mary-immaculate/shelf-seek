@@ -5,7 +5,7 @@ export default function Header(root) {
     <div class=${styles["content-container"]}>
       <div class=${styles["searchbar-container"]}>
         <div class=${styles["header-searchbar-container"]}>
-          <input type="text" id="header-searchbar-input" placeholder="Seek Books.">
+          <input type="text" id="header-searchbar-input" placeholder="Seek Books." autocomplete="off">
           <div class=${styles["searchbar-button-container"]}>
             <img src="https://res.cloudinary.com/dhisbk3b2/image/upload/v1760196186/star_3_f0gvo8.png" alt="">
           </div>
@@ -67,6 +67,32 @@ export default function Header(root) {
     </div>
   `;
 
+    const input = root.querySelector('#header-searchbar-input');
+    const button = root.querySelector(`.${styles["searchbar-button-container"]}`);
+
+    if (!input || !button) {
+        console.error("Main: input or button not found.");
+        return;
+    }
+
+    const handleSearch = () => {
+        const query = input.value.trim();
+        if (query) {
+            window.app.pushRoute("/result");
+        } else {
+            window.app.pushRoute("/noresult");
+        }
+    };
+
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            handleSearch();
+        }
+    });
+
+    button.addEventListener("click", handleSearch);
+    
   const searchInput = document.getElementById('header-searchbar-input');
   const autoSuggest = document.getElementById('auto-suggest');
 

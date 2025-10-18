@@ -11,7 +11,7 @@ export default function Main(root) {
 
                 <div class=${styles["searchbar-container"]}
                      style="opacity: 0; transform: translateX(30px); transition: all 0.8s ease-out;">
-                    <input type="text" placeholder="Seek Books." id="search-input">
+                    <input type="text" placeholder="Seek Books." id="search-input" autocomplete="off">
                     <div class=${styles["search-bbtn"]}>
                         <img src="https://res.cloudinary.com/deogcjil5/image/upload/v1759738671/SEARCH-ICON_v4clpf.png" alt="search icon">
                     </div>

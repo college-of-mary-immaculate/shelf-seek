@@ -7,9 +7,11 @@ html {
 }
 
 body {
-  height: 100vh;
+  /* height: 100vh; */
   font-family: "Georgia", serif;
   margin: 0;
+  /* overflow: scroll; */
+  overflow-x: auto;
 }
 
 @font-face {
