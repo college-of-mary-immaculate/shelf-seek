@@ -10,6 +10,7 @@ and n-grams analysis.
 Package By:
 ` Haimonmon `
 `sudonotrey`
+`wesmabe1129`
 """
 
 from .db import MongoManager
@@ -104,7 +105,12 @@ def vectorizer(query: str = None, documents: List[str] | str = None, similarity:
             query_vector = vectorize.transform(query)
         else:
             pickle_manager: PickleFileManager = _create_instance(PickleFileManager)
-            precomputed_vectorizer: Vectorizer = pickle_manager.pickle_load_processed(r"data\vector\vector.pkl")
+            
+            """ THIS IS FOR WINDOWS PROGRAMMER """
+            # precomputed_vectorizer: Vectorizer = pickle_manager.pickle_load_processed(r"data\vector\vector.pkl")
+            
+            """ THIS IS FOR LINUX PROGRAMMER """
+            precomputed_vectorizer: Vectorizer = pickle_manager.pickle_load_processed("data/vector/vector.pkl")
 
             query_vector = precomputed_vectorizer.transform(query)
 
@@ -169,7 +175,11 @@ def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = True, 
 
         mongo_manager: MongoManager = _create_instance(MongoManager, tokenizer)
 
-        data = file_manager.load_json(r"data\joined_data\barnesnobles.json")
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # data = file_manager.load_json(r"data\joined_data\barnesnobles.json")
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        data = file_manager.load_json("data/joined_data/barnesnobles.json")
 
         mongo_manager.insert_batch(data["books"], force_rebuild)
 

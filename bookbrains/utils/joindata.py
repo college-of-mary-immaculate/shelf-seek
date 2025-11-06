@@ -30,21 +30,36 @@ class Join:
             "books": []
         }
 
-        if force_rebuild:
-            self.file_manager.delete_file(r"data\joined_data\barnesnobles.json")
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if force_rebuild:
+        #     self.file_manager.delete_file(r"data\joined_data\barnesnobles.json")
 
-        self.shelf = self.file_manager.load_json(r"data\barnesnobles_shelf\shelf.json")
-        self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json", default_data)
+        # self.shelf = self.file_manager.load_json(r"data\barnesnobles_shelf\shelf.json")
+        # self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json", default_data)
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if force_rebuild:
+            self.file_manager.delete_file("data/joined_data/barnesnobles.json")
+
+        self.shelf = self.file_manager.load_json("data/barnesnobles_shelf/shelf.json")
+        self.joined_data = self.file_manager.load_json("data/joined_data/barnesnobles.json", default_data)
 
         if len(self.joined_data["books"]) == len(self.shelf["books"]) and not force_rebuild:
                print("[ BookBrains ] Joined Data already prepared.")
                self.is_joined = True
                return
         
-        self.books = self.file_manager.load_json(r"data\barnesnobles_shelf\book.json")
-        self.book_genres = self.file_manager.load_json(r"data\barnesnobles_shelf\categories.json")
-        self.book_authors = self.file_manager.load_json(r"data\barnesnobles_shelf\author.json")
-        self.book_publishers = self.file_manager.load_json(r"data\barnesnobles_shelf\publisher.json")
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.books = self.file_manager.load_json(r"data\barnesnobles_shelf\book.json")
+        # self.book_genres = self.file_manager.load_json(r"data\barnesnobles_shelf\categories.json")
+        # self.book_authors = self.file_manager.load_json(r"data\barnesnobles_shelf\author.json")
+        # self.book_publishers = self.file_manager.load_json(r"data\barnesnobles_shelf\publisher.json")
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.books = self.file_manager.load_json("data/barnesnobles_shelf/book.json")
+        self.book_genres = self.file_manager.load_json("data/barnesnobles_shelf/categories.json")
+        self.book_authors = self.file_manager.load_json("data/barnesnobles_shelf/author.json")
+        self.book_publishers = self.file_manager.load_json("data/barnesnobles_shelf/publisher.json")
 
 
     def remove_ids(self, obj):
@@ -102,7 +117,12 @@ class Join:
         if remove_primary_keys:
             self.remove_ids(self.joined_data)
 
-        self.file_manager.save_json(r"data\joined_data\barnesnobles.json", self.joined_data)
+
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.file_manager.save_json(r"data\joined_data\barnesnobles.json", self.joined_data)
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.file_manager.save_json("data/joined_data/barnesnobles.json", self.joined_data)
 
         
 

@@ -97,14 +97,24 @@ class CorpusVectorPreparation:
 
         self.pickle_manager = PickleFileManager()
 
-        self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.joined_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.joined_data = self.file_manager.load_json("data/joined_data/barnesnobles.json")
 
         self.documents = []
 
     
     def prepare_document_vector(self, force_rebuild: bool) -> None:
         """ Creates each document vectorized """
-        if not self.file_manager.is_file_exist(r"data\joined_data\barnesnobles.json"):
+
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if not self.file_manager.is_file_exist(r"data\joined_data\barnesnobles.json"):
+        #     return
+
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if not self.file_manager.is_file_exist("data/joined_data/barnesnobles.json"):
             return
         
         print("[ BookBrains ] Joined Data vectorized and normalized. ")
@@ -137,9 +147,15 @@ class CorpusVectorPreparation:
 
             book_data["tokens"] = list(set(tokens))
 
-        self.pickle_manager.pickle_save_processed(r"data\vector\vector.pkl", self.vectorizer)
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.pickle_manager.pickle_save_processed(r"data\vector\vector.pkl", self.vectorizer)
 
-        self.file_manager.save_json(r"data\joined_data\barnesnobles.json", self.joined_data)
+        # self.file_manager.save_json(r"data\joined_data\barnesnobles.json", self.joined_data)
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.pickle_manager.pickle_save_processed("data/vector/vector.pkl", self.vectorizer)
+
+        self.file_manager.save_json("data/joined_data/barnesnobles.json", self.joined_data)
         
 if __name__ == "__main__":
       pass
