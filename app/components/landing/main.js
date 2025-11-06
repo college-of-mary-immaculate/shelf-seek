@@ -71,11 +71,117 @@ export default function Main(root) {
         return;
     }
 
+    const debounce = (func, delay) => {
+        let timeOutId;
+        return (...args) => {
+            clearTimeout(timeOutId);
+            timeOutId = setTimeout(() => func.apply(null, args), delay);
+        };
+    };
+
+    // Create the debounced version of your suggestion handler
+    const debouncedHandleSuggestion = debounce(async (q) => {
+        if (!q.trim()) {
+            // Clear suggestions if query is empty
+            const autoSuggest = root.querySelector('#auto-suggest');
+            autoSuggest.innerHTML = '';
+            autoSuggest.classList.remove(styles['show']);
+            return;
+        }
+
+        try {
+            // Make API call to get suggestions
+            const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+            const url = `${API_BASE}/suggestions/suggest?query=${encodeURIComponent(q.trim())}`;
+        
+            console.log('Fetching suggestions from:', url);
+            
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                }
+            });
+            if (!response.ok) throw new Error('Failed to fetch suggestions');
+            
+            const suggestions = await response.json(); // Assuming API returns JSON array
+
+            console.log(suggestions)
+            
+            // Update the UI with suggestions
+            updateAutoSuggestUI(suggestions);
+            
+        } catch (error) {
+            console.error('Error fetching suggestions:', error);
+            // Optionally show error state or fallback suggestions
+        }
+    }, 3000); // 300ms debounce delay
+
+    // Function to update the auto-suggest UI
+    const updateAutoSuggestUI = (suggestion_api) => {
+        const autoSuggest = root.querySelector('#auto-suggest');
+        
+        if (!suggestion_api || suggestion_api.length === 0) {
+            autoSuggest.innerHTML = '';
+            autoSuggest.classList.remove(styles['show']);
+            return;
+        }
+        
+        // Populate suggestion_api
+        autoSuggest.innerHTML = suggestion_api?.suggestions.map(suggestion => `
+            <div class="${styles["suggest-item"]}">
+                <img src="https://res.cloudinary.com/dayv9oa8q/image/upload/v1760368039/bulb_1_vlovvz.png" 
+                    alt="suggest-icon" class="${styles["suggest-icon"]}"/>
+                <div class="${styles["suggest-text"]}">${suggestion}</div>
+            </div>
+        `).join('');
+        
+        // Show the suggestions container
+        autoSuggest.classList.add(styles['show']);
+        
+        // Re-attach click handlers
+        attachSuggestionClickHandlers();
+    };
+
+    // Function to attach click handlers to suggestion items
+    const attachSuggestionClickHandlers = () => {
+        const suggestItems = root.querySelectorAll(`.${styles["suggest-item"]}`);
+        suggestItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const text = item.querySelector(`.${styles["suggest-text"]}`).textContent;
+                input.value = text;
+                
+                // Hide suggestions after selection
+                const autoSuggest = root.querySelector('#auto-suggest');
+                autoSuggest.classList.remove(styles['show']);
+                
+                input.focus();
+            });
+        });
+    };
+
+    // Usage in your input event listener
+    input.addEventListener('input', (e) => {
+        const query = e.target.value;
+        debouncedHandleSuggestion(query); // This will be debounced
+    });
+
+    // Also handle focus to show suggestions if there's existing text
+    input.addEventListener('focus', () => {
+        if (input.value.trim().length > 0) {
+            debouncedHandleSuggestion(input.value);
+        }
+    });
+
     const handleSearch = () => {
         const params = new URLSearchParams(window.location.search);
         const query = params.get("query") || "";
 
         // console.log("Search query:", query); // should log "oninoi"
+
+        // Ano to walang pagpipilian magkaroon man ng query o wala? hahahaha
         if (query) {
             window.app.pushRoute(`/result?query=${encodeURIComponent(input.value.trim())}`, true);
             
