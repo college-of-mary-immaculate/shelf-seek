@@ -80,6 +80,4 @@ def suggest(query: str = Query(..., min_length=3)) -> Dict[str, Any]:
         "suggestions": suggestions[:10]
     }
 
-    print(response)
-
     return response
