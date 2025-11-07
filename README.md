@@ -1,3 +1,37 @@
+# Modern Technology Objectives ( Midterm )
+
+* AI Overview over search result ( Front end and Deepseek API )
+
+* Sign in and Sign Up ( Front end and Account API )
+
+* User logged in Search History ( with clear history and History API )
+
+* Fix response of the search api ( Search API )
+
+* Auto Suggestion need working ( Auto Suggest API )
+
+* Enhancing Scraping ( Number of Data sets )
+
+* Shopping genre ( Front end and Search API )
+
+* Autocorrection ( Front end and Auto Correction API )
+
+* About Us ( Front End )
+
+* Pagination of Result ( Front end and Search API )
+
+* No Result Page not showing up ( Bug )
+
+* Knowledge Panel ( Front End )
+
+* Result source link not working ( Bug )
+
+* Our AI Name, Need to decide 🫶 ( Example Gemini )
+
+* AI Logo ( Front End )
+
+🍃 Updated: November 7, 2025
+
 # 🔍 SeekEngine
 
  SeekEngine is the core search backend system that powers the search functionality. It provides:
