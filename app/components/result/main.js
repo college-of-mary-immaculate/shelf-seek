@@ -3,12 +3,12 @@ import styles from './component.module.css';
 async function loadBookData(query) {
   try {
     console.log("ETO NAKUKUHA: ", query)
-    const response = await fetch("/barnesnobles.json");
+    const response = await fetch(`http://127.0.0.1:8000/api/v1/search?query=${query}`);
     const data = await response.json();
 
-    const listBook = data["books"]
+    const listBook = data["results"]
     
-    const firstTenBooks = listBook.slice(400, 420);
+    const firstTenBooks = listBook;
 
     console.log("10 sample books:", firstTenBooks);
     return firstTenBooks;
@@ -32,25 +32,25 @@ function formatDate(dateStr) {
 
 const createResultCard = (data) => {
     return `
-        <a href="${data.book.url}" target="_blank" class="${styles["book-link"]}">
+        <a href="${data.url}" target="_blank" class="${styles["book-link"]}">
             <div class=${styles["book-container"]}>
                 <div class=${styles["book-image-container"]}>
-                    <img src="${data.book.cover_image_url}" alt="">
+                    <img src="${data.cover_image_url}" alt="">
                 </div>
                 <div class=${styles["book-meta-container"]}>
                     <div class=${styles["meta-header"]}>
                         <div class=${styles["meta-title-container"]}>
-                            <span>${data.book.title}</span>
+                            <span>${data.title}</span>
                         </div>
                         <div class=${styles["meta-date-published-container"]}>
-                            <span>${formatDate(data.book.published_date)}</span>
+                            <span>${formatDate(data.published_date)}</span>
                         </div>
                     </div>
                     <div class=${styles["meta-description"]}>
-                        <span>${data.book.description}</span>
+                        <span>${data.description}</span>
                     </div>
                     <div class=${styles["meta-chips"]}>
-                        <div class=${styles["chip"]}><span>${data.author.name}</span></div>
+                        <div class=${styles["chip"]}><span>${data.author}</span></div>
                       
                         <div class=${styles["more-chip"]}>
                             <div class=${styles["bullet"]}></div>
@@ -85,7 +85,7 @@ const createOtherAuthorResultCard = (data) => `
         <div class="${styles["author-cover-image-container"]} ${data.author.image_cover_url ? styles["author-cover-image"] : styles["default1"]}">
             <img src="${data.author.image_cover_url ? data.author.image_cover_url : "https://res.cloudinary.com/dhisbk3b2/image/upload/v1760286193/reading_1_lsukzn.png"}" alt="Adolf Hitler Cover Picture">
         </div>
-        <h1>${data.author.name} </h1>
+        <h1>${data.author} </h1>
         <span>${data.author.about} </span>
     </div>
 `;
@@ -110,7 +110,7 @@ export default async function Main(root) {
     const query = params.get("query") || "";
 
     const data = await loadBookData(query)
-
+    console.log(data.length)
     if (data.length === 0 || !query) window.app.pushRoute("/noresult")
 
     root.innerHTML = `

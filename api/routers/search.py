@@ -7,7 +7,7 @@ import math
 
 search_router = APIRouter(tags=["search"])
 
-MAX_PAGE_SIZE = 9
+MAX_PAGE_SIZE = 15
 
 @search_router.get("/search", response_model=SearchResponse)
 def search(
