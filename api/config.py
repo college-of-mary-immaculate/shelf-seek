@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 # Check if .env file exists
-env_file = Path(".env")
+env_file = Path(__file__).parent / ".env"
 if not env_file.exists():
     raise FileNotFoundError(
         "Missing .env"

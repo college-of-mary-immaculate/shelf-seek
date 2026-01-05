@@ -19,7 +19,12 @@ class NaiveBayes:
         self.file_manager = file_manager
         self.pickle_manager = pickle_manager
 
-        self.datasets = self.pickle_manager.pickle_load_processed(r"data\classification\label.pkl")
+
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.datasets = self.pickle_manager.pickle_load_processed(r"data\classification\label.pkl")
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.datasets = self.pickle_manager.pickle_load_processed("data/classification/label.pkl")
 
         self.class_models: Dict[str, InterpolatedNigram] = {}
         self.class_priors: Dict[str, float] = {}
@@ -32,15 +37,27 @@ class NaiveBayes:
                   'genre_name_search', 'publisher_name_search']
     
         for label in labels:
-            model_path = fr"data\classification\models\{label}_model.pkl"
+            """ THIS IS FOR WINDOWS PROGRAMMER """
+            # model_path = fr"data\classification\models\{label}_model.pkl"
+            
+            """ THIS IS FOR LINUX PROGRAMMER """
+            model_path = f"data/classification/models/{label}_model.pkl"
             if self.file_manager.is_file_exist(model_path):
                 self.class_models[label] = self.pickle_manager.pickle_load_processed(model_path)
                 self.need_train = False
             else:
                 return
 
-        if self.file_manager.is_file_exist(r"data\classification\models\priors.pkl"):
-            self.class_priors = self.pickle_manager.pickle_load_processed(r"data\classification\models\priors.pkl")
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if self.file_manager.is_file_exist(r"data\classification\models\priors.pkl"):
+        #     self.class_priors = self.pickle_manager.pickle_load_processed(r"data\classification\models\priors.pkl")
+        #     self.need_train = False
+        # else:
+        #     return
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if self.file_manager.is_file_exist("data/classification/models/priors.pkl"):
+            self.class_priors = self.pickle_manager.pickle_load_processed("data/classification/models/priors.pkl")
             self.need_train = False
         else:
             return
@@ -82,9 +99,17 @@ class NaiveBayes:
             num_labels = len(grouped)
             self.class_priors[label] = (len(samples) + alpha) / (total_samples + alpha * num_labels)
 
-            self.pickle_manager.pickle_save_processed(fr"data\classification\models\{label}_model.pkl", model)
+            """ THIS IS FOR WINDOWS PROGRAMMER """
+            # self.pickle_manager.pickle_save_processed(fr"data\classification\models\{label}_model.pkl", model)
+            
+            """ THIS IS FOR LINUX PROGRAMMER """
+            self.pickle_manager.pickle_save_processed(f"data/classification/models/{label}_model.pkl", model)
 
-        self.pickle_manager.pickle_save_processed(fr"data\classification\models\priors.pkl", self.class_priors)
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.pickle_manager.pickle_save_processed(fr"data\classification\models\priors.pkl", self.class_priors)
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.pickle_manager.pickle_save_processed(f"data/classification/models/priors.pkl", self.class_priors)
 
         return {
             "trained_labels": list(grouped.keys()),
@@ -174,8 +199,13 @@ class CorpusPreparation:
 
 
     def setup(self) -> None:
-        self.scraped_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
-        self.training_data = self.pickle_manager.pickle_load_processed(r"data\classification\label.pkl",auto_create = True, default_data = [])
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.scraped_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
+        # self.training_data = self.pickle_manager.pickle_load_processed(r"data\classification\label.pkl",auto_create = True, default_data = [])
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.scraped_data = self.file_manager.load_json("data/joined_data/barnesnobles.json")
+        self.training_data = self.pickle_manager.pickle_load_processed("data/classification/label.pkl",auto_create = True, default_data = [])
 
     def _normalize_text(self, text: str) -> str:
         """ just makes text colurful into not colorful, just pure alphabets folks """
@@ -196,13 +226,29 @@ class CorpusPreparation:
     def build_training_data(self, force_rebuild) -> None:
         """ Builds starter training data """
         if force_rebuild:
-            self.file_manager.delete_file(r"data\classification\label.pkl")
+            """ THIS IS FOR WINDOWS PROGRAMMER """
+            # self.file_manager.delete_file(r"data\classification\label.pkl")
+            
+            """ THIS IS FOR LINUX PROGRAMMER """
+            self.file_manager.delete_file("data/classification/label.pkl")
 
-        if self.file_manager.is_file_exist(r"data\classification\label.pkl") and not force_rebuild:
+
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if self.file_manager.is_file_exist(r"data\classification\label.pkl") and not force_rebuild:
+        #     print("[ BookBrains ] Labels already existed and prepared. ")
+        #     return
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if self.file_manager.is_file_exist("data/classification/label.pkl") and not force_rebuild:
             print("[ BookBrains ] Labels already existed and prepared. ")
             return
 
-        if not self.file_manager.is_file_exist(r"data\joined_data\barnesnobles.json"):
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if not self.file_manager.is_file_exist(r"data\joined_data\barnesnobles.json"):
+        #     print("[ BookBrains ] No Prepared Joined scraped data yet.")
+        #     return
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        if not self.file_manager.is_file_exist("data/joined_data/barnesnobles.json"):
             print("[ BookBrains ] No Prepared Joined scraped data yet.")
             return
 
@@ -224,7 +270,12 @@ class CorpusPreparation:
 
         # print(len(self.training_data))
         # self.file_manager.save_json(r"data\classification\label.json", self.training_data)
-        self.pickle_manager.pickle_save_processed(r"data\classification\label.pkl", self.training_data)
+        
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.pickle_manager.pickle_save_processed(r"data\classification\label.pkl", self.training_data)
+        
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        self.pickle_manager.pickle_save_processed("data/classification/label.pkl", self.training_data)
 
     
     def _get_book_labels(self, book: Dict[str, str | int]) -> None:

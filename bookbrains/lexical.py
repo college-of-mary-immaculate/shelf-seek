@@ -83,15 +83,27 @@ class Correction:
         self.file_manager = file_manager
         self.pickle_manager = pickle_manager
 
-        if self.file_manager.is_file_exist(r"data\lexicon\model\bk_tree.pkl"):
-            self.bk_tree = self.pickle_manager.pickle_load_processed(r"data\lexicon\model\bk_tree.pkl")
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if self.file_manager.is_file_exist(r"data\lexicon\model\bk_tree.pkl"):
+        #     self.bk_tree = self.pickle_manager.pickle_load_processed(r"data\lexicon\model\bk_tree.pkl")
+        # else:
+        #     self.bk_tree = BKTree(self._levenshtein)
+        #     for word in choices:
+        #         self.bk_tree.add(word.lower())
+            
+        #     print("[ BookBrains ] BKTree Model prepared. ")
+        #     self.pickle_manager.pickle_save_processed(r"data\lexicon\model\bk_tree.pkl", self.bk_tree)
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if self.file_manager.is_file_exist("data/lexicon/model/bk_tree.pkl"):
+            self.bk_tree = self.pickle_manager.pickle_load_processed("data/lexicon/model/bk_tree.pkl")
         else:
             self.bk_tree = BKTree(self._levenshtein)
             for word in choices:
                 self.bk_tree.add(word.lower())
             
             print("[ BookBrains ] BKTree Model prepared. ")
-            self.pickle_manager.pickle_save_processed(r"data\lexicon\model\bk_tree.pkl", self.bk_tree)
+            self.pickle_manager.pickle_save_processed("data/lexicon/model/bk_tree.pkl", self.bk_tree)
 
 
     def _levenshtein(self, keyword1: str, keyword2: str) -> int:
@@ -168,8 +180,13 @@ class Normalization:
     def __init__(self, file_manager: FileManager):
         self.file_manager = file_manager
 
-        self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
-        self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
+        # self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
+
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.punctuations = self.file_manager.load_txt("data/lexicon/punctuation.txt")
+        self.stop_words = self.file_manager.load_txt("data/lexicon/stop_words.txt")
 
 
     def normalize(self, sentence, normalize_num: bool = True, remove_stop_words: bool = True) -> str:
@@ -220,10 +237,17 @@ class LexiconPreparation:
 
         self.text_fields = []
 
-        self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
-        self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
+        
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.punctuations = self.file_manager.load_txt(r"data\lexicon\punctuation.txt")
+        # self.stop_words = self.file_manager.load_txt(r"data\lexicon\stop_words.txt")
+        # self.books_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
 
-        self.books_data = self.file_manager.load_json(r"data\joined_data\barnesnobles.json")
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.punctuations = self.file_manager.load_txt("data/lexicon/punctuation.txt")
+        self.stop_words = self.file_manager.load_txt("data/lexicon/stop_words.txt")
+        self.books_data = self.file_manager.load_json("data/joined_data/barnesnobles.json")
+
 
         self.tokenization = Tokenization()
 
@@ -232,10 +256,19 @@ class LexiconPreparation:
     def prepare_word_frequency(self, force_rebuild: bool) -> None:
         """ Creates a lexicon of all listed words base on scraped data """
         if force_rebuild:
-            self.file_manager.delete_file(r"data\lexicon\words.txt")
-            self.file_manager.delete_file(r"data\lexicon\word_frequency.json")
+            """ THIS IS FOR WINDOWS PROGRAMMER """
+            # self.file_manager.delete_file(r"data\lexicon\words.txt")
+            # self.file_manager.delete_file(r"data\lexicon\word_frequency.json")
 
-        if self.file_manager.is_file_exist(r"data\lexicon\words.txt") and self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json") and not force_rebuild:
+            """ THIS IS FOR LINUX PROGRAMMER """
+            self.file_manager.delete_file("data/lexicon/words.txt")
+            self.file_manager.delete_file("data/lexicon/word_frequency.json")
+
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if self.file_manager.is_file_exist(r"data\lexicon\words.txt") and self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json") and not force_rebuild:
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if self.file_manager.is_file_exist("data/lexicon/words.txt") and self.file_manager.is_file_exist("data/lexicon/word_frequency.json") and not force_rebuild:
             print("[ BookBrains ] Data existed and already prepared for word frequency. ")
             return
 
@@ -289,21 +322,39 @@ class LexiconPreparation:
                 else:
                     word_frequency[token] += 1
         
-        if not self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json"):
-            self.file_manager.save_json(r"data\lexicon\word_frequency.json", word_frequency)
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if not self.file_manager.is_file_exist(r"data\lexicon\word_frequency.json"):
+        #     self.file_manager.save_json(r"data\lexicon\word_frequency.json", word_frequency)
 
-        if not self.file_manager.is_file_exist(r"data\lexicon\words.txt"):
-            self.file_manager.save_txt(r"data\lexicon\words.txt", self.words)
+        # if not self.file_manager.is_file_exist(r"data\lexicon\words.txt"):
+        #     self.file_manager.save_txt(r"data\lexicon\words.txt", self.words)
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if not self.file_manager.is_file_exist("data/lexicon/word_frequency.json"):
+            self.file_manager.save_json("data/lexicon/word_frequency.json", word_frequency)
+
+        if not self.file_manager.is_file_exist("data/lexicon/words.txt"):
+            self.file_manager.save_txt("data/lexicon/words.txt", self.words)
         
         return self.words
 
 
     def prepare_sentences(self, force_rebuild) -> None:
         """ Creates a sentence corpus data base on scraped data """
-        if force_rebuild:
-            self.file_manager.delete_file(r"data\corpus\sentences.csv")
 
-        if self.file_manager.is_file_exist(r"data\corpus\sentences.csv") and not force_rebuild:
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # if force_rebuild:
+        #     self.file_manager.delete_file(r"data\corpus\sentences.csv")
+
+        # if self.file_manager.is_file_exist(r"data\corpus\sentences.csv") and not force_rebuild:
+        #     print("[ BookBrains ] Sentences already prepared.")
+        #     return
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        if force_rebuild:
+            self.file_manager.delete_file("data/corpus/sentences.csv")
+
+        if self.file_manager.is_file_exist("data/corpus/sentences.csv") and not force_rebuild:
             print("[ BookBrains ] Sentences already prepared.")
             return
         
@@ -331,7 +382,11 @@ class LexiconPreparation:
             if data2 not in book_data:
                 book_data.append(data2)
         
-        self.file_manager.save_csv(r"data\corpus\sentences.csv", book_data)
+        """ THIS IS FOR WINDOWS PROGRAMMER """
+        # self.file_manager.save_csv(r"data\corpus\sentences.csv", book_data)
+        
+        """ THIS IS FOR LINUX PROGRAMMER """
+        self.file_manager.save_csv("data/corpus/sentences.csv", book_data)
 
 
 

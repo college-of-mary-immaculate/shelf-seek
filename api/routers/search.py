@@ -23,6 +23,7 @@ def search(
 
         # --- Step 2: Retrieve matching documents from database ---
         raw_docs = bookbrains.get_database_document(normalized_query)
+        # print(raw_docs)
         
         # Debug: Check raw data structure
         if raw_docs:
