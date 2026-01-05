@@ -162,18 +162,7 @@ export default function Main(root) {
         });
     };
 
-    // Usage in your input event listener
-    input.addEventListener('input', (e) => {
-        const query = e.target.value;
-        debouncedHandleSuggestion(query); // This will be debounced
-    });
-
-    // Also handle focus to show suggestions if there's existing text
-    input.addEventListener('focus', () => {
-        if (input.value.trim().length > 0) {
-            debouncedHandleSuggestion(input.value);
-        }
-    });
+    
 
     const handleSearch = () => {
         const params = new URLSearchParams(window.location.search);
@@ -189,6 +178,19 @@ export default function Main(root) {
             window.app.pushRoute(`/result?query=${encodeURIComponent(input.value.trim())}`, true);
         }
     };
+
+    // Usage in your input event listener
+    input.addEventListener('input', (e) => {
+        const query = e.target.value;
+        debouncedHandleSuggestion(query); // This will be debounced
+    });
+
+    // Also handle focus to show suggestions if there's existing text
+    input.addEventListener('focus', () => {
+        if (input.value.trim().length > 0) {
+            debouncedHandleSuggestion(input.value);
+        }
+    });
 
     input.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {

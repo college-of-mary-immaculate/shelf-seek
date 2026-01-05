@@ -18,6 +18,7 @@ def suggest(query: str = Query(..., min_length=3)) -> Dict[str, Any]:
     """
 
     # Normalize the input
+    # print("hello world")
     cleaned_query = bookbrains.normalize(query)
     #cleaned_query = query.lower()
 
