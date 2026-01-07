@@ -3,6 +3,7 @@ import Landing from "./pages/landing.js";
 import Result from "./pages/result.js";
 import NoResult from "./pages/noResult.js";
 import About from "./pages/about.js"
+import History from "./pages/history.js";
 
 import "./assets/css/cursor.css";
 import "./assets/js/cursor.js";
@@ -19,5 +20,6 @@ app.add('/landing', Landing);
 app.add('/result', Result);
 app.add('/noresult', NoResult)
 app.add('/about', About)
+app.add('/history', History)
 
 app.handleRouteChanges();
