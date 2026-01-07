@@ -1,0 +1,226 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* height: 100vh; */
+  font-family: "Georgia", serif;
+  margin: 0;
+  /* overflow: scroll; */
+  overflow-x: auto;
+}
+
+@font-face {
+  font-family: "New York";
+  src: url("../fonts/newyork/NewYork\ PERSONAL\ USE.otf");
+}
+
+@font-face {
+  font-family: "Roboto Regular";
+  src: url("../fonts/Roboto/static/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Playfair Regular";
+  src: url("../fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Playfair Medium";
+  src: url("../fonts/Playfair_Display/static/PlayfairDisplay-Medium.ttf");
+}
+
+.header {
+  position: absolute;
+  bottom: 600px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-container {
+  min-width: 1346px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.logo-box {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #0f4257;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F4EEE2;
+}
+
+.logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav {
+  display: flex;
+  border: 1px solid #0f4257; 
+  border-radius: 50px;
+  overflow: hidden;
+  background: #FBF3E6;
+  font-family: "Roboto Regular";
+}
+
+.nav-link {
+  flex: 1; 
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0f4257;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-link.active {
+  background-color: #0f4257;
+  color: white;
+  border-radius: 50px; 
+}
+
+.search-btn {
+  background-color: #073243;
+  color: #FBF3E6;
+  border-radius: 50px;
+  font-family: "Roboto Regular";
+}
+
+.filterButtons {
+    position: absolute;
+    top: 130px;
+    width: 740px;
+    right: 700px;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.historyContainer {
+    background: #FBF3E6;
+    border-radius: 12px;
+    border: #073243 1px solid;
+    position: absolute;
+    top: 150px;
+    right: 100px;
+    width: 1340px;
+    margin: 20px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.filterBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: transparent;
+    color: #0f4257;
+    border: 1px solid #073243;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.filterBtn:hover {
+    background: #eae8e3;
+}
+
+
+.filterBtn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.dateSection {
+    padding: 0;
+}
+
+.dateHeader {
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #073243;
+    background: #FBF3E6;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: #073243 1px solid;
+}
+
+.versionList {
+    background: #FBF3E6;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+}
+
+.versionItem {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid #073243;
+    transition: background 0.2s;
+}
+
+.versionItem:last-child {
+    border-bottom: none;
+}
+
+.versionItem:hover {
+    background: #ffffcb;
+}
+
+.time {
+    font-size: 13px;
+    color: #073243;
+    font-weight: 500;
+}
+
+.name {
+    font-size: 14px;
+    color: #0f4257;
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.viewBtn,
+.deleteBtn {
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.viewBtn {
+    background: #FBF3E6;
+    border: #073243 1px solid;
+    color: #0f4257;
+}
+
+.deleteBtn {
+    background: transparent;
+    color: #0f4257;
+}
