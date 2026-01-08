@@ -19,7 +19,7 @@ export default function Header(root) {
                 </nav>
 
                 <div class=${styles["search-btn-container"]}>
-                    <a href="#" class="${styles["search-btn"]} ${styles["nav-link"]}" data-page="Searches">Searches</a>
+                    <a href="/history" class="${styles["search-btn"]} ${styles["nav-link"]}" data-page="Searches">Searches</a>
                 </div>
             </div>
         </div>

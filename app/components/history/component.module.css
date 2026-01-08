@@ -36,7 +36,7 @@ body {
 
 .header {
   position: absolute;
-  bottom: 600px;
+  bottom: 820px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -104,7 +104,7 @@ body {
     position: absolute;
     top: 130px;
     width: 740px;
-    right: 700px;
+    right: 885px;
     display: flex;
     gap: 8px;
     margin-bottom: 12px;
@@ -116,7 +116,7 @@ body {
     border: #073243 1px solid;
     position: absolute;
     top: 150px;
-    right: 100px;
+    right: 285px;
     width: 1340px;
     margin: 20px auto;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -138,9 +138,9 @@ body {
     font-weight: 500;
 }
 
-.filterBtn:hover {
+/* .filterBtn:hover {
     background: #eae8e3;
-}
+} */
 
 
 .filterBtn svg {
@@ -182,9 +182,9 @@ body {
     border-bottom: none;
 }
 
-.versionItem:hover {
+/* .versionItem:hover {
     background: #ffffcb;
-}
+} */
 
 .time {
     font-size: 13px;
