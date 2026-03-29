@@ -36,7 +36,7 @@ def tokenizer(sentence: str) -> List[str]:
     """
     ### Tokenization
 
-    Seperates sentence into an array of word or cahracters 
+    Seperates sentence into an array of word or cahracters
     """
 
     tokenization: Tokenization = _create_instance(Tokenization)
@@ -48,7 +48,7 @@ def levenshtein(word: str, choices: List, threshold: float = 0.55) -> str:
     """
     ### Lexicon Auto Correction
 
-    Auto corrections of word 
+    Auto corrections of word
     """
 
     file_manager: FileManager = _create_instance(FileManager)
@@ -63,7 +63,7 @@ def classify(sentence: str, retrain: bool = False) -> Tuple:
     """
     ### Classifier
 
-    Uses Naive Bayes that can identify sentences intention 
+    Uses Naive Bayes that can identify sentences intention
     """
 
     file_manager: FileManager = _create_instance(FileManager)
@@ -84,14 +84,14 @@ def classify(sentence: str, retrain: bool = False) -> Tuple:
 def vectorizer(query: str = None, documents: List[str] | str = None, similarity: bool = True, document_vectors: List[Dict[str, float]] = None, existing_model: bool = False) -> List[Dict[str, float]] | Vectorizer:
     """
     ### Vector
-     
-    Converts your document into meaningful language for computers 
+
+    Converts your document into meaningful language for computers
     """
     vectorize: Vectorizer = _create_instance(Vectorizer)
 
     if not query and not documents:
         return Vectorizer
-    
+
     if not document_vectors:
         vectorize.fit(documents)
 
@@ -99,16 +99,16 @@ def vectorizer(query: str = None, documents: List[str] | str = None, similarity:
 
         if not similarity:
             return document_vectors
-        
+
     if similarity and document_vectors:
         if not existing_model:
             query_vector = vectorize.transform(query)
         else:
             pickle_manager: PickleFileManager = _create_instance(PickleFileManager)
-            
+
             """ THIS IS FOR WINDOWS PROGRAMMER """
             # precomputed_vectorizer: Vectorizer = pickle_manager.pickle_load_processed(r"data\vector\vector.pkl")
-            
+
             """ THIS IS FOR LINUX PROGRAMMER """
             precomputed_vectorizer: Vectorizer = pickle_manager.pickle_load_processed("data/vector/vector.pkl")
 
@@ -122,12 +122,12 @@ def vectorizer(query: str = None, documents: List[str] | str = None, similarity:
         similarities.sort(key=lambda x: x[1], reverse=True)
 
         return similarities
-    
+
     return Vectorizer
-    
+
 
 def normalize(sentence: str, normalize_num: bool = True) -> str:
-    """ 
+    """
     ### Normalization
     Cleans sentence into just plain text
      """
@@ -141,8 +141,8 @@ def normalize(sentence: str, normalize_num: bool = True) -> str:
 def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = True, vectorize: bool = True, database_insert: bool = False) -> None:
     """
     ### Corpus and Lexicon Creation
-     
-    Prepares data this may take a while. use this if your scraped data have gone modifed 
+
+    Prepares data this may take a while. use this if your scraped data have gone modifed
     """
 
     file_manager: FileManager = _create_instance(FileManager)
@@ -177,7 +177,7 @@ def prepare_data(force_rebuild: bool = False, remove_primary_keys: bool = True, 
 
         """ THIS IS FOR WINDOWS PROGRAMMER """
         # data = file_manager.load_json(r"data\joined_data\barnesnobles.json")
-        
+
         """ THIS IS FOR LINUX PROGRAMMER """
         data = file_manager.load_json("data/joined_data/barnesnobles.json")
 
